@@ -1,14 +1,20 @@
 ﻿<!DOCTYPE html>
-<html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="fr"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="fr"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="fr"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="fr"> <!--<![endif]-->
 <head>
     <meta charset="utf-8" />
     <title>@ViewBag.Title</title>
-    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<link rel="stylesheet" href="@Url.Content("~/Content/skeleton/stylesheets/base.css")">
+	<link rel="stylesheet" href="@Url.Content("~/Content/skeleton/stylesheets/skeleton.css")">
+	<link rel="stylesheet" href="@Url.Content("~/Content/skeleton/stylesheets/layout.css")">
     <script src="@Url.Content("~/Scripts/modernizr-2.5.3.js")" type="text/javascript"></script>
 </head>
 <body>
-    <div class="page">
-        <header>
+    <div class="container">
+        <header class="sixteen columns">
             <div id="title">
                 <h1>My MVC Application</h1>
             </div>
@@ -16,22 +22,25 @@
                 @Html.Partial("_LogOnPartial")
             </div>
             <nav>
-                <ul id="menu">
+                <ul id="menu" class="tabs">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                 </ul>
             </nav>
         </header>
-        <section id="main">
+        <section id="main" class="sixteen columns">
+            <div class="container">
             @RenderBody()
+            </div>
         </section>
-        <footer>
+        <footer class="sixteen columns">
         </footer>
     </div>
 
 <!-- <Javascript.Section> -->
 <script src="@Url.Content("~/Scripts/jquery-1.7.2.min.js")" type="text/javascript"></script>
 @StackExchange.Profiling.MiniProfiler.RenderIncludes()
+<script src="@Url.Content("~/Content/skeleton/javascripts/tabs.js")"></script>
 @RenderSection("Javascript", required: false)
 <!-- </Javascript.Section> -->
 
