@@ -35,6 +35,8 @@ namespace Repertoir
         {
             AreaRegistration.RegisterAllAreas();
 
+            System.Data.Entity.Database.SetInitializer(new System.Data.Entity.DropCreateDatabaseIfModelChanges<Repertoir.Models.RepertoirContext>());
+
             ViewEngines.Engines.Clear();
             ViewEngines.Engines.Add(new RazorViewEngine());
 
