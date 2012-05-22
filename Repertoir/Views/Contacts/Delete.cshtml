@@ -10,17 +10,23 @@
 <fieldset>
     <legend>Contact</legend>
 
-    <div class="display-label">ContactName</div>
+    <div class="display-label">
+        @Html.LabelFor(model => model.ContactName)
+    </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.ContactName)
     </div>
 
-    <div class="display-label">Phone</div>
+    <div class="display-label">
+        @Html.LabelFor(model => model.Phone)
+    </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Phone)
     </div>
 
-    <div class="display-label">Email</div>
+    <div class="display-label">
+        @Html.LabelFor(model => model.Email)
+    </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Email)
     </div>
