@@ -1,0 +1,68 @@
+/* Utilisation de ma police de prédilection */
+body,
+h1, h2, h3, h4, h5, h6
+{
+  font-family: "Century Gothic", "Trebuchet MS", Verdana, Helvetica, Sans-Serif;
+}
+
+/* Positionne le lien d'authentification en haut à droite */
+#logindisplay
+{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+/* Changement du jeu de couleurs */
+h1 { color: #d2691e; } /* chocolat */
+h2 { color: #888888; } /* gris */
+h3 { color: #39b449; } /* vert */
+
+/* Par défaut les tables occupent toute la largeur de la page */
+table
+{
+    width: 100%;
+}
+
+/* Aération des cellules */
+thead th,
+tbody td,
+tfoot th
+{
+  border: 1px dotted #aaa;
+  padding: 0.5em;
+  text-align: left;
+  vertical-align: top;
+}
+
+/* Redéfini les couleurs de l'en-tête et du pied des tables */
+thead tr th,
+tfoot tr th
+{
+  background-color: #d2691e;  /* chocolat */
+  color: #fff;
+}
+
+/* Alterne la couleur de fond des lignes d'une table */
+tbody tr:nth-child(odd)
+{
+background-color: #f9f9f9; /* idem Twitter Bootstrap */
+}
+
+/* Ajoute un effet lors du survol d'une ligne */
+tbody tr:hover
+{
+  background-color: #f5f5f5; /* idem Twitter Bootstrap */
+}
+
+/* Repasse les liens sont bleus */
+a,
+a:visited
+{
+    color: #00f;
+}
+a:hover,
+a:focus
+{
+    color: #88f;
+}
