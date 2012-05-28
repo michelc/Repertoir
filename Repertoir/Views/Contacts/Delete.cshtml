@@ -6,34 +6,34 @@
 
 <h2>Delete</h2>
 
-<h3>Are you sure you want to delete this?</h3>
-<fieldset>
-    <legend>Contact</legend>
+<fieldset class="sixteen columns">
+    <legend>Are you sure you want to delete this?</legend>
 
-    <div class="display-label">
+    <div class="display-label one-third column alpha">
         @Html.LabelFor(model => model.ContactName)
     </div>
-    <div class="display-field">
+    <div class="display-field two-thirds column omega">
         @Html.DisplayFor(model => model.ContactName)
     </div>
 
-    <div class="display-label">
+    <div class="display-label one-third column alpha">
         @Html.LabelFor(model => model.Phone)
     </div>
-    <div class="display-field">
+    <div class="display-field two-thirds column omega">
         @Html.DisplayFor(model => model.Phone)
     </div>
 
-    <div class="display-label">
+    <div class="display-label one-third column alpha">
         @Html.LabelFor(model => model.Email)
     </div>
-    <div class="display-field">
+    <div class="display-field two-thirds column omega">
         @Html.DisplayFor(model => model.Email)
     </div>
+    @using (Html.BeginForm())
+    {
+        <p class="offset-by-third two-thirds column alpha">
+            <input type="submit" value="Delete" />
+            @Html.ActionLink("Back to List", "Index")
+        </p>
+    }
 </fieldset>
-@using (Html.BeginForm()) {
-    <p>
-        <input type="submit" value="Delete" />
-        @Html.ActionLink("Back to List", "Index")
-    </p>
-}

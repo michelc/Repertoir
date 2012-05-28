@@ -68,6 +68,7 @@
     .container .offset-by-thirteen              { padding-left: 780px; }
     .container .offset-by-fourteen              { padding-left: 840px; }
     .container .offset-by-fifteen               { padding-left: 900px; }
+    .container .offset-by-third                 { padding-left: 320px; }
 
 
 
@@ -121,6 +122,7 @@
         .container .offset-by-thirteen              { padding-left: 624px; }
         .container .offset-by-fourteen              { padding-left: 672px; }
         .container .offset-by-fifteen               { padding-left: 720px; }
+        .container .offset-by-third                 { padding-left: 256px; }
     }
 
 
@@ -169,7 +171,8 @@
         .container .offset-by-twelve,
         .container .offset-by-thirteen,
         .container .offset-by-fourteen,
-        .container .offset-by-fifteen { padding-left: 0; }
+        .container .offset-by-fifteen,
+        .container .offset-by-third { padding-left: 0; }
 
     }
 

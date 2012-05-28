@@ -8,34 +8,34 @@
 
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
-    <fieldset>
+    <fieldset class="sixteen columns">
         <legend>Contact</legend>
 
-        <div class="editor-label">
+        <div class="editor-label one-third column alpha">
             @Html.LabelFor(model => model.ContactName)
         </div>
-        <div class="editor-field">
+        <div class="editor-field two-thirds column omega">
             @Html.EditorFor(model => model.ContactName)
             @Html.ValidationMessageFor(model => model.ContactName)
         </div>
 
-        <div class="editor-label">
+        <div class="editor-label one-third column alpha">
             @Html.LabelFor(model => model.Phone)
         </div>
-        <div class="editor-field">
+        <div class="editor-field two-thirds column omega">
             @Html.EditorFor(model => model.Phone)
             @Html.ValidationMessageFor(model => model.Phone)
         </div>
 
-        <div class="editor-label">
+        <div class="editor-label one-third column alpha">
             @Html.LabelFor(model => model.Email)
         </div>
-        <div class="editor-field">
+        <div class="editor-field two-thirds column omega">
             @Html.EditorFor(model => model.Email)
             @Html.ValidationMessageFor(model => model.Email)
         </div>
 
-        <p>
+        <p class="offset-by-third two-thirds column alpha">
             <input type="submit" value="Create" />
             @Html.ActionLink("Back to List", "Index")
         </p>
