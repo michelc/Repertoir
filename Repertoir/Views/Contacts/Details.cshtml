@@ -1,13 +1,13 @@
 ﻿@model Repertoir.Models.Contact
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Afficher un contact";
 }
 
-<h2>Details</h2>
+<h2>@ViewBag.Title</h2>
 
 <fieldset class="sixteen columns">
-    <legend>Contact</legend>
+    <legend>@Model.ContactName</legend>
 
     <div class="display-label one-third column alpha">
         @Html.LabelFor(model => model.ContactName)
@@ -31,6 +31,6 @@
     </div>
 </fieldset>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id=Model.ID })
-    | @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Modifier ce contact", "Edit", new { id = Model.ID })
+    | @Html.ActionLink("Annuler", "Index")
 </p>

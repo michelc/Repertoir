@@ -1,15 +1,15 @@
 ﻿@model Repertoir.Models.Contact
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Modifier un contact";
 }
 
-<h2>Edit</h2>
+<h2>@ViewBag.Title</h2>
 
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
     <fieldset class="sixteen columns">
-        <legend>Contact</legend>
+        <legend>@Model.ContactName</legend>
 
         @Html.HiddenFor(model => model.ID)
 
@@ -38,8 +38,8 @@
         </div>
 
         <p class="offset-by-third two-thirds column alpha">
-            <input type="submit" value="Save" />
-            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value="Enregistrer" />
+            @Html.ActionLink("Annuler", "Index")
         </p>
     </fieldset>
 }

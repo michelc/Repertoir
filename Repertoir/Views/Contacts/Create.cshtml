@@ -1,15 +1,15 @@
 ﻿@model Repertoir.Models.Contact
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Créer un contact";
 }
 
-<h2>Create</h2>
+<h2>@ViewBag.Title</h2>
 
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
     <fieldset class="sixteen columns">
-        <legend>Contact</legend>
+        <legend>Nouveau contact</legend>
 
         <div class="editor-label one-third column alpha">
             @Html.LabelFor(model => model.ContactName)
@@ -36,8 +36,8 @@
         </div>
 
         <p class="offset-by-third two-thirds column alpha">
-            <input type="submit" value="Create" />
-            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value="Enregistrer" />
+            @Html.ActionLink("Annuler", "Index")
         </p>
     </fieldset>
 }

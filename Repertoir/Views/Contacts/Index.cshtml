@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<Repertoir.Models.Contact>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Tous les contacts";
 }
 
-<h2>Index</h2>
+<h2>@ViewBag.Title</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Créer", "Create")
 </p>
 <table>
 <thead>
@@ -37,9 +37,9 @@
             @Html.DisplayFor(modelItem => item.Email)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            @Html.ActionLink("Afficher", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Modifier", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Supprimer", "Delete", new { id=item.ID })
         </td>
     </tr>
 }
