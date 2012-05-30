@@ -54,6 +54,7 @@ namespace Repertoir.Models
         public string Fax { get; set; }
 
         [Display(Name = "Adresse mél")]
+        [RegularExpression(@"^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$", ErrorMessage = "Cette adresse mél n'est pas correcte")]
         [DataType(DataType.EmailAddress)]
         [StringLength(255)]
         public string Email { get; set; }
