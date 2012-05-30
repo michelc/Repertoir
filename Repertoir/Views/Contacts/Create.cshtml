@@ -12,6 +12,14 @@
         <legend>Nouveau contact</legend>
 
         <div class="editor-label one-third column alpha">
+            @Html.LabelFor(model => model.Civility)
+        </div>
+        <div class="editor-field two-thirds column omega">
+            @Html.EditorFor(model => model.Civility)
+            @Html.ValidationMessageFor(model => model.Civility)
+        </div>
+
+        <div class="editor-label one-third column alpha">
             @Html.LabelFor(model => model.LastName)
         </div>
         <div class="editor-field two-thirds column omega">

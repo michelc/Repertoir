@@ -1,0 +1,33 @@
+﻿@model System.String
+@{
+    var man_attrs = new Dictionary<string, object>();
+    var woman_attrs = new Dictionary<string, object>();
+    var null_attrs = new Dictionary<string, object>();
+
+    var fieldId = ViewData.TemplateInfo.GetFullHtmlFieldId("");
+    man_attrs.Add("id", fieldId + "_Man");
+    woman_attrs.Add("id", fieldId + "_Woman");
+    null_attrs.Add("id", fieldId + "_Null");
+
+    var is_nullable = ViewData.ModelMetadata.IsNullableValueType;
+    var is_required = ViewData.ModelMetadata.IsRequired;
+
+    if (Model == "M.")
+    {
+        man_attrs.Add("checked", "checked");
+    }
+    else if (Model == "Mme")
+    {
+        woman_attrs.Add("checked", "checked");
+    }
+    else if (!is_required)
+    {
+        null_attrs.Add("checked", "checked");
+    }
+}
+@Html.RadioButtonFor(x => x, "M.", man_attrs)<label for="@(fieldId)_Man">Monsieur</label>
+@Html.RadioButtonFor(x => x, "Mme", woman_attrs)<label for="@(fieldId)_Woman">Madame</label>
+@if (!is_required)
+{
+    @Html.RadioButtonFor(x => x, "", null_attrs)<label for="@(fieldId)_Null">(vide)</label>
+}

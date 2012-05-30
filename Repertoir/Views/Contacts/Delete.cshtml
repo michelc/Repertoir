@@ -10,6 +10,13 @@
     <legend>Confirmez-vous la suppression ?</legend>
 
     <div class="display-label one-third column alpha">
+        @Html.LabelFor(model => model.Civility)
+    </div>
+    <div class="display-field two-thirds column omega">
+        @Html.DisplayFor(model => model.Civility)&nbsp;
+    </div>
+
+    <div class="display-label one-third column alpha">
         @Html.LabelFor(model => model.LastName)
     </div>
     <div class="display-field two-thirds column omega">
