@@ -13,10 +13,13 @@
 <thead>
     <tr>
         <th>
-            @Html.LabelFor(model => model.First().ContactName)
+            @Html.LabelFor(model => model.First().LastName)
         </th>
         <th>
-            @Html.LabelFor(model => model.First().Phone)
+            @Html.LabelFor(model => model.First().FirstName)
+        </th>
+        <th>
+            @Html.LabelFor(model => model.First().Phone1)
         </th>
         <th>
             @Html.LabelFor(model => model.First().Email)
@@ -28,18 +31,21 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.ContactName)
+            @Html.DisplayFor(modelItem => item.LastName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Phone)
+            @Html.DisplayFor(modelItem => item.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Phone1)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Email)
         </td>
         <td>
-            @Html.ActionLink("Afficher", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Modifier", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Supprimer", "Delete", new { id=item.ID })
+            @Html.ActionLink("Afficher", "Details", new { id = item.ID }) |
+            @Html.ActionLink("Modifier", "Edit", new { id = item.ID }) |
+            @Html.ActionLink("Supprimer", "Delete", new { id = item.ID })
         </td>
     </tr>
 }

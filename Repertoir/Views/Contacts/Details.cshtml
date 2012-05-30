@@ -7,20 +7,55 @@
 <h2>@ViewBag.Title</h2>
 
 <fieldset class="sixteen columns">
-    <legend>@Model.ContactName</legend>
+    <legend>@Model.FirstName @Model.LastName</legend>
 
     <div class="display-label one-third column alpha">
-        @Html.LabelFor(model => model.ContactName)
+        @Html.LabelFor(model => model.LastName)
     </div>
     <div class="display-field two-thirds column omega">
-        @Html.DisplayFor(model => model.ContactName)
+        @Html.DisplayFor(model => model.LastName)
     </div>
 
     <div class="display-label one-third column alpha">
-        @Html.LabelFor(model => model.Phone)
+        @Html.LabelFor(model => model.FirstName)
     </div>
     <div class="display-field two-thirds column omega">
-        @Html.DisplayFor(model => model.Phone)
+        @Html.DisplayFor(model => model.FirstName)
+    </div>
+
+    <div class="display-label one-third column alpha">
+        @Html.LabelFor(model => model.Title)
+    </div>
+    <div class="display-field two-thirds column omega">
+        @Html.DisplayFor(model => model.Title)
+    </div>
+
+    <div class="display-label one-third column alpha">
+        @Html.LabelFor(model => model.CompanyName)
+    </div>
+    <div class="display-field two-thirds column omega">
+        @Html.DisplayFor(model => model.CompanyName)
+    </div>
+
+    <div class="display-label one-third column alpha">
+        @Html.LabelFor(model => model.Phone1)
+    </div>
+    <div class="display-field two-thirds column omega">
+        @Html.DisplayFor(model => model.Phone1)
+    </div>
+
+    <div class="display-label one-third column alpha">
+        @Html.LabelFor(model => model.Phone2)
+    </div>
+    <div class="display-field two-thirds column omega">
+        @Html.DisplayFor(model => model.Phone2)
+    </div>
+
+    <div class="display-label one-third column alpha">
+        @Html.LabelFor(model => model.Fax)
+    </div>
+    <div class="display-field two-thirds column omega">
+        @Html.DisplayFor(model => model.Fax)
     </div>
 
     <div class="display-label one-third column alpha">
@@ -28,6 +63,55 @@
     </div>
     <div class="display-field two-thirds column omega">
         @Html.DisplayFor(model => model.Email)
+    </div>
+
+    <div class="display-label one-third column alpha">
+        @Html.LabelFor(model => model.Url)
+    </div>
+    <div class="display-field two-thirds column omega">
+        @Html.DisplayFor(model => model.Url)
+    </div>
+
+    <div class="display-label one-third column alpha">
+        @Html.LabelFor(model => model.AddressLine1)
+    </div>
+    <div class="display-field two-thirds column omega">
+        @Html.DisplayFor(model => model.AddressLine1)
+    </div>
+
+    <div class="display-label one-third column alpha">
+        @Html.LabelFor(model => model.AddressLine2)
+    </div>
+    <div class="display-field two-thirds column omega">
+        @Html.DisplayFor(model => model.AddressLine2)
+    </div>
+
+    <div class="display-label one-third column alpha">
+        @Html.LabelFor(model => model.PostalCode)
+    </div>
+    <div class="display-field two-thirds column omega">
+        @Html.DisplayFor(model => model.PostalCode)
+    </div>
+
+    <div class="display-label one-third column alpha">
+        @Html.LabelFor(model => model.Municipality)
+    </div>
+    <div class="display-field two-thirds column omega">
+        @Html.DisplayFor(model => model.Municipality)
+    </div>
+
+    <div class="display-label one-third column alpha">
+        @Html.LabelFor(model => model.Country)
+    </div>
+    <div class="display-field two-thirds column omega">
+        @Html.DisplayFor(model => model.Country)
+    </div>
+
+    <div class="display-label one-third column alpha">
+        @Html.LabelFor(model => model.Notes)
+    </div>
+    <div class="display-field two-thirds column omega">
+        @Html.DisplayFor(model => model.Notes)
     </div>
 </fieldset>
 <p>
