@@ -1,11 +1,11 @@
-/* Utilisation de ma police de prédilection */
+ï»¿/* Utilisation de ma police de prÃ©dilection */
 body,
 h1, h2, h3, h4, h5, h6
 {
     font-family: "Century Gothic", "Trebuchet MS", Verdana, Helvetica, Sans-Serif;
 }
 
-/* Positionne le lien d'authentification en haut à droite */
+/* Positionne le lien d'authentification en haut Ã  droite */
 #logindisplay
 {
     position: absolute;
@@ -18,13 +18,13 @@ h1 { color: #d2691e; } /* chocolat */
 h2 { color: #888888; } /* gris */
 h3 { color: #39b449; } /* vert */
 
-/* Par défaut les tables occupent toute la largeur de la page */
+/* Par dÃ©faut les tables occupent toute la largeur de la page */
 table
 {
     width: 100%;
 }
 
-/* Aération des cellules */
+/* AÃ©ration des cellules */
 thead th,
 tbody td,
 tfoot th
@@ -35,7 +35,7 @@ tfoot th
     vertical-align: top;
 }
 
-/* Redéfini les couleurs de l'en-tête et du pied des tables */
+/* RedÃ©fini les couleurs de l'en-tÃªte et du pied des tables */
 thead tr th,
 tfoot tr th
 {
@@ -105,13 +105,13 @@ input[type="button"]:hover
 /* #Forms
 ================================================== */
 
-/* Suppression marges horizontales (dûes à .columns) sur les <fieldset> */
+/* Suppression marges horizontales (dÃ»es Ã  .columns) sur les <fieldset> */
 fieldset
 {
     margin: 0 !important;
 }
 
-/* Style des <legend> inspiré du style des <h3> */
+/* Style des <legend> inspirÃ© du style des <h3> */
 legend
 {
     border: 0;
@@ -122,12 +122,12 @@ legend
     font-weight: normal;
     line-height: 34px;
     margin: 0;
-    margin-bottom: 15px; /* pour espacement avec 1° bloc saisie du formulaire (ne fonctionne que sous IE ?) */
+    margin-bottom: 15px; /* pour espacement avec 1Â° bloc saisie du formulaire (ne fonctionne que sous IE ?) */
     padding: 0;
     width: 100%;
 }
 
-/* Augmente la lisibilité des zones de saisie */
+/* Augmente la lisibilitÃ© des zones de saisie */
 input[type="text"],
 select,
 textarea
@@ -142,7 +142,7 @@ textarea
     padding: 4px;
 }
 
-/* Mise en évidence du DIV contenant le label associé aux zones de saisie obligatoires */
+/* Mise en Ã©vidence du DIV contenant le label associÃ© aux zones de saisie obligatoires */
 div.is_required label
 {
     color: black;
@@ -154,7 +154,7 @@ div.is_required label span
     margin-left: 0.5em;
 }
 
-/* Mise en évidence de la zone de saisie en cours */
+/* Mise en Ã©vidence de la zone de saisie en cours */
 input[type="text"]:focus,
 select:focus,
 textarea:focus
@@ -164,7 +164,7 @@ textarea:focus
     border: 1px solid #d2691e;  /* chocolat */
 }
 
-/* Mise en évidence des messages d'erreurs de saisie */
+/* Mise en Ã©vidence des messages d'erreurs de saisie */
 .field-validation-error
 {
     color: #d2691e;  /* chocolat */
@@ -192,7 +192,7 @@ textarea:focus
 }
 
 
-/* Formulaires sont en horizontal par défaut */
+/* Formulaires sont en horizontal par dÃ©faut */
 .display-label, 
 .editor-label 
 {
