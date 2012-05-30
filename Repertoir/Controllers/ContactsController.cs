@@ -41,7 +41,7 @@ namespace Repertoir.Controllers
         //
         // POST: /Contacts/Create
 
-        [HttpPost]
+        [HttpPost, ValidateAntiForgeryToken]
         public ActionResult Create(Contact contact)
         {
             if (ModelState.IsValid)
@@ -66,7 +66,7 @@ namespace Repertoir.Controllers
         //
         // POST: /Contacts/Edit/5
 
-        [HttpPost]
+        [HttpPost, ValidateAntiForgeryToken]
         public ActionResult Edit(Contact contact)
         {
             if (ModelState.IsValid)
@@ -90,7 +90,7 @@ namespace Repertoir.Controllers
         //
         // POST: /Contacts/Delete/5
 
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ValidateAntiForgeryToken, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {            
             Contact contact = db.Contacts.Find(id);
