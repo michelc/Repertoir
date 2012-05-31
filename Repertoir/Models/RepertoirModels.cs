@@ -27,6 +27,7 @@ namespace Repertoir.Models
 
         [Display(Name = "Civilité")]
         [UIHint("Civility")]
+        [StringLength(3)]
         public string Civility { get; set; }
 
         [Display(Name = "Fonction")]
