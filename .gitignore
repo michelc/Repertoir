@@ -7,6 +7,9 @@ build/
 [Oo]bj/
 [Tt]est[Rr]esults/
 *.suo
-*.sln.cache
+*.cache
 _ReSharper.*/
 *.user
+deploy
+deploy/*
+packages/
