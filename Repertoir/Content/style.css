@@ -128,7 +128,11 @@ legend
 }
 
 /* Augmente la lisibilité des zones de saisie */
+input[type="email"],
+input[type="password"],
+input[type="phone"],
 input[type="text"],
+input[type="url"],
 select,
 textarea
 {
@@ -155,7 +159,11 @@ div.is_required label span
 }
 
 /* Mise en évidence de la zone de saisie en cours */
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="phone"]:focus,
 input[type="text"]:focus,
+input[type="url"]:focus,
 select:focus,
 textarea:focus
 {
@@ -198,11 +206,25 @@ textarea:focus
 {
     text-align: right;
 }
+input[type="phone"]
+{
+    width: 200px;
+}
+input[type="password"],
 input[type="text"],
-select,
-textarea
+select
 {
     width: 300px;
+}
+input[type="email"],
+input[type="url"],
+textarea
+{
+    width: 600px;
+}
+textarea
+{
+    height: 7em;
 }
 
 /* Formulaires passent en vertical pour les petites largeurs */
@@ -214,7 +236,11 @@ textarea
         text-align: left !important;
     }
     
+    input[type="email"],
+    input[type="password"],
+    input[type="phone"],
     input[type="text"],
+    input[type="url"],
     select,
     textarea
     {
