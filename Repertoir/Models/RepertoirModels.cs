@@ -74,7 +74,6 @@ namespace Repertoir.Models
         public string AddressLine2 { get; set; }
 
         [Display(Name = "Code postal")]
-        [UIHint("ShortText")]
         [StringLength(20)]
         public string PostalCode { get; set; }
 

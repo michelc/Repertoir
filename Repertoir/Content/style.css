@@ -200,7 +200,7 @@ textarea:focus
 }
 
 
-/* Formulaires sont en horizontal par défaut */
+/* Formulaires sont en horizontal par défaut avec saisies de largeurs variables */
 .display-label, 
 .editor-label 
 {
@@ -226,6 +226,20 @@ textarea
 {
     height: 7em;
 }
+
+input[type="text"].inputshort
+{
+    width: 100px;
+}
+input[type="text"].inputmedium
+{
+    width: 400px;
+}
+input[type="text"].inputbig
+{
+    width: 600px;
+}
+
 
 /* Formulaires passent en vertical pour les petites largeurs */
 @media only screen and (max-width: 767px)

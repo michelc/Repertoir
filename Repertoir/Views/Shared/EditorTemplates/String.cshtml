@@ -1,0 +1,28 @@
+﻿@model System.String
+@{
+    // http://stackoverflow.com/a/7433993/17316
+    var validators = ModelValidatorProviders.Providers.GetValidators(ViewData.ModelMetadata, ViewContext);
+    var rule = validators.SelectMany(v => v.GetClientValidationRules()).FirstOrDefault(m => m.ValidationType == "length");
+    var textclass = "";
+    if (rule != null && rule.ValidationParameters.ContainsKey("max"))
+    {
+        var len = (int)rule.ValidationParameters["max"];
+        if (len <= 25)
+        {
+            textclass = " inputshort";
+        }
+        else if (len <= 50)
+        {
+            textclass = "";
+        }
+        else if (len <= 150)
+        {
+            textclass = " inputmedium";
+        }
+        else
+        {
+            textclass = " inputbig";
+        }
+    }    
+}
+@Html.TextBoxFor(model => model, new { @class = "text-box single-line" + textclass})
