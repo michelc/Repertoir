@@ -1,0 +1,28 @@
+﻿@model Repertoir.Models.Contact
+
+@{
+    ViewBag.Title = "Modifier une société";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <fieldset class="sixteen columns">
+        <legend>@Model.FirstName @Model.LastName</legend>
+
+        @Html.HiddenFor(model => model.ID)
+        @Html.Partial("_Editor", Model)
+ 
+        <p class="offset-by-five eleven columns alpha">
+            <input type="submit" value="Enregistrer" />
+            @Html.ActionLink("Annuler", "Index", "Contacts")
+        </p>
+    </fieldset>
+}
+
+@section JavaScript
+{
+    @Html.Partial("_FormScripts")
+}
