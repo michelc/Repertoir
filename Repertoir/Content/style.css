@@ -146,12 +146,12 @@ textarea
     padding: 4px;
 }
 
-/* Mise en évidence du DIV contenant le label associé aux zones de saisie obligatoires */
-div.is_required label
+/* Mise en évidence des labels associés aux zones de saisie obligatoires */
+label.is_required
 {
     color: black;
 }
-div.is_required label span
+label.is_required span
 {
     color: #d2691e;  /* chocolat */
     font-weight: bold;
