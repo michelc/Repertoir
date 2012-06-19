@@ -52,7 +52,7 @@ tbody tr:nth-child(odd)
 /* Ajoute un effet lors du survol d'une ligne */
 tbody tr:hover
 {
-    background-color: #ffffdf; /* jaune postit de Uni-Form */
+    background-color: #fcfec5; /* jaune postit de Msdn */
 }
 
 /* Repasse les liens en bleu */
@@ -88,17 +88,22 @@ input[type="button"]
 
 input[type="submit"]
 {
+    background-color: #4b8df7;
     font-weight: bold;
 }
 
 button:focus,
-input[type="submit"]:focus,
 input[type="button"]:focus,
 button:hover,
-input[type="submit"]:hover,
 input[type="button"]:hover
 {
-    background-color: #35A644;
+    background-color: #35a644; /* #39b449 -10% luminosité */
+}
+
+input[type="submit"]:focus,
+input[type="submit"]:hover
+{
+    background-color: #4582e5; /* #4b8df7 -10% luminosité */
 }
 
 
@@ -168,7 +173,7 @@ select:focus,
 textarea:focus
 {
     /* box-shadow: #08f 0 0 7px; */
-    background-color: #ffffdf; /* jaune postit de Uni-Form */
+    background-color: #fcfec5; /* jaune postit de Msdn */
     border: 1px solid #d2691e;  /* chocolat */
 }
 
