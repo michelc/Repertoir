@@ -1,14 +1,6 @@
 ﻿@model Repertoir.Models.Contact
 
 <div class="editor-label five columns alpha">
-    @Html.CaptionFor(model => model.Civility)
-</div>
-<div class="editor-field eleven columns omega">
-    @Html.EditorFor(model => model.Civility)
-    @Html.ValidationMessageFor(model => model.Civility)
-</div>
-
-<div class="editor-label five columns alpha">
     @Html.CaptionFor(model => model.LastName)
 </div>
 <div class="editor-field eleven columns omega">
@@ -22,6 +14,14 @@
 <div class="editor-field eleven columns omega">
     @Html.EditorFor(model => model.FirstName)
     @Html.ValidationMessageFor(model => model.FirstName)
+</div>
+
+<div class="editor-label five columns alpha">
+    @Html.CaptionFor(model => model.Civility)
+</div>
+<div class="editor-field eleven columns omega">
+    @Html.EditorFor(model => model.Civility)
+    @Html.ValidationMessageFor(model => model.Civility)
 </div>
 
 <div class="editor-label five columns alpha">
@@ -81,33 +81,32 @@
 </div>
 
 <div class="editor-label five columns alpha">
+    @Html.CaptionFor(model => model.Notes)
+</div>
+<div class="editor-field eleven columns omega">
+    @Html.EditorFor(model => model.Notes)
+    @Html.ValidationMessageFor(model => model.Notes)
+</div>
+
+<div class="editor-label five columns alpha">
     @Html.CaptionFor(model => model.AddressLine1)
 </div>
 <div class="editor-field eleven columns omega">
     @Html.EditorFor(model => model.AddressLine1)
     @Html.ValidationMessageFor(model => model.AddressLine1)
-</div>
-
-<div class="editor-label five columns alpha">
-    @Html.CaptionFor(model => model.AddressLine2)
-</div>
-<div class="editor-field eleven columns omega">
+    <br>
     @Html.EditorFor(model => model.AddressLine2)
     @Html.ValidationMessageFor(model => model.AddressLine2)
 </div>
 
 <div class="editor-label five columns alpha">
     @Html.CaptionFor(model => model.PostalCode)
+    /
+    @Html.CaptionFor(model => model.Municipality)
 </div>
 <div class="editor-field eleven columns omega">
     @Html.EditorFor(model => model.PostalCode)
     @Html.ValidationMessageFor(model => model.PostalCode)
-</div>
-
-<div class="editor-label five columns alpha">
-    @Html.CaptionFor(model => model.Municipality)
-</div>
-<div class="editor-field eleven columns omega">
     @Html.EditorFor(model => model.Municipality)
     @Html.ValidationMessageFor(model => model.Municipality)
 </div>
@@ -118,12 +117,4 @@
 <div class="editor-field eleven columns omega">
     @Html.EditorFor(model => model.Country)
     @Html.ValidationMessageFor(model => model.Country)
-</div>
-
-<div class="editor-label five columns alpha">
-    @Html.CaptionFor(model => model.Notes)
-</div>
-<div class="editor-field eleven columns omega">
-    @Html.EditorFor(model => model.Notes)
-    @Html.ValidationMessageFor(model => model.Notes)
 </div>
