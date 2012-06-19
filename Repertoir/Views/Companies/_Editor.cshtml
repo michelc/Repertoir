@@ -1,5 +1,7 @@
 ﻿@model Repertoir.Models.Contact
 
+@Html.HiddenFor(model => model.LastName)
+
 <div class="editor-label five columns alpha">
     @Html.CaptionFor(model => model.CompanyName)
 </div>

@@ -7,10 +7,10 @@
 <h2>@ViewBag.Title</h2>
 
 <fieldset class="sixteen columns">
-    <legend>@Model.FirstName @Model.LastName</legend>
+    <legend>@Model.CompanyName</legend>
     @Html.Partial("_Display", Model)
 </fieldset>
 <p>
-    @Html.ActionLink("Modifier ce contact", "Edit", new { id = Model.ID })
+    @Html.ActionLink("Modifier cette société", "Edit", new { id = Model.ID })
     | @Html.ActionLink("Annuler", "Index", "Contacts")
 </p>

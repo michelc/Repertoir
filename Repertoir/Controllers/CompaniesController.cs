@@ -23,7 +23,10 @@ namespace Repertoir.Controllers
 
         public ActionResult Create()
         {
-            return View();
+            var company = new Contact();
+            company.LastName = "*";
+
+            return View(company);
         }
 
         //

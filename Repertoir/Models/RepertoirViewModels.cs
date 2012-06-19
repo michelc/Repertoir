@@ -8,15 +8,14 @@ namespace Repertoir.Models
         public int ID { get; set; }
 
         [Display(Name = "Nom")]
-        public string LastName { get; set; }
-
-        [Display(Name = "Prénom")]
-        public string FirstName { get; set; }
+        public string DisplayName { get; set; }
 
         [Display(Name = "Téléphone")]
         public string Phone1 { get; set; }
 
         [Display(Name = "Adresse mél")]
         public string Email { get; set; }
+
+        public string ControllerName { get; set; }
     }
 }

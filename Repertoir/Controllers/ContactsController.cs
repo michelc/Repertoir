@@ -18,10 +18,10 @@ namespace Repertoir.Controllers
                             select new ContactList
                             {
                                 ID = c.ID,
-                                LastName = c.LastName,
-                                FirstName = c.FirstName,
+                                DisplayName = c.LastName == "*" ? c.CompanyName : c.LastName + " " + c.FirstName,
                                 Phone1 = c.Phone1,
-                                Email = c.Email
+                                Email = c.Email,
+                                ControllerName = c.LastName == "*" ? "Companies" : "People"
                             }).ToList();
 
             return View(contacts);

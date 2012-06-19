@@ -15,10 +15,7 @@
 <thead>
     <tr>
         <th>
-            @Html.LabelFor(model => model.First().LastName)
-        </th>
-        <th>
-            @Html.LabelFor(model => model.First().FirstName)
+            @Html.LabelFor(model => model.First().DisplayName)
         </th>
         <th>
             @Html.LabelFor(model => model.First().Phone1)
@@ -33,10 +30,7 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.LastName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FirstName)
+            @Html.DisplayFor(modelItem => item.DisplayName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Phone1)
@@ -45,9 +39,9 @@
             @Html.DisplayFor(modelItem => item.Email)
         </td>
         <td>
-            @Html.ActionLink("Afficher", "Details", "People", new { id = item.ID }, null) |
-            @Html.ActionLink("Modifier", "Edit", "People", new { id = item.ID }, null) |
-            @Html.ActionLink("Supprimer", "Delete", "People", new { id = item.ID }, null)
+            @Html.ActionLink("Afficher", "Details", item.ControllerName, new { id = item.ID }, null) |
+            @Html.ActionLink("Modifier", "Edit", item.ControllerName, new { id = item.ID }, null) |
+            @Html.ActionLink("Supprimer", "Delete", item.ControllerName, new { id = item.ID }, null)
         </td>
     </tr>
 }
