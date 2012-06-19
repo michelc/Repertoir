@@ -1,7 +1,7 @@
 ﻿@model Repertoir.Models.Contact
 
 @{
-    ViewBag.Title = "Afficher un contact";
+    ViewBag.Title = "Afficher une personne";
 }
 
 <h2>@ViewBag.Title</h2>
@@ -12,5 +12,5 @@
 </fieldset>
 <p>
     @Html.ActionLink("Modifier ce contact", "Edit", new { id = Model.ID })
-    | @Html.ActionLink("Annuler", "Index")
+    | @Html.ActionLink("Annuler", "Index", "Contacts")
 </p>

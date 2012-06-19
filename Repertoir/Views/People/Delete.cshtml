@@ -1,13 +1,13 @@
 ﻿@model Repertoir.Models.Contact
 
 @{
-    ViewBag.Title = "Supprimer un contact";
+    ViewBag.Title = "Supprimer une personne";
 }
 
 <h2>@ViewBag.Title</h2>
 
 <fieldset class="sixteen columns">
-    <legend>Confirmez-vous la suppression ?</legend>
+    <legend>Supprimer «&nbsp;@Model.FirstName @Model.LastName&nbsp;» ?</legend>
 
     @Html.Partial("_Display", Model)
 
@@ -15,7 +15,7 @@
     {
         <p class="offset-by-five eleven columns alpha">
             <input type="submit" value="Ok pour supprimer !" />
-            @Html.ActionLink("Annuler", "Index")
+            @Html.ActionLink("Annuler", "Index", "Contacts")
         </p>
     }
 </fieldset>

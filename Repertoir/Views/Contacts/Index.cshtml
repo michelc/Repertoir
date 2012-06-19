@@ -7,7 +7,7 @@
 <h2>@ViewBag.Title</h2>
 
 <p>
-    @Html.ActionLink("Créer", "Create")
+    @Html.ActionLink("Créer", "Create", "People")
 </p>
 <table>
 <thead>
@@ -43,9 +43,9 @@
             @Html.DisplayFor(modelItem => item.Email)
         </td>
         <td>
-            @Html.ActionLink("Afficher", "Details", new { id = item.ID }) |
-            @Html.ActionLink("Modifier", "Edit", new { id = item.ID }) |
-            @Html.ActionLink("Supprimer", "Delete", new { id = item.ID })
+            @Html.ActionLink("Afficher", "Details", "People", new { id = item.ID }, null) |
+            @Html.ActionLink("Modifier", "Edit", "People", new { id = item.ID }, null) |
+            @Html.ActionLink("Supprimer", "Delete", "People", new { id = item.ID }, null)
         </td>
     </tr>
 }

@@ -1,7 +1,7 @@
 ﻿@model Repertoir.Models.Contact
 
 @{
-    ViewBag.Title = "Modifier un contact";
+    ViewBag.Title = "Modifier une personne";
 }
 
 <h2>@ViewBag.Title</h2>
@@ -17,7 +17,7 @@
  
         <p class="offset-by-five eleven columns alpha">
             <input type="submit" value="Enregistrer" />
-            @Html.ActionLink("Annuler", "Index")
+            @Html.ActionLink("Annuler", "Index", "Contacts")
         </p>
     </fieldset>
 }

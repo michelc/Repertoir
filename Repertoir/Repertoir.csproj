@@ -99,6 +99,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ContactsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PeopleController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -211,25 +212,25 @@
     <Content Include="Views\Contacts\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Contacts\Details.cshtml" />
+    <Content Include="Views\People\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Contacts\Create.cshtml" />
+    <Content Include="Views\People\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Contacts\Edit.cshtml" />
+    <Content Include="Views\People\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Contacts\Delete.cshtml" />
+    <Content Include="Views\People\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\EditorTemplates\Civility.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Contacts\_Editor.cshtml" />
+    <Content Include="Views\People\_Editor.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Contacts\_Display.cshtml" />
+    <Content Include="Views\People\_Display.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\_FormScripts.cshtml" />

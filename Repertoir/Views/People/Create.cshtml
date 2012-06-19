@@ -1,7 +1,7 @@
 ﻿@model Repertoir.Models.Contact
 
 @{
-    ViewBag.Title = "Créer un contact";
+    ViewBag.Title = "Créer une personne";
 }
 
 <h2>@ViewBag.Title</h2>
@@ -10,13 +10,13 @@
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
     <fieldset class="sixteen columns">
-        <legend>Nouveau contact</legend>
+        <legend>Nouvelle personne</legend>
 
         @Html.Partial("_Editor", Model)
 
         <p class="offset-by-five eleven columns alpha">
             <input type="submit" value="Enregistrer" />
-            @Html.ActionLink("Annuler", "Index")
+            @Html.ActionLink("Annuler", "Index", "Contacts")
         </p>
     </fieldset>
 }
