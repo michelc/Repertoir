@@ -13,6 +13,7 @@
 
     @using (Html.BeginForm())
     {
+        @Html.AntiForgeryToken()
         <p class="offset-by-five eleven columns alpha">
             <input type="submit" value="Ok pour supprimer !" />
             @Html.ActionLink("Annuler", "Index", "Contacts")
