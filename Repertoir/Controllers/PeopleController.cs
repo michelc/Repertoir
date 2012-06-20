@@ -75,6 +75,7 @@ namespace Repertoir.Controllers
 
                 return RedirectToAction("Details", new { Id = contact.ID });
             }
+
             return View(person);
         }
 

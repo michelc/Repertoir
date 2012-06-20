@@ -13,7 +13,8 @@ namespace Repertoir.Controllers
 
         public ViewResult Details(int id)
         {
-            Contact company = db.Contacts.Find(id);
+            var contact = db.Contacts.Find(id);
+            var company = contact.To_ViewCompany();
 
             return View(company);
         }
@@ -23,8 +24,8 @@ namespace Repertoir.Controllers
 
         public ActionResult Create()
         {
-            var company = new Contact();
-            company.LastName = "*";
+            var contact = new Contact();
+            var company = contact.To_ViewCompany();
 
             return View(company);
         }
@@ -33,14 +34,16 @@ namespace Repertoir.Controllers
         // POST: /Companies/Create
 
         [HttpPost, ValidateAntiForgeryToken]
-        public ActionResult Create(Contact company)
+        public ActionResult Create(ViewCompany company)
         {
             if (ModelState.IsValid)
             {
-                db.Contacts.Add(company);
+                var contact = new Contact();
+                contact.Update_With_ViewCompany(company);
+                db.Contacts.Add(contact);
                 db.SaveChanges();
 
-                return RedirectToAction("Details", new { Id = company.ID });
+                return RedirectToAction("Details", new { Id = contact.ID });
             }
 
             return View(company);
@@ -51,7 +54,8 @@ namespace Repertoir.Controllers
 
         public ActionResult Edit(int id)
         {
-            Contact company = db.Contacts.Find(id);
+            var contact = db.Contacts.Find(id);
+            var company = contact.To_ViewCompany();
 
             return View(company);
         }
@@ -60,15 +64,18 @@ namespace Repertoir.Controllers
         // POST: /Companies/Edit/5
 
         [HttpPost, ValidateAntiForgeryToken]
-        public ActionResult Edit(Contact company)
+        public ActionResult Edit(ViewCompany company)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(company).State = EntityState.Modified;
+                var contact = db.Contacts.Find(company.ID);
+                contact.Update_With_ViewCompany(company);
+                db.Entry(contact).State = EntityState.Modified;
                 db.SaveChanges();
 
-                return RedirectToAction("Details", new { Id = company.ID });
+                return RedirectToAction("Details", new { Id = contact.ID });
             }
+
             return View(company);
         }
 
@@ -77,7 +84,8 @@ namespace Repertoir.Controllers
 
         public ActionResult Delete(int id)
         {
-            Contact company = db.Contacts.Find(id);
+            var contact = db.Contacts.Find(id);
+            var company = contact.To_ViewCompany();
 
             return View(company);
         }
@@ -88,8 +96,8 @@ namespace Repertoir.Controllers
         [HttpPost, ValidateAntiForgeryToken, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            Contact company = db.Contacts.Find(id);
-            db.Contacts.Remove(company);
+            var contact = db.Contacts.Find(id);
+            db.Contacts.Remove(contact);
             db.SaveChanges();
 
             return RedirectToAction("Index", "Contacts");

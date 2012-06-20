@@ -108,6 +108,7 @@
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\RepertoirModels.cs" />
     <Compile Include="Models\RepertoirViewModels.cs" />
+    <Compile Include="Models\ViewCompany.cs" />
     <Compile Include="Models\ViewPerson.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
