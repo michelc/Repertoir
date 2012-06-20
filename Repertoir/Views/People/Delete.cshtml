@@ -4,7 +4,13 @@
     ViewBag.Title = "Supprimer une personne";
 }
 
-<h2>@ViewBag.Title</h2>
+<h2 class="crud">
+    @Html.ActionLink("Contacts", "Index", "Contacts")
+    / @Html.ActionLink("Créer", "Create")
+    / @Html.ActionLink("Afficher", "Details", new { id = Model.ID })
+    / @Html.ActionLink("Modifier", "Edit", new { id = Model.ID })
+    / Supprimer
+</h2>
 
 <fieldset class="sixteen columns">
     <legend>Supprimer «&nbsp;@Model.FirstName @Model.LastName&nbsp;» ?</legend>

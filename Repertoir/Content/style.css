@@ -267,3 +267,10 @@ input[type="text"].inputbig
         width: 96% !important;
     }
 }
+
+/* Menu des actions CRUD */
+h2.crud
+{
+    font-size: smaller;
+    font-variant: small-caps;
+}

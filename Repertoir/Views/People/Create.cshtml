@@ -4,7 +4,11 @@
     ViewBag.Title = "Créer une personne";
 }
 
-<h2>@ViewBag.Title</h2>
+<h2 class="crud">
+    @Html.ActionLink("Contacts", "Index", "Contacts")
+    /
+    Créer
+</h2>
 
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()

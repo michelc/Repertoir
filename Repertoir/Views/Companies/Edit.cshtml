@@ -4,7 +4,13 @@
     ViewBag.Title = "Modifier une société";
 }
 
-<h2>@ViewBag.Title</h2>
+<h2 class="crud">
+    @Html.ActionLink("Contacts", "Index", "Contacts")
+    / @Html.ActionLink("Créer", "Create")
+    / @Html.ActionLink("Afficher", "Details", new { id = Model.ID })
+    / Modifier
+    / @Html.ActionLink("Supprimer", "Delete", new { id = Model.ID })
+</h2>
 
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()

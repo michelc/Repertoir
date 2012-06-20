@@ -4,13 +4,15 @@
     ViewBag.Title = "Afficher une société";
 }
 
-<h2>@ViewBag.Title</h2>
+<h2 class="crud">
+    @Html.ActionLink("Contacts", "Index", "Contacts")
+    / @Html.ActionLink("Créer", "Create")
+    / Afficher
+    / @Html.ActionLink("Modifier", "Edit", new { id = Model.ID })
+    / @Html.ActionLink("Supprimer", "Delete", new { id = Model.ID })
+</h2>
 
 <fieldset class="sixteen columns">
     <legend>@Model.CompanyName</legend>
     @Html.Partial("_Display", Model)
 </fieldset>
-<p>
-    @Html.ActionLink("Modifier cette société", "Edit", new { id = Model.ID })
-    | @Html.ActionLink("Annuler", "Index", "Contacts")
-</p>
