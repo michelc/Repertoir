@@ -13,7 +13,8 @@ namespace Repertoir.Controllers
 
         public ViewResult Details(int id)
         {
-            Contact person = db.Contacts.Find(id);
+            var contact = db.Contacts.Find(id);
+            var person = contact.To_ViewPerson();
 
             return View(person);
         }
@@ -23,21 +24,26 @@ namespace Repertoir.Controllers
 
         public ActionResult Create()
         {
-            return View();
+            var contact = new Contact();
+            var person = contact.To_ViewPerson();
+
+            return View(person);
         }
 
         //
         // POST: /People/Create
 
         [HttpPost, ValidateAntiForgeryToken]
-        public ActionResult Create(Contact person)
+        public ActionResult Create(ViewPerson person)
         {
             if (ModelState.IsValid)
             {
-                db.Contacts.Add(person);
+                var contact = new Contact();
+                contact.Update_With_ViewPerson(person);
+                db.Contacts.Add(contact);
                 db.SaveChanges();
 
-                return RedirectToAction("Details", new { Id = person.ID });
+                return RedirectToAction("Details", new { Id = contact.ID });
             }
 
             return View(person);
@@ -48,7 +54,8 @@ namespace Repertoir.Controllers
 
         public ActionResult Edit(int id)
         {
-            Contact person = db.Contacts.Find(id);
+            var contact = db.Contacts.Find(id);
+            var person = contact.To_ViewPerson();
 
             return View(person);
         }
@@ -57,14 +64,16 @@ namespace Repertoir.Controllers
         // POST: /People/Edit/5
 
         [HttpPost, ValidateAntiForgeryToken]
-        public ActionResult Edit(Contact person)
+        public ActionResult Edit(ViewPerson person)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(person).State = EntityState.Modified;
+                var contact = db.Contacts.Find(person.ID);
+                contact.Update_With_ViewPerson(person);
+                db.Entry(contact).State = EntityState.Modified;
                 db.SaveChanges();
 
-                return RedirectToAction("Details", new { Id = person.ID });
+                return RedirectToAction("Details", new { Id = contact.ID });
             }
             return View(person);
         }
@@ -74,7 +83,8 @@ namespace Repertoir.Controllers
 
         public ActionResult Delete(int id)
         {
-            Contact person = db.Contacts.Find(id);
+            var contact = db.Contacts.Find(id);
+            var person = contact.To_ViewPerson();
 
             return View(person);
         }
@@ -85,8 +95,8 @@ namespace Repertoir.Controllers
         [HttpPost, ValidateAntiForgeryToken, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            Contact person = db.Contacts.Find(id);
-            db.Contacts.Remove(person);
+            var contact = db.Contacts.Find(id);
+            db.Contacts.Remove(contact);
             db.SaveChanges();
 
             return RedirectToAction("Index", "Contacts");
