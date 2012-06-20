@@ -2,7 +2,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Web;
 using System.Web.Mvc;
+using System.Web.Mvc.Html;
 
 namespace Repertoir.Helpers
 {
@@ -44,5 +46,20 @@ namespace Repertoir.Helpers
             return MvcHtmlString.Create(tag.ToString(TagRenderMode.Normal));
         }
 
+        public static HtmlString ActionCancel(this HtmlHelper helper, int id = 0)
+        {
+            MvcHtmlString html = null;
+
+            if (id != 0)
+            {
+                html = helper.ActionLink("Annuler", "Details", new { id = id });
+            }
+            else
+            {
+                html = helper.ActionLink("Annuler", "Index", "Contacts");
+            }
+
+            return html;
+        }
     }
 }
