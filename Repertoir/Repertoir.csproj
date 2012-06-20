@@ -109,6 +109,7 @@
     <Compile Include="Models\RepertoirModels.cs" />
     <Compile Include="Models\RepertoirViewModels.cs" />
     <Compile Include="Models\ViewCompany.cs" />
+    <Compile Include="Models\ViewContact.cs" />
     <Compile Include="Models\ViewPerson.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
