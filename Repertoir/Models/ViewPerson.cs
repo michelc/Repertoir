@@ -42,6 +42,7 @@ namespace Repertoir.Models
                 LastName = model.LastName,
                 FirstName = model.FirstName,
                 Title = model.Title,
+                CompanyName = model.CompanyName,
                 Phone1 = model.Phone1,
                 Phone2 = model.Phone2,
                 Fax = model.Fax,
