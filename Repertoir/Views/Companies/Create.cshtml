@@ -12,7 +12,7 @@
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
     <fieldset class="sixteen columns">
-        <legend>Nouvelle société</legend>
+        <legend>Nouvelle société (ou @Html.ActionLink("créer une nouvelle personne", "Create", "People"))</legend>
 
         @Html.Partial("_Editor", Model)
 
