@@ -5,11 +5,7 @@
 }
 
 <h2 class="crud">
-    @Html.ActionLink("Contacts", "Index", "Contacts")
-    / @Html.ActionLink("Créer", "Create")
-    / @Html.ActionLink("Afficher", "Details", new { id = Model.ID })
-    / @Html.ActionLink("Modifier", "Edit", new { id = Model.ID })
-    / Supprimer
+    @Html.ActionCrud(Model.ID)
 </h2>
 
 <fieldset class="sixteen columns">
