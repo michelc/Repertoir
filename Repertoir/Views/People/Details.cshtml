@@ -8,7 +8,13 @@
     @Html.ActionCrud(Model.ID)
 </h2>
 
-<fieldset class="sixteen columns">
+<fieldset class="readonly sixteen columns">
     <legend>@Model.FirstName @Model.LastName</legend>
-    @Html.Partial("_Display", Model)
+    @Html.Partial("_Editor", Model)
 </fieldset>
+
+
+@section JavaScript
+{
+    @Html.Partial("_FormScripts")
+}
