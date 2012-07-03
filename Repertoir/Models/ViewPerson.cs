@@ -38,6 +38,7 @@ namespace Repertoir.Models
             var view_model = new ViewPerson
             {
                 Contact_ID = model.Contact_ID,
+                DisplayName = model.DisplayName,
                 Civility = model.Civility,
                 LastName = model.LastName,
                 FirstName = model.FirstName,
@@ -62,6 +63,7 @@ namespace Repertoir.Models
         public static Contact Update_With_ViewPerson(this Contact model, ViewPerson view_model)
         {
             model.Contact_ID = view_model.Contact_ID;
+            model.DisplayName = (view_model.FirstName + " " + view_model.LastName).Trim();
             model.Civility = view_model.Civility;
             model.LastName = view_model.LastName;
             model.FirstName = view_model.FirstName;

@@ -13,6 +13,8 @@ namespace Repertoir.Models
         [Key]
         public int Contact_ID { get; set; }
 
+        public string DisplayName { get; set; }
+
         [Required]
         [StringLength(100)]
         public string LastName { get; set; }

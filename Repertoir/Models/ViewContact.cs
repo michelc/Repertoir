@@ -5,6 +5,7 @@ namespace Repertoir.Models
     public class ViewContact
     {
         public int Contact_ID { get; set; }
+        public string DisplayName { get; set; }
 
         [Required]
         [Display(Name = "Téléphone")]

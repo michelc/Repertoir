@@ -21,6 +21,7 @@ namespace Repertoir.Models
             var view_model = new ViewCompany
             {
                 Contact_ID = model.Contact_ID,
+                DisplayName = model.DisplayName,
                 CompanyName = model.CompanyName,
                 Phone1 = model.Phone1,
                 Phone2 = model.Phone2,
@@ -41,6 +42,7 @@ namespace Repertoir.Models
         public static Contact Update_With_ViewCompany(this Contact model, ViewCompany view_model)
         {
             model.Contact_ID = view_model.Contact_ID;
+            model.DisplayName = view_model.CompanyName;
             model.Civility = null;
             model.LastName = "*";
             model.FirstName = null;

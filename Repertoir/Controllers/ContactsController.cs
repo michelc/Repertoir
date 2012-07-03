@@ -18,7 +18,7 @@ namespace Repertoir.Controllers
                             select new ContactList
                             {
                                 Contact_ID = c.Contact_ID,
-                                DisplayName = c.LastName == "*" ? c.CompanyName : c.LastName + " " + c.FirstName,
+                                DisplayName = c.DisplayName,
                                 Phone1 = c.Phone1,
                                 Email = c.Email,
                                 ControllerName = c.LastName == "*" ? "Companies" : "People"
