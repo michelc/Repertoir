@@ -6,6 +6,7 @@ namespace Repertoir.Models
     {
         public int Contact_ID { get; set; }
         public string DisplayName { get; set; }
+        public bool IsCompany { get; set; } // true = Société / false = Personne
 
         [Required]
         [Display(Name = "Téléphone")]

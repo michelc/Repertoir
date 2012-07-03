@@ -21,7 +21,7 @@ namespace Repertoir.Controllers
                                 DisplayName = c.DisplayName,
                                 Phone1 = c.Phone1,
                                 Email = c.Email,
-                                ControllerName = c.LastName == "*" ? "Companies" : "People"
+                                ControllerName = c.IsCompany ? "Companies" : "People"
                             }).ToList();
 
             return View(contacts);

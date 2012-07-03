@@ -64,6 +64,7 @@ namespace Repertoir.Models
         {
             model.Contact_ID = view_model.Contact_ID;
             model.DisplayName = (view_model.FirstName + " " + view_model.LastName).Trim();
+            model.IsCompany = false;
             model.Civility = view_model.Civility;
             model.LastName = view_model.LastName;
             model.FirstName = view_model.FirstName;
