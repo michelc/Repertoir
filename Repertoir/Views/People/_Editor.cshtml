@@ -33,11 +33,11 @@
 </div>
 
 <div class="editor-label five columns alpha">
-    @Html.CaptionFor(model => model.CompanyName)
+    @Html.LabelFor(model => model.Company_ID)
 </div>
 <div class="editor-field eleven columns omega">
-    @Html.EditorFor(model => model.CompanyName)
-    @Html.ValidationMessageFor(model => model.CompanyName)
+    @Html.DropDownListFor(model => model.Company_ID, Model.Companies, string.Empty)
+    @Html.ValidationMessageFor(model => model.Company_ID)
 </div>
 
 <div class="editor-label five columns alpha">

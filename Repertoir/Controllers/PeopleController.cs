@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using System.Linq;
 using System.Web.Mvc;
 using Repertoir.Models; 
 
@@ -15,6 +16,9 @@ namespace Repertoir.Controllers
         {
             var contact = db.Contacts.Find(id);
             var person = contact.To_ViewPerson();
+            
+            // nécessaire car _Editor.cshtml est utilisé par la vue Details.cs
+            person.Companies = ListCompanies(person.Company_ID);
 
             return View(person);
         }
@@ -27,6 +31,7 @@ namespace Repertoir.Controllers
             var contact = new Contact();
             var person = contact.To_ViewPerson();
 
+            person.Companies = ListCompanies(person.Company_ID);
             return View(person);
         }
 
@@ -46,6 +51,7 @@ namespace Repertoir.Controllers
                 return RedirectToAction("Details", new { Id = contact.Contact_ID });
             }
 
+            person.Companies = ListCompanies(person.Company_ID);
             return View(person);
         }
 
@@ -57,6 +63,7 @@ namespace Repertoir.Controllers
             var contact = db.Contacts.Find(id);
             var person = contact.To_ViewPerson();
 
+            person.Companies = ListCompanies(person.Company_ID);
             return View(person);
         }
 
@@ -76,6 +83,7 @@ namespace Repertoir.Controllers
                 return RedirectToAction("Details", new { Id = contact.Contact_ID });
             }
 
+            person.Companies = ListCompanies(person.Company_ID);
             return View(person);
         }
 
@@ -101,6 +109,11 @@ namespace Repertoir.Controllers
             db.SaveChanges();
 
             return RedirectToAction("Index", "Contacts");
+        }
+
+        protected SelectList ListCompanies(int? Company_ID)
+        {
+            return new SelectList(db.Contacts.Where(x => x.IsCompany == true).OrderBy(x => x.DisplayName), "Contact_ID", "DisplayName", Company_ID);
         }
 
         protected override void Dispose(bool disposing)

@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 
 namespace Repertoir.Models
 {
@@ -29,6 +26,11 @@ namespace Repertoir.Models
         [Display(Name = "Nom société")]
         [StringLength(100)]
         public string CompanyName { get; set; }
+
+        [Display(Name = "Société")]
+        public int? Company_ID { get; set; }
+
+        public SelectList Companies { get; set; }
     }
 
     public static class ViewPersonExtensions
@@ -43,7 +45,6 @@ namespace Repertoir.Models
                 LastName = model.LastName,
                 FirstName = model.FirstName,
                 Title = model.Title,
-                CompanyName = model.CompanyName,
                 Phone1 = model.Phone1,
                 Phone2 = model.Phone2,
                 Fax = model.Fax,
@@ -54,7 +55,10 @@ namespace Repertoir.Models
                 PostalCode = model.PostalCode,
                 Municipality = model.Municipality,
                 Country = model.Country,
-                Notes = model.Notes
+                Notes = model.Notes,
+                Company_ID = model.Company_ID,
+                CompanyName = model.Company_ID.HasValue ? model.Company.CompanyName : string.Empty,
+                Companies = null
             };
 
             return view_model;
@@ -69,7 +73,6 @@ namespace Repertoir.Models
             model.LastName = view_model.LastName;
             model.FirstName = view_model.FirstName;
             model.Title = view_model.Title;
-            model.CompanyName = view_model.CompanyName;
             model.Phone1 = view_model.Phone1;
             model.Phone2 = view_model.Phone2;
             model.Fax = view_model.Fax;
@@ -81,7 +84,8 @@ namespace Repertoir.Models
             model.Municipality = view_model.Municipality;
             model.Country = view_model.Country;
             model.Notes = view_model.Notes;
-
+            model.Company_ID = view_model.Company_ID;
+            model.CompanyName = "*";
             return model;
         }
     }

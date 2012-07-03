@@ -13,6 +13,14 @@ namespace Repertoir.Models
         [Key]
         public int Contact_ID { get; set; }
 
+        // 1 personne peut faire parti d'une société
+        public int? Company_ID { get; set; }
+        [ForeignKey("Company_ID")]
+        public virtual Contact Company { get; set; }
+
+        [StringLength(100)]
+        public string CompanyName { get; set; }
+
         public string DisplayName { get; set; }
         public bool IsCompany { get; set; } // true = Société / false = Personne
 
@@ -28,9 +36,6 @@ namespace Repertoir.Models
 
         [StringLength(100)]
         public string Title { get; set; }
-
-        [StringLength(100)]
-        public string CompanyName { get; set; }
 
         [Required]
         [StringLength(50)]
