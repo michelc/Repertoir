@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 
 namespace Repertoir.Models
@@ -17,6 +18,9 @@ namespace Repertoir.Models
         public int? Company_ID { get; set; }
         [ForeignKey("Company_ID")]
         public virtual Contact Company { get; set; }
+        
+        // 1 société regroupe plusieurs personnes
+        public virtual IList<Contact> People { get; set; }
 
         [StringLength(100)]
         public string CompanyName { get; set; }

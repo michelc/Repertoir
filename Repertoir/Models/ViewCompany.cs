@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace Repertoir.Models
 {
@@ -8,6 +10,8 @@ namespace Repertoir.Models
         [Display(Name = "Nom société")]
         [StringLength(100)]
         public string CompanyName { get; set; }
+
+        public IList<ContactList> People { get; set; }
     }
 
     public static class ViewCompanyExtensions
@@ -29,7 +33,8 @@ namespace Repertoir.Models
                 PostalCode = model.PostalCode,
                 Municipality = model.Municipality,
                 Country = model.Country,
-                Notes = model.Notes
+                Notes = model.Notes,
+                People = new List<ContactList>()
             };
 
             return view_model;
@@ -58,6 +63,22 @@ namespace Repertoir.Models
             model.Notes = view_model.Notes;
 
             return model;
+        }
+
+        public static IList<ContactList> To_ContactList(this IEnumerable<Contact> model)
+        {
+            var view_model = (from c in model
+                              orderby c.DisplayName
+                              select new ContactList
+                              {
+                                  Contact_ID = c.Contact_ID,
+                                  DisplayName = c.DisplayName,
+                                  Phone1 = c.Phone1,
+                                  Email = c.Email,
+                                  ControllerName = c.IsCompany ? "Companies" : "People"
+                              }).ToList();
+
+            return view_model;
         }
     }
 }

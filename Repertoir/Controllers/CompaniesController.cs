@@ -16,6 +16,7 @@ namespace Repertoir.Controllers
             var contact = db.Contacts.Find(id);
             var company = contact.To_ViewCompany();
 
+            company.People = contact.People.To_ContactList();
             return View(company);
         }
 
