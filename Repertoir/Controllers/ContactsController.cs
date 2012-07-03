@@ -14,7 +14,7 @@ namespace Repertoir.Controllers
         public ViewResult Index()
         {
             var contacts = (from c in db.Contacts
-                            orderby c.LastName ascending, c.FirstName ascending
+                            orderby c.DisplayName ascending
                             select new ContactList
                             {
                                 Contact_ID = c.Contact_ID,

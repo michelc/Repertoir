@@ -12,7 +12,7 @@
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
     <fieldset class="sixteen columns">
-        <legend>@Model.FirstName @Model.LastName</legend>
+        <legend>@Model.DisplayName</legend>
 
         @Html.HiddenFor(model => model.Contact_ID)
         @Html.Partial("_Editor", Model)
