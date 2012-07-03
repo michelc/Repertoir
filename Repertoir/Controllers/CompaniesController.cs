@@ -43,7 +43,7 @@ namespace Repertoir.Controllers
                 db.Contacts.Add(contact);
                 db.SaveChanges();
 
-                return RedirectToAction("Details", new { Id = contact.ID });
+                return RedirectToAction("Details", new { Id = contact.Contact_ID });
             }
 
             return View(company);
@@ -68,12 +68,12 @@ namespace Repertoir.Controllers
         {
             if (ModelState.IsValid)
             {
-                var contact = db.Contacts.Find(company.ID);
+                var contact = db.Contacts.Find(company.Contact_ID);
                 contact.Update_With_ViewCompany(company);
                 db.Entry(contact).State = EntityState.Modified;
                 db.SaveChanges();
 
-                return RedirectToAction("Details", new { Id = contact.ID });
+                return RedirectToAction("Details", new { Id = contact.Contact_ID });
             }
 
             return View(company);

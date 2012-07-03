@@ -10,7 +10,8 @@ namespace Repertoir.Models
 
     public class Contact
     {
-        public int ID { get; set; }
+        [Key]
+        public int Contact_ID { get; set; }
 
         [Required]
         [StringLength(100)]

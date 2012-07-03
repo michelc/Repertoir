@@ -5,7 +5,7 @@ namespace Repertoir.Models
     /* Contact simplifié utilisé pour /Contacts/Index */
     public class ContactList
     {
-        public int ID { get; set; }
+        public int Contact_ID { get; set; }
 
         [Display(Name = "Nom")]
         public string DisplayName { get; set; }

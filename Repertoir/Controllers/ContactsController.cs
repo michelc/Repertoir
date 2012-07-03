@@ -17,7 +17,7 @@ namespace Repertoir.Controllers
                             orderby c.LastName ascending, c.FirstName ascending
                             select new ContactList
                             {
-                                ID = c.ID,
+                                Contact_ID = c.Contact_ID,
                                 DisplayName = c.LastName == "*" ? c.CompanyName : c.LastName + " " + c.FirstName,
                                 Phone1 = c.Phone1,
                                 Email = c.Email,

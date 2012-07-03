@@ -36,9 +36,9 @@
             @Html.DisplayFor(modelItem => item.Email)
         </td>
         <td>
-            @Html.ActionLink("Afficher", "Details", item.ControllerName, new { id = item.ID }, null) |
-            @Html.ActionLink("Modifier", "Edit", item.ControllerName, new { id = item.ID }, null) |
-            @Html.ActionLink("Supprimer", "Delete", item.ControllerName, new { id = item.ID }, null)
+            @Html.ActionLink("Afficher", "Details", item.ControllerName, new { id = item.Contact_ID }, null) |
+            @Html.ActionLink("Modifier", "Edit", item.ControllerName, new { id = item.Contact_ID }, null) |
+            @Html.ActionLink("Supprimer", "Delete", item.ControllerName, new { id = item.Contact_ID }, null)
         </td>
     </tr>
 }

@@ -5,7 +5,7 @@
 }
 
 <h2 class="crud">
-    @Html.ActionCrud(Model.ID)
+    @Html.ActionCrud(Model.Contact_ID)
 </h2>
 
 <fieldset class="sixteen columns">
@@ -18,7 +18,7 @@
         @Html.AntiForgeryToken()
         <p class="offset-by-five eleven columns alpha">
             <input type="submit" value="Ok pour supprimer !" />
-            @Html.ActionCancel(Model.ID)
+            @Html.ActionCancel(Model.Contact_ID)
         </p>
     }
 </fieldset>
