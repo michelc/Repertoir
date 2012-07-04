@@ -5,8 +5,9 @@ namespace Repertoir.Models
     public class ViewContact
     {
         public int Contact_ID { get; set; }
+        public bool IsCompany { get; set; }
         public string DisplayName { get; set; }
-        public bool IsCompany { get; set; } // true = Société / false = Personne
+        public string Slug { get; set; }
 
         [Required]
         [Display(Name = "Téléphone")]
