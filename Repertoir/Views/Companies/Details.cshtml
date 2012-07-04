@@ -13,4 +13,6 @@
     @Html.Partial("_Display", Model)
 </fieldset>
 
+<h2 class="crud">Personnes / @Html.ActionLink("Créer", "Create", "People", new { ParentID = Model.Contact_ID }, null)</h2>
+
 @Html.Partial(@"../Contacts/_List", Model.People)

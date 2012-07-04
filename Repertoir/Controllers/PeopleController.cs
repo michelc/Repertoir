@@ -23,9 +23,14 @@ namespace Repertoir.Controllers
         //
         // GET: /People/Create
 
-        public ActionResult Create()
+        public ActionResult Create(int ParentID = 0)
         {
             var contact = new Contact();
+            if (ParentID != 0)
+            {
+                contact.Company_ID = ParentID;
+                contact.Company = db.Contacts.Find(ParentID);
+            }
             var person = contact.To_ViewPerson();
 
             person.Companies = ListCompanies(person.Company_ID);
