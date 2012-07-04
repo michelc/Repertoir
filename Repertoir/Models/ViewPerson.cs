@@ -85,7 +85,7 @@ namespace Repertoir.Models
             model.Country = view_model.Country;
             model.Notes = view_model.Notes;
             model.Company_ID = view_model.Company_ID;
-            model.CompanyName = "*";
+            model.CompanyName = null;
             return model;
         }
     }

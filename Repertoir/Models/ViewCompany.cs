@@ -46,7 +46,7 @@ namespace Repertoir.Models
             model.DisplayName = view_model.CompanyName;
             model.IsCompany = true;
             model.Civility = null;
-            model.LastName = "*";
+            model.LastName = null;
             model.FirstName = null;
             model.Title = null;
             model.CompanyName = view_model.CompanyName;
