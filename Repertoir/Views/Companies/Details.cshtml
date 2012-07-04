@@ -13,39 +13,4 @@
     @Html.Partial("_Display", Model)
 </fieldset>
 
-<table>
-<thead>
-    <tr>
-        <th>
-            @Html.LabelFor(model => model.People.First().DisplayName)
-        </th>
-        <th>
-            @Html.LabelFor(model => model.People.First().Phone1)
-        </th>
-        <th>
-            @Html.LabelFor(model => model.People.First().Email)
-        </th>
-        <th></th>
-    </tr>
-</thead>
-<tbody>
-@foreach (var item in Model.People) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.DisplayName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Phone1)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            @Html.ActionLink("Afficher", "Details", item.ControllerName, new { id = item.Contact_ID }, null) |
-            @Html.ActionLink("Modifier", "Edit", item.ControllerName, new { id = item.Contact_ID }, null) |
-            @Html.ActionLink("Supprimer", "Delete", item.ControllerName, new { id = item.Contact_ID }, null)
-        </td>
-    </tr>
-}
-</tbody>
-</table>
+@Html.Partial(@"../Contacts/_List", Model.People)
