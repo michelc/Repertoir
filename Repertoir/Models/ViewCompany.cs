@@ -75,6 +75,8 @@ namespace Repertoir.Models
                                   DisplayName = c.DisplayName,
                                   Phone1 = c.Phone1,
                                   Email = c.Email,
+                                  Civility = c.Civility,
+                                  IsCompany = c.IsCompany,
                                   ControllerName = c.IsCompany ? "Companies" : "People"
                               }).ToList();
 

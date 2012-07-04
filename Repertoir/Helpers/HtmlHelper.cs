@@ -43,7 +43,7 @@ namespace Repertoir.Helpers
                 tag.SetInnerText(labelText);
             }
 
-            return MvcHtmlString.Create(tag.ToString(TagRenderMode.Normal));
+            return new MvcHtmlString(tag.ToString(TagRenderMode.Normal));
         }
 
         public static HtmlString ActionCancel(this HtmlHelper helper, int id = 0)
@@ -62,7 +62,7 @@ namespace Repertoir.Helpers
             return html;
         }
 
-        public static HtmlString ActionCrud(this HtmlHelper helper, int id = 0)
+        public static MvcHtmlString ActionCrud(this HtmlHelper helper, int id = 0)
         {
             var current_action = helper.ViewContext.RouteData.Values["action"].ToString().ToLower();
 
@@ -150,7 +150,27 @@ namespace Repertoir.Helpers
 
             }
 
-            return new HtmlString(html);
+            return new MvcHtmlString(html);
+        }
+
+        public static MvcHtmlString ContactCss(this HtmlHelper helper, bool IsCompany, string Civility)
+        {
+            string cssClass = string.Empty;
+
+            if (IsCompany)
+            {
+                cssClass = "is_society";
+            }
+            else if (Civility == "M.")
+            {
+                cssClass = "is_man";
+            }
+            else if (Civility == "Mme")
+            {
+                cssClass = "is_woman";
+            }
+
+            return new MvcHtmlString(cssClass);
         }
     }
 }

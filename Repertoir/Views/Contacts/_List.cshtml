@@ -4,6 +4,7 @@
 <thead>
     <tr>
         <th></th>
+        <th></th>
         <th>
             @Html.LabelFor(model => model.First().DisplayName)
         </th>
@@ -21,6 +22,9 @@
     <tr>
         <td>
             @Html.ActionLink("Modifier", "Edit", item.ControllerName, new { id = item.Contact_ID }, new { @class = "edit" })
+        </td>
+        <td>
+            <a class="icon @Html.ContactCss(item.IsCompany, item.Civility)">x</a>
         </td>
         <td>
             @Html.ActionLink(item.DisplayName, "Details", item.ControllerName, new { id = item.Contact_ID }, null)

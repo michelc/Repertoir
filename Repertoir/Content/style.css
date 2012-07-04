@@ -71,6 +71,7 @@ a:focus
 /* #Icons
 ================================================== */
 
+a.icon,
 a.edit,
 a.delete
 {
@@ -91,6 +92,7 @@ a.delete
     background-image: url(icons/delete.png);
 }
 
+table a.icon,
 table a.edit,
 table a.delete
 {
@@ -99,6 +101,21 @@ table a.delete
     max-width: 24px;
     overflow: hidden;
     margin: -3px 0;
+}
+
+a.is_society
+{
+    background-image: url(icons/home.png);
+}
+
+a.is_man
+{
+    background-image: url(icons/male_user.png);
+}
+
+a.is_woman
+{
+    background-image: url(icons/female_user.png);
 }
 
 
