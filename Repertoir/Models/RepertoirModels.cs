@@ -25,14 +25,16 @@ namespace Repertoir.Models
         [StringLength(100)]
         public string CompanyName { get; set; }
 
+        [StringLength(100)]
         public string DisplayName { get; set; }
+
         public bool IsCompany { get; set; } // true = Société / false = Personne
 
         [Required]
-        [StringLength(100)]
+        [StringLength(50)]
         public string LastName { get; set; }
 
-        [StringLength(100)]
+        [StringLength(50)]
         public string FirstName { get; set; }
 
         [StringLength(3)]
