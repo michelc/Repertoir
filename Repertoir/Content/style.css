@@ -68,6 +68,40 @@ a:focus
 }
 
 
+/* #Icons
+================================================== */
+
+a.edit,
+a.delete
+{
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    display: inline-block;
+    height: 24px;
+    padding-left: 30px;
+}
+
+a.edit
+{
+    background-image: url(icons/edit.png);
+}
+
+a.delete
+{
+    background-image: url(icons/delete.png);
+}
+
+table a.edit,
+table a.delete
+{
+    padding-left: 0;
+    text-indent: 100px;
+    max-width: 24px;
+    overflow: hidden;
+    margin: -3px 0;
+}
+
+
 /* #Buttons
 ================================================== */
 

@@ -3,6 +3,7 @@
 <table>
 <thead>
     <tr>
+        <th></th>
         <th>
             @Html.LabelFor(model => model.First().DisplayName)
         </th>
@@ -19,7 +20,10 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.DisplayName)
+            @Html.ActionLink("Modifier", "Edit", item.ControllerName, new { id = item.Contact_ID }, new { @class = "edit" })
+        </td>
+        <td>
+            @Html.ActionLink(item.DisplayName, "Details", item.ControllerName, new { id = item.Contact_ID }, null)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Phone1)
@@ -28,9 +32,7 @@
             @Html.DisplayFor(modelItem => item.Email)
         </td>
         <td>
-            @Html.ActionLink("Afficher", "Details", item.ControllerName, new { id = item.Contact_ID }, null) |
-            @Html.ActionLink("Modifier", "Edit", item.ControllerName, new { id = item.Contact_ID }, null) |
-            @Html.ActionLink("Supprimer", "Delete", item.ControllerName, new { id = item.Contact_ID }, null)
+            @Html.ActionLink("Supprimer", "Delete", item.ControllerName, new { id = item.Contact_ID }, new { @class = "delete" })
         </td>
     </tr>
 }
