@@ -32,7 +32,10 @@
     @Html.LabelFor(model => model.CompanyName)
 </div>
 <div class="display-field eleven columns omega">
-    @Html.DisplayFor(model => model.CompanyName)
+@if (Model.Company_ID.HasValue)
+{
+    @Html.ActionLink(Model.CompanyName, "Details", "Companies", new { id = Model.Company_ID }, null)
+}
 </div>
 
 <div class="display-label five columns alpha">

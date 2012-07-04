@@ -3,15 +3,6 @@
 <script>
 $(document).ready(function () {
 
-    /* Lecture seule pour les champs contenus dans une classe readonly */
-    /* --------------------------------------------------------------- */
-    /* - à faire avant de donner le focus sinon IE9 permet la saisie sur le 1° champ */
-    $(".readonly :input").attr("readonly", true);
-    /* - readonly ne s'applique pas aux boutons radio, aux cases à cocher et aux listes d'options */
-    $(".readonly :radio:not(:checked)").attr('disabled', true);
-    $(".readonly :checkbox:not(:checked)").attr('disabled', true);
-    $(".readonly option:not(:checked)").attr('disabled', true);
-
     /* Donne le focus au premier champ du formulaire */
     /* --------------------------------------------- */
     $(":input:visible:enabled:first").focus();

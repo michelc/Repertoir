@@ -10,11 +10,5 @@
 
 <fieldset class="readonly sixteen columns">
     <legend>@Model.DisplayName</legend>
-    @Html.Partial("_Editor", Model)
+    @Html.Partial("_Display", Model)
 </fieldset>
-
-
-@section JavaScript
-{
-    @Html.Partial("_FormScripts")
-}

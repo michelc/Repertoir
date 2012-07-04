@@ -16,9 +16,6 @@ namespace Repertoir.Controllers
         {
             var contact = db.Contacts.Find(id);
             var person = contact.To_ViewPerson();
-            
-            // nécessaire car _Editor.cshtml est utilisé par la vue Details.cs
-            person.Companies = ListCompanies(person.Company_ID);
 
             return View(person);
         }
