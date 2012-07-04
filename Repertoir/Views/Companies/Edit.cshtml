@@ -5,7 +5,7 @@
 }
 
 <h2 class="crud">
-    @Html.ActionCrud(Model.Contact_ID)
+    @Html.ActionCrud(Model.Contact_ID, Model.Slug)
 </h2>
 
 @using (Html.BeginForm()) {
@@ -19,7 +19,7 @@
  
         <p class="offset-by-five eleven columns alpha">
             <input type="submit" value="Enregistrer" />
-            @Html.ActionCancel(Model.Contact_ID)
+            @Html.ActionCancel(Model.Contact_ID, Model.Slug)
         </p>
     </fieldset>
 }

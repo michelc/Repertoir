@@ -46,13 +46,13 @@ namespace Repertoir.Helpers
             return new MvcHtmlString(tag.ToString(TagRenderMode.Normal));
         }
 
-        public static HtmlString ActionCancel(this HtmlHelper helper, int id = 0)
+        public static HtmlString ActionCancel(this HtmlHelper helper, int id = 0, string slug = "")
         {
             MvcHtmlString html = null;
 
             if (id != 0)
             {
-                html = helper.ActionLink("Annuler", "Details", new { id = id });
+                html = helper.ActionLink("Annuler", "Details", new { id = id, slug = slug });
             }
             else
             {
@@ -62,7 +62,7 @@ namespace Repertoir.Helpers
             return html;
         }
 
-        public static MvcHtmlString ActionCrud(this HtmlHelper helper, int id = 0)
+        public static MvcHtmlString ActionCrud(this HtmlHelper helper, int id = 0, string slug = "")
         {
             var current_action = helper.ViewContext.RouteData.Values["action"].ToString().ToLower();
 
@@ -114,7 +114,7 @@ namespace Repertoir.Helpers
                 if (current_action != "details")
                 {
                     // Alors, il faut un lien vers la page Details
-                    html += helper.ActionLink("Afficher", "Details", new { id = id }).ToString();
+                    html += helper.ActionLink("Afficher", "Details", new { id = id, slug = slug }).ToString();
                 }
                 else
                 {
@@ -127,7 +127,7 @@ namespace Repertoir.Helpers
                 if (current_action != "edit")
                 {
                     // Alors, il faut un lien vers la page Edit
-                    html += helper.ActionLink("Modifier", "Edit", new { id = id }).ToString();
+                    html += helper.ActionLink("Modifier", "Edit", new { id = id, slug = slug }).ToString();
                 }
                 else
                 {
@@ -140,7 +140,7 @@ namespace Repertoir.Helpers
                 if (current_action != "delete")
                 {
                     // Alors, il faut un lien vers la page Delete
-                    html += helper.ActionLink("Supprimer", "Delete", new { id = id }).ToString();
+                    html += helper.ActionLink("Supprimer", "Delete", new { id = id, slug = slug }).ToString();
                 }
                 else
                 {

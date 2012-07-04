@@ -50,7 +50,7 @@ namespace Repertoir.Controllers
                 db.Contacts.Add(contact);
                 db.SaveChanges();
 
-                return RedirectToAction("Details", new { Id = contact.Contact_ID });
+                return RedirectToAction("Details", new { id = contact.Contact_ID, slug = contact.Slug });
             }
 
             person.Companies = ListCompanies(person.Company_ID);
@@ -82,7 +82,7 @@ namespace Repertoir.Controllers
                 db.Entry(contact).State = EntityState.Modified;
                 db.SaveChanges();
 
-                return RedirectToAction("Details", new { Id = contact.Contact_ID });
+                return RedirectToAction("Details", new { id = contact.Contact_ID, slug = contact.Slug });
             }
 
             person.Companies = ListCompanies(person.Company_ID);
