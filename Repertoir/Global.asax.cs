@@ -24,6 +24,12 @@ namespace Repertoir
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRouteLowercase(
+                "Id_Slug", // Route name
+                "{controller}/{action}/{id}/{slug}", // URL with parameters
+                new { controller = "Home", action = "Index" } // Parameter defaults
+            );
+
+            routes.MapRouteLowercase(
                 "Default", // Route name
                 "{controller}/{action}/{id}", // URL with parameters
                 new { controller = "Home", action = "Index", id = UrlParameter.Optional } // Parameter defaults

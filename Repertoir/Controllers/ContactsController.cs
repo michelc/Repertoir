@@ -23,6 +23,7 @@ namespace Repertoir.Controllers
                                 Email = c.Email,
                                 Civility = c.Civility,
                                 IsCompany = c.IsCompany,
+                                Slug = c.Slug,
                                 ControllerName = c.IsCompany ? "Companies" : "People"
                             }).ToList();
 

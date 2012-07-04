@@ -18,6 +18,7 @@ namespace Repertoir.Models
 
         public string Civility { get; set; }
         public bool IsCompany { get; set; }
+        public string Slug { get; set; }
         public string ControllerName { get; set; }
     }
 }

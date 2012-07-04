@@ -21,13 +21,13 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.ActionLink("Modifier", "Edit", item.ControllerName, new { id = item.Contact_ID }, new { @class = "edit" })
+            @Html.ActionLink("Modifier", "Edit", item.ControllerName, new { id = item.Contact_ID, slug = item.Slug }, new { @class = "edit" })
         </td>
         <td>
             <a class="icon @Html.ContactCss(item.IsCompany, item.Civility)">x</a>
         </td>
         <td>
-            @Html.ActionLink(item.DisplayName, "Details", item.ControllerName, new { id = item.Contact_ID }, null)
+            @Html.ActionLink(item.DisplayName, "Details", item.ControllerName, new { id = item.Contact_ID, slug = item.Slug }, null)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Phone1)
@@ -36,7 +36,7 @@
             @Html.DisplayFor(modelItem => item.Email)
         </td>
         <td>
-            @Html.ActionLink("Supprimer", "Delete", item.ControllerName, new { id = item.Contact_ID }, new { @class = "delete" })
+            @Html.ActionLink("Supprimer", "Delete", item.ControllerName, new { id = item.Contact_ID, slug = item.Slug }, new { @class = "delete" })
         </td>
     </tr>
 }
