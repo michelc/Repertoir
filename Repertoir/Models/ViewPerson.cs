@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
+using Repertoir.Helpers;
 
 namespace Repertoir.Models
 {
@@ -69,7 +70,7 @@ namespace Repertoir.Models
         {
             model.Contact_ID = view_model.Contact_ID;
             model.DisplayName = (view_model.FirstName + " " + view_model.LastName).Trim();
-            model.Slug = model.DisplayName.ToLower().Replace(" ", "-");
+            model.Slug = model.DisplayName.Slugify();
             model.IsCompany = false;
             model.Civility = view_model.Civility;
             model.LastName = view_model.LastName;
