@@ -1,14 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 
 namespace Repertoir.Models
 {
-    public class RepertoirContext : DbContext
-    {
-        public DbSet<Contact> Contacts { get; set; }
-    }
-
     public class Contact
     {
         [Key]
@@ -79,5 +75,24 @@ namespace Repertoir.Models
 
         [Column(TypeName = "ntext")]
         public string Notes { get; set; }
+    }
+
+    public class RepertoirContext : DbContext
+    {
+        public DbSet<Contact> Contacts { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<RepertoirContext, Configuration>());
+        }
+    }
+
+    public class Configuration : DbMigrationsConfiguration<RepertoirContext>
+    {
+        public Configuration()
+        {
+            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationDataLossAllowed = true;
+        }
     }
 }

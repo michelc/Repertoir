@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using LowercaseRoutesMVC;
@@ -40,8 +37,6 @@ namespace Repertoir
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
-
-            System.Data.Entity.Database.SetInitializer(new System.Data.Entity.DropCreateDatabaseIfModelChanges<Repertoir.Models.RepertoirContext>());
 
             ViewEngines.Engines.Clear();
             ViewEngines.Engines.Add(new RazorViewEngine());
