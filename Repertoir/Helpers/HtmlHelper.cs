@@ -46,13 +46,15 @@ namespace Repertoir.Helpers
             return new MvcHtmlString(tag.ToString(TagRenderMode.Normal));
         }
 
-        public static HtmlString ActionCancel(this HtmlHelper helper, int id = 0, string slug = "")
+        public static HtmlString ActionCancel(this HtmlHelper helper)
         {
             MvcHtmlString html = null;
+            var id = helper.ViewContext.RouteData.Values["id"];
+            var slug = helper.ViewContext.RouteData.Values["slug"];
 
-            if (id != 0)
+            if (id != null)
             {
-                html = helper.ActionLink("Annuler", "Details", new { id = id, slug = slug });
+                html = helper.ActionLink("Annuler", "Details", new { id = id.ToString(), slug = slug.ToString() });
             }
             else
             {
