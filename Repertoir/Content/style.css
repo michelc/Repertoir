@@ -167,6 +167,20 @@ fieldset
     margin: 0 !important;
 }
 
+/* Suppression marges latérales (dûes aux nested .columns) */
+/* (!important est nécessaire car .columns est défini après) */
+.display-label,
+.editor-label
+{
+    margin-left: 0 !important;
+    clear: left;
+}
+.display-field,
+.editor-field
+{
+    margin-right: 0 !important;
+}
+
 /* Style des <legend> inspiré du style des <h3> */
 legend
 {

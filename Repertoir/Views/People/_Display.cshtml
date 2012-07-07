@@ -1,107 +1,107 @@
 ﻿@model Repertoir.Models.ViewPerson
 
-<div class="display-label five columns alpha">
+<div class="display-label five columns">
     @Html.LabelFor(model => model.LastName)
 </div>
-<div class="display-field eleven columns omega">
+<div class="display-field eleven columns">
     @Html.DisplayFor(model => model.LastName)
 </div>
 
-<div class="display-label five columns alpha">
+<div class="display-label five columns">
     @Html.LabelFor(model => model.FirstName)
 </div>
-<div class="display-field eleven columns omega">
+<div class="display-field eleven columns">
     @Html.DisplayFor(model => model.FirstName)
 </div>
 
-<div class="display-label five columns alpha">
+<div class="display-label five columns">
     @Html.LabelFor(model => model.Civility)
 </div>
-<div class="display-field eleven columns omega">
+<div class="display-field eleven columns">
     @Html.DisplayFor(model => model.Civility)
 </div>
 
-<div class="display-label five columns alpha">
+<div class="display-label five columns">
     @Html.LabelFor(model => model.Title)
 </div>
-<div class="display-field eleven columns omega">
+<div class="display-field eleven columns">
     @Html.DisplayFor(model => model.Title)
 </div>
 
-<div class="display-label five columns alpha">
+<div class="display-label five columns">
     @Html.LabelFor(model => model.CompanyName)
 </div>
-<div class="display-field eleven columns omega">
+<div class="display-field eleven columns">
 @if (Model.Company_ID.HasValue)
 {
     @Html.ActionLink(Model.CompanyName, "Details", "Companies", new { id = Model.Company_ID }, null)
 }
 </div>
 
-<div class="display-label five columns alpha">
+<div class="display-label five columns">
     @Html.LabelFor(model => model.Phone1)
 </div>
-<div class="display-field eleven columns omega">
+<div class="display-field eleven columns">
     @Html.DisplayFor(model => model.Phone1)
 </div>
 
-<div class="display-label five columns alpha">
+<div class="display-label five columns">
     @Html.LabelFor(model => model.Phone2)
 </div>
-<div class="display-field eleven columns omega">
+<div class="display-field eleven columns">
     @Html.DisplayFor(model => model.Phone2)
 </div>
 
-<div class="display-label five columns alpha">
+<div class="display-label five columns">
     @Html.LabelFor(model => model.Fax)
 </div>
-<div class="display-field eleven columns omega">
+<div class="display-field eleven columns">
     @Html.DisplayFor(model => model.Fax)
 </div>
 
-<div class="display-label five columns alpha">
+<div class="display-label five columns">
     @Html.LabelFor(model => model.Email)
 </div>
-<div class="display-field eleven columns omega">
+<div class="display-field eleven columns">
     @Html.DisplayFor(model => model.Email)
 </div>
 
-<div class="display-label five columns alpha">
+<div class="display-label five columns">
     @Html.LabelFor(model => model.Url)
 </div>
-<div class="display-field eleven columns omega">
+<div class="display-field eleven columns">
     @Html.DisplayFor(model => model.Url)
 </div>
 
-<div class="display-label five columns alpha">
+<div class="display-label five columns">
     @Html.LabelFor(model => model.Notes)
 </div>
-<div class="display-field eleven columns omega">
+<div class="display-field eleven columns">
     @Html.DisplayFor(model => model.Notes)
 </div>
 
-<div class="display-label five columns alpha">
+<div class="display-label five columns">
     @Html.LabelFor(model => model.AddressLine1)
 </div>
-<div class="display-field eleven columns omega">
+<div class="display-field eleven columns">
     @Html.DisplayFor(model => model.AddressLine1)
     <br>
     @Html.DisplayFor(model => model.AddressLine2)
 </div>
 
-<div class="display-label five columns alpha">
+<div class="display-label five columns">
     @Html.LabelFor(model => model.PostalCode)
     /
     @Html.LabelFor(model => model.Municipality)
 </div>
-<div class="display-field eleven columns omega">
+<div class="display-field eleven columns">
     @Html.DisplayFor(model => model.PostalCode)
     @Html.DisplayFor(model => model.Municipality)
 </div>
 
-<div class="display-label five columns alpha">
+<div class="display-label five columns">
     @Html.LabelFor(model => model.Country)
 </div>
-<div class="display-field eleven columns omega">
+<div class="display-field eleven columns">
     @Html.DisplayFor(model => model.Country)
 </div>
