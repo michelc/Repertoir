@@ -18,6 +18,29 @@ h1 { color: #d2691e; } /* chocolat */
 h2 { color: #888888; } /* gris */
 h3 { color: #39b449; } /* vert */
 
+/* Repasse les liens en bleu */
+a,
+a:visited
+{
+    color: #00f;
+}
+a:hover,
+a:focus
+{
+    color: #88f;
+}
+
+/* Menu des actions CRUD */
+h2.crud
+{
+    font-size: smaller;
+    font-variant: small-caps;
+}
+
+
+/* #Tables
+================================================== */
+
 /* Par défaut les tables occupent toute la largeur de la page */
 table
 {
@@ -53,18 +76,6 @@ tbody tr:nth-child(odd)
 tbody tr:hover
 {
     background-color: #fcfec5; /* jaune postit de Msdn */
-}
-
-/* Repasse les liens en bleu */
-a,
-a:visited
-{
-    color: #00f;
-}
-a:hover,
-a:focus
-{
-    color: #88f;
 }
 
 
@@ -103,20 +114,9 @@ table a.delete
     margin: -3px 0;
 }
 
-a.is_society
-{
-    background-image: url(icons/home.png);
-}
-
-a.is_man
-{
-    background-image: url(icons/male_user.png);
-}
-
-a.is_woman
-{
-    background-image: url(icons/female_user.png);
-}
+a.is_society    { background-image: url(icons/home.png); }
+a.is_man        { background-image: url(icons/male_user.png); }
+a.is_woman      { background-image: url(icons/female_user.png); }
 
 
 /* #Buttons
@@ -331,11 +331,4 @@ input[type="text"].inputbig
     {
         width: 96% !important;
     }
-}
-
-/* Menu des actions CRUD */
-h2.crud
-{
-    font-size: smaller;
-    font-variant: small-caps;
 }
