@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using System.Web.Routing;
 using LowercaseRoutesMVC;
+using Repertoir.Helpers;
 using StackExchange.Profiling;
 
 namespace Repertoir
@@ -37,6 +38,8 @@ namespace Repertoir
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
+
+            ModelBinders.Binders.Add(typeof(string), new StringModelBinder());
 
             ViewEngines.Engines.Clear();
             ViewEngines.Engines.Add(new RazorViewEngine());
