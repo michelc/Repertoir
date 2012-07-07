@@ -49,11 +49,11 @@ namespace Repertoir.Helpers
         public static HtmlString ActionCancel(this HtmlHelper helper)
         {
             MvcHtmlString html = null;
-            var id = helper.ViewContext.RouteData.Values["id"];
-            var slug = helper.ViewContext.RouteData.Values["slug"];
 
+            var id = helper.ViewContext.RouteData.Values["id"];
             if (id != null)
             {
+                var slug = helper.ViewContext.RouteData.Values["slug"];
                 html = helper.ActionLink("Annuler", "Details", new { id = id.ToString(), slug = slug.ToString() });
             }
             else
@@ -64,7 +64,7 @@ namespace Repertoir.Helpers
             return html;
         }
 
-        public static MvcHtmlString ActionCrud(this HtmlHelper helper, int id = 0, string slug = "")
+        public static MvcHtmlString ActionCrud(this HtmlHelper helper)
         {
             var current_action = helper.ViewContext.RouteData.Values["action"].ToString().ToLower();
 
@@ -107,16 +107,18 @@ namespace Repertoir.Helpers
             }
 
             // Si on a un identifiant de fiche
-            if (id != 0)
+            var id = helper.ViewContext.RouteData.Values["id"];
+            if (id != null)
             {
                 // Alors, il faut générer les autres liens CRUD
+                var slug = helper.ViewContext.RouteData.Values["slug"];
 
                 // Si on n'est pas sur la page Details
                 html += " / ";
                 if (current_action != "details")
                 {
                     // Alors, il faut un lien vers la page Details
-                    html += helper.ActionLink("Afficher", "Details", new { id = id, slug = slug }).ToString();
+                    html += helper.ActionLink("Afficher", "Details", new { id = id.ToString(), slug = slug.ToString() }).ToString();
                 }
                 else
                 {
@@ -129,7 +131,7 @@ namespace Repertoir.Helpers
                 if (current_action != "edit")
                 {
                     // Alors, il faut un lien vers la page Edit
-                    html += helper.ActionLink("Modifier", "Edit", new { id = id, slug = slug }).ToString();
+                    html += helper.ActionLink("Modifier", "Edit", new { id = id.ToString(), slug = slug.ToString() }).ToString();
                 }
                 else
                 {
@@ -142,7 +144,7 @@ namespace Repertoir.Helpers
                 if (current_action != "delete")
                 {
                     // Alors, il faut un lien vers la page Delete
-                    html += helper.ActionLink("Supprimer", "Delete", new { id = id, slug = slug }).ToString();
+                    html += helper.ActionLink("Supprimer", "Delete", new { id = id.ToString(), slug = slug.ToString() }).ToString();
                 }
                 else
                 {
