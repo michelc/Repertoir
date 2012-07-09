@@ -34,7 +34,7 @@
 <div class="display-field eleven columns">
 @if (Model.Company_ID.HasValue)
 {
-    @Html.ActionLink(Model.CompanyName, "Details", "Companies", new { id = Model.Company_ID }, null)
+    @Html.ActionLink(Model.CompanyName, "Details", "Companies", new { id = Model.Company_ID, slug = Model.Slug }, null)
 }
 </div>
 
