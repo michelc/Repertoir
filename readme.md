@@ -12,6 +12,7 @@ Gestion d'un petit répertoire de contacts pour servir de banc d'essai
 * Entity Migration : en vue d'un déploiement sur AppHarbor
 * MiniProfiler : pour connaitre le code SQL généré par EF
 * LowercaseMVC : pour avoir des URLs en minuscule
+* Déploiement sur AppHarbor
 
 ### Charte graphique
 
@@ -45,8 +46,9 @@ Gestion d'un petit répertoire de contacts pour servir de banc d'essai
 
 ### Pour le "framework"
 
-* Déployer sur AppHarbor
-* Rechercher si AntiXSS est nécessaire en plus de AntiForgeryToken
+* Rechercher si AntiXSS est nécessaire en plus de AntiForgeryToken : OUI !!!
+  * [Securing Your ASP.NET Applications](http://msdn.microsoft.com/en-us/magazine/hh708755.aspx)
+  * [ASP.NET MVC security and hacking: Defense-in-depth](https://sites.google.com/site/muazkh/asp-net-mvc-security-and-hacking-defense-in-depth)
 * Utiliser le CDN Google ou Microsoft pour les fichiers jQuery
 * Améliorer la CSS pour les affichages _Display.cshtml
 * Tester et revoir (condenser) l'affichage pour les smartphones
