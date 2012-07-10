@@ -1,5 +1,8 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
+using Repertoir.Helpers;
 using Repertoir.Models;
 
 namespace Repertoir.Controllers
@@ -37,12 +40,12 @@ namespace Repertoir.Controllers
         {
             var contacts = (from c in db.Contacts
                             orderby c.IsCompany descending, c.DisplayName ascending
-                            select new
+                            select new FlatContact
                             {
                                 Slug = c.Slug,
                                 DisplayName = c.DisplayName,
                                 IsCompany = c.IsCompany,
-                                CompanyName = c.Company_ID.HasValue ? c.Company.CompanyName : "",
+                                CompanyName = c.Company_ID.HasValue ? c.Company.CompanyName : c.CompanyName,
                                 Civility = c.Civility,
                                 LastName = c.LastName,
                                 FirstName = c.FirstName,
@@ -60,7 +63,61 @@ namespace Repertoir.Controllers
                                 Notes = c.Notes
                             }).ToList();
 
-            return Json(contacts, JsonRequestBehavior.AllowGet);
+            return Json(contacts, "application/json", JsonRequestBehavior.AllowGet);
+        }
+
+        //
+        // GET: /Contacts/Import
+        public ActionResult Import()
+        {
+            var file = Server.MapPath("~/Content/sample_db.json");
+            var json = System.IO.File.ReadAllText(file);
+
+            var serializer = new JavaScriptSerializer();
+            var contacts = serializer.Deserialize<List<FlatContact>>(json);
+
+            // Vide la table des contacts actuels
+            db.Database.ExecuteSqlCommand("DELETE FROM Contacts WHERE Company_ID IS NOT NULL");
+            db.Database.ExecuteSqlCommand("DELETE FROM Contacts WHERE Company_ID IS NULL");
+            db.Database.ExecuteSqlCommand("ALTER TABLE Contacts ALTER COLUMN Contact_ID IDENTITY (1,1)");
+
+            // Enregistre les sociétés
+            foreach (var c in contacts)
+            {
+                if (c.IsCompany)
+                {
+                    var contact = new Contact();
+                    contact.Update_With_FlatContact(c);
+
+                    db.Contacts.Add(contact);
+                }
+            }
+            db.SaveChanges();
+
+            // Enregistre les personnes
+            foreach (var c in contacts)
+            {
+                if (!c.IsCompany)
+                {
+                    var contact = new Contact();
+                    contact.Update_With_FlatContact(c);
+
+                    if (!string.IsNullOrEmpty(contact.CompanyName))
+                    {
+                        var slug = contact.CompanyName.Slugify();
+                        var company = db.Contacts.Where(s => s.Slug == slug).FirstOrDefault();
+                        if (company != null)
+                        {
+                            contact.Company_ID = company.Contact_ID;
+                        }
+                    }
+
+                    db.Contacts.Add(contact);
+                }
+            }
+            db.SaveChanges();
+
+            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)

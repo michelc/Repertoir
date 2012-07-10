@@ -1,49 +1,40 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Web.Mvc;
-using Repertoir.Helpers;
+﻿using Repertoir.Helpers;
 
 namespace Repertoir.Models
 {
-    public class ViewPerson : ViewContact
+    public class FlatContact
     {
-        [Required]
-        [Display(Name = "Nom")]
-        [StringLength(100)]
-        public string LastName { get; set; }
-
-        [Display(Name = "Prénom")]
-        [StringLength(100)]
-        public string FirstName { get; set; }
-
-        [Display(Name = "Civilité")]
-        [UIHint("Civility")]
-        [StringLength(3)]
-        public string Civility { get; set; }
-
-        [Display(Name = "Fonction")]
-        [StringLength(100)]
-        public string Title { get; set; }
-
-        [Display(Name = "Nom société")]
-        [StringLength(100)]
+        public string Slug { get; set; }
+        public string DisplayName { get; set; }
+        public bool IsCompany { get; set; }
         public string CompanyName { get; set; }
-
-        [Display(Name = "Société")]
-        public int? Company_ID { get; set; }
-        public string CompanySlug { get; set; }
-
-        public SelectList Companies { get; set; }
+        public string Civility { get; set; }
+        public string LastName { get; set; }
+        public string FirstName { get; set; }
+        public string Title { get; set; }
+        public string Phone1 { get; set; }
+        public string Phone2 { get; set; }
+        public string Fax { get; set; }
+        public string Email { get; set; }
+        public string Url { get; set; }
+        public string AddressLine1 { get; set; }
+        public string AddressLine2 { get; set; }
+        public string PostalCode { get; set; }
+        public string Municipality { get; set; }
+        public string Country { get; set; }
+        public string Notes { get; set; }
     }
 
-    public static class ViewPersonExtensions
+    public static class FlatContactExtensions
     {
-        public static ViewPerson To_ViewPerson(this Contact model)
+        public static FlatContact To_FlatContact(this Contact model)
         {
-            var view_model = new ViewPerson
+            var view_model = new FlatContact
             {
-                Contact_ID = model.Contact_ID,
-                DisplayName = model.DisplayName,
                 Slug = model.Slug,
+                DisplayName = model.DisplayName,
+                IsCompany = model.IsCompany,
+                CompanyName = model.Company_ID.HasValue ? model.Company.CompanyName : model.CompanyName,
                 Civility = model.Civility,
                 LastName = model.LastName,
                 FirstName = model.FirstName,
@@ -58,26 +49,22 @@ namespace Repertoir.Models
                 PostalCode = model.PostalCode,
                 Municipality = model.Municipality,
                 Country = model.Country,
-                Notes = model.Notes,
-                Company_ID = model.Company_ID,
-                CompanySlug = model.Company_ID.HasValue ? model.Company.Slug : null,
-                CompanyName = model.Company_ID.HasValue ? model.Company.CompanyName : null,
-                Companies = null
+                Notes = model.Notes
             };
 
             return view_model;
         }
 
-        public static Contact Update_With_ViewPerson(this Contact model, ViewPerson view_model)
+        public static Contact Update_With_FlatContact(this Contact model, FlatContact view_model)
         {
-            model.Contact_ID = view_model.Contact_ID;
-            model.DisplayName = (view_model.FirstName + " " + view_model.LastName).Trim();
+            model.DisplayName = view_model.DisplayName;
             model.Slug = model.DisplayName.Slugify();
-            model.IsCompany = false;
+            model.IsCompany = view_model.IsCompany;
             model.Civility = view_model.Civility;
             model.LastName = view_model.LastName;
             model.FirstName = view_model.FirstName;
             model.Title = view_model.Title;
+            model.CompanyName = view_model.CompanyName;
             model.Phone1 = view_model.Phone1;
             model.Phone2 = view_model.Phone2;
             model.Fax = view_model.Fax;
@@ -89,8 +76,7 @@ namespace Repertoir.Models
             model.Municipality = view_model.Municipality;
             model.Country = view_model.Country;
             model.Notes = view_model.Notes;
-            model.Company_ID = view_model.Company_ID;
-            model.CompanyName = null;
+
             return model;
         }
     }
