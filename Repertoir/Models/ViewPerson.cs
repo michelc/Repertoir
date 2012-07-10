@@ -30,6 +30,7 @@ namespace Repertoir.Models
 
         [Display(Name = "Société")]
         public int? Company_ID { get; set; }
+        public string CompanySlug { get; set; }
 
         public SelectList Companies { get; set; }
     }
@@ -59,6 +60,7 @@ namespace Repertoir.Models
                 Country = model.Country,
                 Notes = model.Notes,
                 Company_ID = model.Company_ID,
+                CompanySlug = model.Company_ID.HasValue ? model.Company.Slug : string.Empty,
                 CompanyName = model.Company_ID.HasValue ? model.Company.CompanyName : string.Empty,
                 Companies = null
             };
