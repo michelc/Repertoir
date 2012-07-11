@@ -70,7 +70,7 @@ namespace Repertoir.Controllers
         // GET: /Contacts/Import
         public ActionResult Import()
         {
-            var file = Server.MapPath("~/Content/sample_db.json");
+            var file = Server.MapPath("~/Scripts/sample_db.js");
             var json = System.IO.File.ReadAllText(file);
 
             var serializer = new JavaScriptSerializer();
