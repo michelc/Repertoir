@@ -79,7 +79,19 @@ namespace Repertoir.Controllers
             // Vide la table des contacts actuels
             db.Database.ExecuteSqlCommand("DELETE FROM Contacts WHERE Company_ID IS NOT NULL");
             db.Database.ExecuteSqlCommand("DELETE FROM Contacts WHERE Company_ID IS NULL");
-            db.Database.ExecuteSqlCommand("ALTER TABLE Contacts ALTER COLUMN Contact_ID IDENTITY (1,1)");
+            // Réinitialise la numérotation automatique
+            try
+            {
+                // SQL Server CE
+                db.Database.ExecuteSqlCommand("ALTER TABLE Contacts ALTER COLUMN Contact_ID IDENTITY (1,1)");
+            }
+            catch { }
+            try
+            {
+                // SQL Server pas CE
+                db.Database.ExecuteSqlCommand("TRUNCATE TABLE Contacts");
+            }
+            catch { }
 
             // Enregistre les sociétés
             foreach (var c in contacts)
