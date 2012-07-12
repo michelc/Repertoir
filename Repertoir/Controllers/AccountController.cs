@@ -23,6 +23,7 @@ namespace Repertoir.Controllers
         //
         // POST: /Account/LogOn
 
+        [Authorize]
         [HttpPost]
         public ActionResult LogOn(LogOnModel model, string returnUrl)
         {
@@ -72,6 +73,7 @@ namespace Repertoir.Controllers
         //
         // POST: /Account/Register
 
+        [Authorize]
         [HttpPost]
         public ActionResult Register(RegisterModel model)
         {
