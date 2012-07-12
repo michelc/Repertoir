@@ -40,6 +40,7 @@ Gestion d'un petit répertoire de contacts pour servir de banc d'essai
 * Mise en commun du code des vues Details.cshtml et Delete.cshtml dans une vue
   partielle _Display.cshtml
 * Création d'un helper HtmlCrud() pour afficher un menu des actions CRUD
+* Utilisation du CDN Microsoft pour les fichiers jQuery
 
 
 ## Idées et Todo
@@ -49,15 +50,12 @@ Gestion d'un petit répertoire de contacts pour servir de banc d'essai
 * Rechercher si AntiXSS est nécessaire en plus de AntiForgeryToken : OUI !!!
   * [Securing Your ASP.NET Applications](http://msdn.microsoft.com/en-us/magazine/hh708755.aspx)
   * [ASP.NET MVC security and hacking: Defense-in-depth](https://sites.google.com/site/muazkh/asp-net-mvc-security-and-hacking-defense-in-depth)
-* Utiliser le CDN Google ou Microsoft pour les fichiers jQuery
 * Améliorer la CSS pour les affichages _Display.cshtml
 * Tester et revoir (condenser) l'affichage pour les smartphones
 * Ajouter des tests unitaires
 
 ### Pour l'application
 
-* Développer un import / export JSON ou YAML (facilitera l'échange de données
-  avec AppHarbor)
 * Ne pas utiliser une table pour la liste des contacts
 * Détail d'une personne => afficher le détail de sa société
 * Gérer des tags, notes, liens, pièces jointes ... sur les contacts
