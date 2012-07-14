@@ -46,7 +46,7 @@ namespace Repertoir.Helpers
             return new MvcHtmlString(tag.ToString(TagRenderMode.Normal));
         }
 
-        public static HtmlString ActionCancel(this HtmlHelper helper)
+        public static MvcHtmlString ActionCancel(this HtmlHelper helper)
         {
             MvcHtmlString html = null;
 
