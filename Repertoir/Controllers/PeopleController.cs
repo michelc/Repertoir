@@ -1,6 +1,7 @@
 ﻿using System.Data;
 using System.Linq;
 using System.Web.Mvc;
+using Repertoir.Helpers;
 using Repertoir.Models; 
 
 namespace Repertoir.Controllers
@@ -50,6 +51,7 @@ namespace Repertoir.Controllers
                 db.Contacts.Add(contact);
                 db.SaveChanges();
 
+                this.Flash(string.Format("La fiche de {0} a été insérée", contact.DisplayName));
                 return RedirectToAction("Details", new { id = contact.Contact_ID, slug = contact.Slug });
             }
 
@@ -82,6 +84,7 @@ namespace Repertoir.Controllers
                 db.Entry(contact).State = EntityState.Modified;
                 db.SaveChanges();
 
+                this.Flash(string.Format("La fiche de {0} a été mise à jour", contact.DisplayName));
                 return RedirectToAction("Details", new { id = contact.Contact_ID, slug = contact.Slug });
             }
 
@@ -110,6 +113,7 @@ namespace Repertoir.Controllers
             db.Contacts.Remove(contact);
             db.SaveChanges();
 
+            this.Flash(string.Format("La fiche de {0} a été supprimée", contact.DisplayName));
             return RedirectToAction("Index", "Contacts");
         }
 
