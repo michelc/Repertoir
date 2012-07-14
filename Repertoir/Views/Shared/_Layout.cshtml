@@ -14,6 +14,7 @@
     <script src="@Url.Content("~/Scripts/modernizr-2.5.3.js")"></script>
 </head>
 <body>
+    @Html.Flash()
     <div class="container">
         <header class="sixteen columns">
             <div id="title">
@@ -27,7 +28,6 @@
             </nav>
         </header>
         <section id="main" class="sixteen columns">
-            @Html.Flash()
             @RenderBody()
         </section>
         <footer class="sixteen columns">

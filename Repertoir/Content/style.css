@@ -332,3 +332,16 @@ input[type="text"].inputbig
         width: 96% !important;
     }
 }
+
+
+/* Message flash suite à une action réussie */
+.flash {
+  background-color: #cfc;
+  border-top: 1px solid #060;
+  border-bottom: 4px solid #060;
+  color: #393;
+  xdisplay: none;
+  xfont-size: 1em;
+  padding: 6px;
+  text-align: center;
+}
