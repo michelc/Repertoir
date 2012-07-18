@@ -18,7 +18,8 @@ namespace Repertoir.Tests.Controllers
             ViewResult result = null;
 
             // Assert
-            Assert.IsNotNull(result, "(volontaire car Contacts.Index utilise la bdd)");
+            Assert.Inconclusive("Mise en quarantaine de Contacts.Index() car il passe par la bdd");
+            Assert.IsNotNull(result);
             Assert.IsTrue(string.IsNullOrEmpty(result.ViewName));
         }
 
