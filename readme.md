@@ -56,7 +56,6 @@ Gestion d'un petit répertoire de contacts pour servir de banc d'essai
 
 ### Pour l'application
 
-* Ne pas utiliser une table pour la liste des contacts
 * Détail d'une personne => afficher le détail de sa société
 * Gérer des tags, notes, liens, pièces jointes ... sur les contacts
 * Gérer les doublons

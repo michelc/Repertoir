@@ -78,6 +78,9 @@ namespace Repertoir.Models
                                   DisplayName = c.DisplayName,
                                   Phone1 = c.Phone1,
                                   Email = c.Email,
+                                  Informations = c.Company_ID.HasValue
+                                                    ? c.Title + " // " + c.Company.CompanyName
+                                                    : "// " + c.PostalCode + " " + c.Municipality,
                                   Civility = c.Civility,
                                   IsCompany = c.IsCompany,
                                   Slug = c.Slug,

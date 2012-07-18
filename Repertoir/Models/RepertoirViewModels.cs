@@ -16,6 +16,8 @@ namespace Repertoir.Models
         [Display(Name = "Adresse mél")]
         public string Email { get; set; }
 
+        public string Informations { get; set; }
+
         public string Civility { get; set; }
         public bool IsCompany { get; set; }
         public string Slug { get; set; }
