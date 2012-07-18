@@ -24,7 +24,7 @@ namespace Repertoir.Controllers
         //
         // GET: /Companies/Create
 
-        public ActionResult Create()
+        public ViewResult Create()
         {
             var contact = new Contact();
             var company = contact.To_ViewCompany();
@@ -55,7 +55,7 @@ namespace Repertoir.Controllers
         //
         // GET: /Companies/Edit/5
 
-        public ActionResult Edit(int id)
+        public ViewResult Edit(int id)
         {
             var contact = db.Contacts.Find(id);
             var company = contact.To_ViewCompany();
@@ -86,7 +86,7 @@ namespace Repertoir.Controllers
         //
         // GET: /Companies/Delete/5
 
-        public ActionResult Delete(int id)
+        public ViewResult Delete(int id)
         {
             var contact = db.Contacts.Find(id);
             var company = contact.To_ViewCompany();

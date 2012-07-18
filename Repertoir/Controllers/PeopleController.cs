@@ -24,7 +24,7 @@ namespace Repertoir.Controllers
         //
         // GET: /People/Create
 
-        public ActionResult Create(int ParentID = 0)
+        public ViewResult Create(int ParentID = 0)
         {
             var contact = new Contact();
             if (ParentID != 0)
@@ -62,7 +62,7 @@ namespace Repertoir.Controllers
         //
         // GET: /People/Edit/5
 
-        public ActionResult Edit(int id)
+        public ViewResult Edit(int id)
         {
             var contact = db.Contacts.Find(id);
             var person = contact.To_ViewPerson();
@@ -95,7 +95,7 @@ namespace Repertoir.Controllers
         //
         // GET: /People/Delete/5
 
-        public ActionResult Delete(int id)
+        public ViewResult Delete(int id)
         {
             var contact = db.Contacts.Find(id);
             var person = contact.To_ViewPerson();

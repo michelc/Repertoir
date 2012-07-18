@@ -1,5 +1,4 @@
-﻿using System.Web.Mvc;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Repertoir.Controllers;
 
 namespace Repertoir.Tests.Controllers
@@ -8,13 +7,27 @@ namespace Repertoir.Tests.Controllers
     public class HomeControllerTest
     {
         [TestMethod]
-        public void Index()
+        public void HomeIndex_doit_renvoyer_la_vue_par_defaut()
         {
             // Arrange
-            HomeController controller = new HomeController();
+            var controller = new HomeController();
 
             // Act
-            ViewResult result = controller.Index() as ViewResult;
+            var result = controller.Index();
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.IsTrue(string.IsNullOrEmpty(result.ViewName));
+        }
+
+        [TestMethod]
+        public void HomeIndex_doit_definir_le_bon_titre_dans_ViewBag()
+        {
+            // Arrange
+            var controller = new HomeController();
+
+            // Act
+            var result = controller.Index();
 
             // Assert
             Assert.AreEqual("Répertoir", result.ViewBag.Title);
