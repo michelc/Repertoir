@@ -12,7 +12,7 @@ namespace Repertoir.Models
         [StringLength(100)]
         public string CompanyName { get; set; }
 
-        public IList<ContactList> People { get; set; }
+        public ICollection<ContactList> People { get; set; }
     }
 
     public static class ViewCompanyExtensions
@@ -68,7 +68,7 @@ namespace Repertoir.Models
             return model;
         }
 
-        public static IList<ContactList> To_ContactList(this IEnumerable<Contact> model)
+        public static ICollection<ContactList> To_ContactList(this IQueryable<Contact> model)
         {
             var view_model = (from c in model
                               orderby c.DisplayName

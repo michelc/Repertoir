@@ -16,7 +16,7 @@ namespace Repertoir.Models
         public virtual Contact Company { get; set; }
         
         // 1 société regroupe plusieurs personnes
-        public virtual IList<Contact> People { get; set; }
+        public virtual ICollection<Contact> People { get; set; }
 
         [StringLength(100)]
         public string CompanyName { get; set; }

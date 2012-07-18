@@ -16,19 +16,7 @@ namespace Repertoir.Controllers
 
         public ViewResult Index()
         {
-            var contacts = (from c in db.Contacts
-                            orderby c.DisplayName ascending
-                            select new ContactList
-                            {
-                                Contact_ID = c.Contact_ID,
-                                DisplayName = c.DisplayName,
-                                Phone1 = c.Phone1,
-                                Email = c.Email,
-                                Civility = c.Civility,
-                                IsCompany = c.IsCompany,
-                                Slug = c.Slug,
-                                ControllerName = c.IsCompany ? "Companies" : "People"
-                            }).ToList();
+            var contacts = db.Contacts.To_ContactList();
 
             return View(contacts);
         }

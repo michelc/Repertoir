@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using System.Linq;
 using System.Web.Mvc;
 using Repertoir.Helpers;
 using Repertoir.Models;
@@ -17,7 +18,7 @@ namespace Repertoir.Controllers
             var contact = db.Contacts.Find(id);
             var company = contact.To_ViewCompany();
 
-            company.People = contact.People.To_ContactList();
+            company.People = db.Contacts.Where(person => person.Company_ID == id).To_ContactList();
             return View(company);
         }
 
