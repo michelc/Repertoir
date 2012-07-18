@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Web.Mvc;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Repertoir.Controllers;
 
 namespace Repertoir.Tests.Controllers
@@ -13,10 +14,11 @@ namespace Repertoir.Tests.Controllers
             var controller = new ContactsController();
 
             // Act
-            var result = controller.Index();
+            // var result = controller.Index();
+            ViewResult result = null;
 
             // Assert
-            Assert.IsNotNull(result);
+            Assert.IsNotNull(result, "(volontaire car Contacts.Index utilise la bdd)");
             Assert.IsTrue(string.IsNullOrEmpty(result.ViewName));
         }
 
