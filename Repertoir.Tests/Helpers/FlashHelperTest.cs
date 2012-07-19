@@ -35,7 +35,7 @@ namespace Repertoir.Tests.Helpers
             {
                 TempData = controller.TempData
             };
-            HtmlHelper helper = new HtmlHelper(context, new VdcImplementation());
+            var helper = new HtmlHelper(context, new VdcImplementation());
 
             // Act
             var flash = helper.Flash();
@@ -54,7 +54,7 @@ namespace Repertoir.Tests.Helpers
             {
                 TempData = controller.TempData
             };
-            HtmlHelper helper = new HtmlHelper(context, new VdcImplementation());
+            var helper = new HtmlHelper(context, new VdcImplementation());
 
             // Act
             var flash = helper.Flash();

@@ -114,7 +114,7 @@ table a.delete
     margin: -3px 0;
 }
 
-a.icon.is_society    { background-image: url(icons/home.png); }
+a.icon.is_company    { background-image: url(icons/home.png); }
 a.icon.is_man        { background-image: url(icons/male_user.png); }
 a.icon.is_woman      { background-image: url(icons/female_user.png); }
 
@@ -368,7 +368,7 @@ input[type="text"].inputbig
     margin-bottom: 5px;
     min-height: 48px;
 }
-.list_contact.is_society    { background-image: url(icons/home_48.png); }
+.list_contact.is_company    { background-image: url(icons/home_48.png); }
 .list_contact.is_man        { background-image: url(icons/male_user_48.png); }
 .list_contact.is_woman      { background-image: url(icons/female_user_48.png); }
 

@@ -22,7 +22,7 @@ namespace Repertoir.Tests.Helpers
             context.RouteData = new RouteData();
             context.RouteData.Values["action"] = "toto";
             context.RouteData.Values["controller"] = "tutu";
-            HtmlHelper helper = new HtmlHelper(context, new VdcImplementation());
+            var helper = new HtmlHelper(context, new VdcImplementation());
 
             // Act
             var link = helper.ActionCrud();
@@ -39,7 +39,7 @@ namespace Repertoir.Tests.Helpers
             context.RouteData = new RouteData();
             context.RouteData.Values["action"] = "index";
             context.RouteData.Values["controller"] = "tutu";
-            HtmlHelper helper = new HtmlHelper(context, new VdcImplementation());
+            var helper = new HtmlHelper(context, new VdcImplementation());
 
             // Act
             var link = helper.ActionCrud();
@@ -56,7 +56,7 @@ namespace Repertoir.Tests.Helpers
             context.RouteData = new RouteData();
             context.RouteData.Values["action"] = "toto";
             context.RouteData.Values["controller"] = "tutu";
-            HtmlHelper helper = new HtmlHelper(context, new VdcImplementation());
+            var helper = new HtmlHelper(context, new VdcImplementation());
 
             // Act
             var link = helper.ActionCrud();
@@ -73,7 +73,7 @@ namespace Repertoir.Tests.Helpers
             context.RouteData = new RouteData();
             context.RouteData.Values["action"] = "create";
             context.RouteData.Values["controller"] = "tutu";
-            HtmlHelper helper = new HtmlHelper(context, new VdcImplementation());
+            var helper = new HtmlHelper(context, new VdcImplementation());
 
             // Act
             var link = helper.ActionCrud();
@@ -90,7 +90,7 @@ namespace Repertoir.Tests.Helpers
             context.RouteData = new RouteData();
             context.RouteData.Values["action"] = "create";
             context.RouteData.Values["controller"] = "tutu";
-            HtmlHelper helper = new HtmlHelper(context, new VdcImplementation());
+            var helper = new HtmlHelper(context, new VdcImplementation());
 
             // Act
             var link = helper.ActionCrud();
@@ -109,7 +109,7 @@ namespace Repertoir.Tests.Helpers
             context.RouteData.Values["slug"] = "slug";
             context.RouteData.Values["action"] = "create";
             context.RouteData.Values["controller"] = "tutu";
-            HtmlHelper helper = new HtmlHelper(context, new VdcImplementation());
+            var helper = new HtmlHelper(context, new VdcImplementation());
 
             // Act
             var link = helper.ActionCrud();
@@ -128,7 +128,7 @@ namespace Repertoir.Tests.Helpers
             context.RouteData.Values["slug"] = "slug";
             context.RouteData.Values["action"] = "toto";
             context.RouteData.Values["controller"] = "tutu";
-            HtmlHelper helper = new HtmlHelper(context, new VdcImplementation());
+            var helper = new HtmlHelper(context, new VdcImplementation());
 
             // Act
             var link = helper.ActionCrud();
@@ -147,7 +147,7 @@ namespace Repertoir.Tests.Helpers
             context.RouteData.Values["slug"] = "slug";
             context.RouteData.Values["action"] = "details";
             context.RouteData.Values["controller"] = "tutu";
-            HtmlHelper helper = new HtmlHelper(context, new VdcImplementation());
+            var helper = new HtmlHelper(context, new VdcImplementation());
 
             // Act
             var link = helper.ActionCrud();
@@ -166,7 +166,7 @@ namespace Repertoir.Tests.Helpers
             context.RouteData.Values["slug"] = "slug";
             context.RouteData.Values["action"] = "toto";
             context.RouteData.Values["controller"] = "tutu";
-            HtmlHelper helper = new HtmlHelper(context, new VdcImplementation());
+            var helper = new HtmlHelper(context, new VdcImplementation());
 
             // Act
             var link = helper.ActionCrud();
@@ -185,7 +185,7 @@ namespace Repertoir.Tests.Helpers
             context.RouteData.Values["slug"] = "slug";
             context.RouteData.Values["action"] = "edit";
             context.RouteData.Values["controller"] = "tutu";
-            HtmlHelper helper = new HtmlHelper(context, new VdcImplementation());
+            var helper = new HtmlHelper(context, new VdcImplementation());
 
             // Act
             var link = helper.ActionCrud();
@@ -204,7 +204,7 @@ namespace Repertoir.Tests.Helpers
             context.RouteData.Values["slug"] = "slug";
             context.RouteData.Values["action"] = "toto";
             context.RouteData.Values["controller"] = "tutu";
-            HtmlHelper helper = new HtmlHelper(context, new VdcImplementation());
+            var helper = new HtmlHelper(context, new VdcImplementation());
 
             // Act
             var link = helper.ActionCrud();
@@ -223,13 +223,65 @@ namespace Repertoir.Tests.Helpers
             context.RouteData.Values["slug"] = "slug";
             context.RouteData.Values["action"] = "delete";
             context.RouteData.Values["controller"] = "tutu";
-            HtmlHelper helper = new HtmlHelper(context, new VdcImplementation());
+            var helper = new HtmlHelper(context, new VdcImplementation());
 
             // Act
             var link = helper.ActionCrud();
 
             // Assert
             Assert.IsFalse(link.ToString().Contains(">Supprimer</a>"));
+        }
+
+        [TestMethod]
+        public void ContactCss_renvoie_is_company_pour_les_societes()
+        {
+            // Arrange            
+            var helper = new HtmlHelper(new ViewContext(), new VdcImplementation());
+
+            // Act
+            var css = helper.ContactCss(true, null);
+
+            // Assert
+            Assert.AreEqual("is_company", css.ToString());
+        }
+
+        [TestMethod]
+        public void ContactCss_renvoie_is_man_pour_les_monsieurs()
+        {
+            // Arrange            
+            var helper = new HtmlHelper(new ViewContext(), new VdcImplementation());
+
+            // Act
+            var css = helper.ContactCss(false, "M.");
+
+            // Assert
+            Assert.AreEqual("is_man", css.ToString());
+        }
+
+        [TestMethod]
+        public void ContactCss_renvoie_is_woman_pour_les_madames()
+        {
+            // Arrange            
+            var helper = new HtmlHelper(new ViewContext(), new VdcImplementation());
+
+            // Act
+            var css = helper.ContactCss(false, "Mme");
+
+            // Assert
+            Assert.AreEqual("is_woman", css.ToString());
+        }
+
+        [TestMethod]
+        public void ContactCss_renvoie_vide_pour_les_personnes_sans_civilite()
+        {
+            // Arrange            
+            var helper = new HtmlHelper(new ViewContext(), new VdcImplementation());
+
+            // Act
+            var css = helper.ContactCss(false, null);
+
+            // Assert
+            Assert.AreEqual(string.Empty, css.ToString());
         }
     }
 }

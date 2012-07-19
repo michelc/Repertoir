@@ -163,7 +163,7 @@ namespace Repertoir.Helpers
 
             if (IsCompany)
             {
-                cssClass = "is_society";
+                cssClass = "is_company";
             }
             else if (Civility == "M.")
             {
