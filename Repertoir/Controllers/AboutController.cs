@@ -2,7 +2,7 @@
 
 namespace Repertoir.Controllers
 {
-    public class HomeController : Controller
+    public class AboutController : Controller
     {
         public ViewResult Index()
         {

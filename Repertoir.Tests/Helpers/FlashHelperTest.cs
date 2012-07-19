@@ -17,7 +17,7 @@ namespace Repertoir.Tests.Helpers
         public void Flash_enregistre_le_texte_dans_TempData()
         {
             // Arrange
-            var controller = new HomeController();
+            var controller = new AboutController();
 
             // Act
             controller.Flash("Raton-laveur");
@@ -30,7 +30,7 @@ namespace Repertoir.Tests.Helpers
         public void Flash_renvoie_null_quand_pas_de_message()
         {
             // Arrange            
-            var controller = new HomeController();
+            var controller = new AboutController();
             var context = new ViewContext
             {
                 TempData = controller.TempData
@@ -48,7 +48,7 @@ namespace Repertoir.Tests.Helpers
         public void Flash_renvoie_le_message_quand_il_existe()
         {
             // Arrange            
-            var controller = new HomeController();
+            var controller = new AboutController();
             controller.Flash("Raton-laveur");
             var context = new ViewContext
             {
