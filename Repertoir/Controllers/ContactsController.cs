@@ -22,6 +22,16 @@ namespace Repertoir.Controllers
         }
 
         //
+        // GET: /Contacts/Table
+
+        public ViewResult Table()
+        {
+            var contacts = db.Contacts.To_ContactList();
+
+            return View(contacts);
+        }
+
+        //
         // GET: /Contacts/Export
 
         public JsonResult Export()

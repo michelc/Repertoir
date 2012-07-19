@@ -23,6 +23,18 @@ namespace Repertoir.Controllers
         }
 
         //
+        // GET: /Companies/Display/5
+
+        public ViewResult Display(int id)
+        {
+            var contact = db.Contacts.Find(id);
+            var company = contact.To_ViewCompany();
+
+            company.People = db.Contacts.Where(person => person.Company_ID == id).To_ContactList();
+            return View("Details", company);
+        }
+
+        //
         // GET: /Companies/Create
 
         public ViewResult Create()

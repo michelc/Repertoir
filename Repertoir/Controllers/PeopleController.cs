@@ -22,6 +22,17 @@ namespace Repertoir.Controllers
         }
 
         //
+        // GET: /People/Display/5
+
+        public ViewResult Display(int id)
+        {
+            var contact = db.Contacts.Find(id);
+            var person = contact.To_ViewPerson();
+
+            return View(person);
+        }
+
+        //
         // GET: /People/Create
 
         public ViewResult Create(int ParentID = 0)

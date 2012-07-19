@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Repertoir.Models.ContactList>
+
+@{
+    ViewBag.Title = "Table des contacts";
+}
+
+<h2 class="crud">
+    @Html.ActionCrud()
+</h2>
+
+<table>
+<thead>
+    <tr>
+        <th></th>
+        <th></th>
+        <th>
+            @Html.LabelFor(model => model.First().DisplayName)
+        </th>
+        <th>
+            @Html.LabelFor(model => model.First().Phone1)
+        </th>
+        <th>
+            @Html.LabelFor(model => model.First().Email)
+        </th>
+        <th></th>
+    </tr>
+</thead>
+<tbody>
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink("Modifier", "Edit", item.ControllerName, new { id = item.Contact_ID, slug = item.Slug }, new { @class = "edit" })
+        </td>
+        <td>
+            <a class="icon @Html.ContactCss(item.IsCompany, item.Civility)">x</a>
+        </td>
+        <td>
+            @Html.ActionLink(item.DisplayName, "Display", item.ControllerName, new { id = item.Contact_ID, slug = item.Slug }, null)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Phone1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.ActionLink("Supprimer", "Delete", item.ControllerName, new { id = item.Contact_ID, slug = item.Slug }, new { @class = "delete" })
+        </td>
+    </tr>
+}
+</tbody>
+</table>
