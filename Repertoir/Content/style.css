@@ -185,15 +185,24 @@ fieldset
 legend
 {
     border: 0;
-    border-bottom: 2px solid #39b449;
     color: #39b449;
     font-family: "Century Gothic", "Trebuchet MS", Verdana, Helvetica, Sans-Serif;
     font-size: 28px;
     font-weight: normal;
     line-height: 34px;
     margin: 0;
-    margin-bottom: 15px; /* pour espacement avec 1° bloc saisie du formulaire (ne fonctionne que sous IE ?) */
     padding: 0;
+    width: 100%;
+}
+
+/* Bidouille pour émuler un border et margin bottom sur les <legend> sous Chrome */
+legend:after
+{
+    border-top: 2px solid #39b449;
+    clear: both;
+    content: "\0020";
+    display: block;
+    height: 15px;
     width: 100%;
 }
 
