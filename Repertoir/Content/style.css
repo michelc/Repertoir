@@ -397,3 +397,33 @@ input[type="text"].inputbig
 {
     .list_contact { background-image: none !important; }
 }
+
+
+/* #Condense l'affichage pour les petites largeurs
+================================================== */
+
+@media only screen and (max-width: 767px)
+{
+    .display-field
+    {
+        margin-top: -5px !important;
+    }
+
+    .editor-field 
+    {
+        margin-top: -11px !important;
+    }
+
+	h3 { font-size: 21px; line-height: 30px; margin-bottom: 4px; }
+	h4 { font-size: 17px; line-height: 24px; margin-bottom: 0px; }
+
+    legend
+    {
+        font-size: 21px;
+        line-height: 30px;
+    }
+    legend:after
+    {
+        height: 10px;
+    }
+}
