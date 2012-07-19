@@ -9,7 +9,10 @@
 </h2>
 
 <fieldset class="sixteen columns">
-    <legend>Supprimer «&nbsp;@Model.DisplayName&nbsp;» ?</legend>
+    <legend>
+        <span class="ten columns alpha">@Model.DisplayName</span>
+        <span class="six columns omega">@Model.Phone1</span>
+    </legend>
 
     @Html.Partial("_Display", Model)
 

@@ -197,6 +197,12 @@ legend
     width: 100%;
 }
 
+/* Cadrage à droite pour la dernière colonne des <legend> */
+legend span.omega
+{
+    text-align: right;
+}
+
 /* Augmente la lisibilité des zones de saisie */
 input[type="email"],
 input[type="password"],
