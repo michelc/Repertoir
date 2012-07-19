@@ -1,38 +1,24 @@
 ﻿@model Repertoir.Models.ViewCompany
 
-<div class="display-label five columns">
-    @Html.LabelFor(model => model.CompanyName)
-</div>
-<div class="display-field eleven columns">
-    @Html.DisplayFor(model => model.CompanyName)
-</div>
-
-<div class="display-label five columns">
-    @Html.LabelFor(model => model.Phone1)
-</div>
-<div class="display-field eleven columns">
-    @Html.DisplayFor(model => model.Phone1)
-</div>
-
-<div class="display-label five columns">
-    @Html.LabelFor(model => model.Phone2)
-</div>
-<div class="display-field eleven columns">
-    @Html.DisplayFor(model => model.Phone2)
-</div>
-
-<div class="display-label five columns">
-    @Html.LabelFor(model => model.Fax)
-</div>
-<div class="display-field eleven columns">
-    @Html.DisplayFor(model => model.Fax)
-</div>
-
-<div class="display-label five columns">
-    @Html.LabelFor(model => model.Email)
-</div>
-<div class="display-field eleven columns">
-    @Html.DisplayFor(model => model.Email)
+<div class="list_contact is_society clearfix">
+    <div class="offset-by-two four columns alpha">
+        @Html.LabelFor(model => model.Phone2)
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Phone2)
+        </div>
+    </div>
+    <div class="four columns">
+        @Html.LabelFor(model => model.Fax)
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Fax)
+        </div>
+    </div>
+    <div class="six columns omega">
+        @Html.LabelFor(model => model.Email)
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Email)
+        </div>
+    </div>
 </div>
 
 <div class="display-label five columns">
@@ -47,24 +33,15 @@
 </div>
 <div class="display-field eleven columns">
     @Html.DisplayFor(model => model.AddressLine1)
+    @if (!string.IsNullOrEmpty(Model.AddressLine2))
+    {
+        <text><br></text>
+        @Html.DisplayFor(model => model.AddressLine2)
+    }
     <br>
-    @Html.DisplayFor(model => model.AddressLine2)
-</div>
-
-<div class="display-label five columns">
-    @Html.LabelFor(model => model.PostalCode)
-    /
-    @Html.LabelFor(model => model.Municipality)
-</div>
-<div class="display-field eleven columns">
     @Html.DisplayFor(model => model.PostalCode)
     @Html.DisplayFor(model => model.Municipality)
-</div>
-
-<div class="display-label five columns">
-    @Html.LabelFor(model => model.Country)
-</div>
-<div class="display-field eleven columns">
+    <br>
     @Html.DisplayFor(model => model.Country)
 </div>
 
