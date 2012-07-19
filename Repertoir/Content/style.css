@@ -264,19 +264,24 @@ textarea:focus
     color: #d2691e;  /* chocolat */
 }
 
-/* Zones d'affichage reprennent les styles des zones de saisie */
+/* Mise en évidence des zones d'affichage par rapport aux simples labels */
 .display-field
 {
+    background-color: #fafafa;
+    border: 1px solid #f0f0f0;
+    box-sizing: border-box;
     color: #000;
     font-family: Arial, "Liberation Sans", FreeSans, sans-serif;
     font-size: 110%;
     letter-spacing: 1px;
+    margin: 5px 0;
+    min-height: 2.1em;
+    padding: 4px 4px;
 }
 
 /* Espacement et alignement verticaux des blocs de saisie */
 .display-label, 
-.editor-label,
-.display-field
+.editor-label
 {
     padding: 10px 0 0 0;
 }
