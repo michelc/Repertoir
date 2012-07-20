@@ -15,3 +15,9 @@
     </legend>
     @Html.Partial("_Display", Model)
 </fieldset>
+
+<p>
+    @Html.ActionLink("Avant", "Previous", new { id = Model.Contact_ID, slug = Model.Slug })
+    /
+    @Html.ActionLink("Après", "Next", new { id = Model.Contact_ID, slug = Model.Slug })
+</p>
