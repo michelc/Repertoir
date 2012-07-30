@@ -121,8 +121,11 @@
     <Content Include="Content\icons\delete.png" />
     <Content Include="Content\icons\edit.png" />
     <Content Include="Content\icons\female_user.png" />
+    <Content Include="Content\icons\female_user_48.png" />
     <Content Include="Content\icons\home.png" />
+    <Content Include="Content\icons\home_48.png" />
     <Content Include="Content\icons\male_user.png" />
+    <Content Include="Content\icons\male_user_48.png" />
     <Content Include="Content\skeleton\javascripts\tabs.js" />
     <Content Include="Content\skeleton\stylesheets\base.css" />
     <Content Include="Content\skeleton\stylesheets\layout.css" />
