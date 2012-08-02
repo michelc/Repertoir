@@ -41,7 +41,6 @@ Gestion d'un petit répertoire de contacts pour servir de banc d'essai
 
 * Mise en commun du code des vues Details.cshtml et Delete.cshtml dans une vue
   partielle _Display.cshtml
-
 * Création d'un helper HtmlCrud() pour afficher un menu des actions CRUD
 * Utilisation du CDN Microsoft pour les fichiers jQuery
 
@@ -53,7 +52,7 @@ Gestion d'un petit répertoire de contacts pour servir de banc d'essai
 * Rechercher si AntiXSS est nécessaire en plus de AntiForgeryToken : OUI !!!
   * [Securing Your ASP.NET Applications](http://msdn.microsoft.com/en-us/magazine/hh708755.aspx)
   * [ASP.NET MVC security and hacking: Defense-in-depth](https://sites.google.com/site/muazkh/asp-net-mvc-security-and-hacking-defense-in-depth)
-* Ajouter des tests unitaires
+* Ajouter des tests unitaires (en cours...)
 
 ### Pour l'application
 
