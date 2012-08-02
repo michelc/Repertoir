@@ -9,11 +9,6 @@ namespace Repertoir.Tests.Helpers
     [TestClass]
     public class HtmlHelperTest
     {
-        private class VdcImplementation : IViewDataContainer
-        {
-            public ViewDataDictionary ViewData { get; set; }
-        }
-
         [TestMethod]
         public void ActionCrud_renvoie_lien_contacts_si_pas_sur_index()
         {
@@ -22,7 +17,7 @@ namespace Repertoir.Tests.Helpers
             context.RouteData = new RouteData();
             context.RouteData.Values["action"] = "toto";
             context.RouteData.Values["controller"] = "tutu";
-            var helper = new HtmlHelper(context, new VdcImplementation());
+            var helper = new HtmlHelper(context, Moq.GetViewDataContainer());
 
             // Act
             var link = helper.ActionCrud();
@@ -39,7 +34,7 @@ namespace Repertoir.Tests.Helpers
             context.RouteData = new RouteData();
             context.RouteData.Values["action"] = "index";
             context.RouteData.Values["controller"] = "tutu";
-            var helper = new HtmlHelper(context, new VdcImplementation());
+            var helper = new HtmlHelper(context, Moq.GetViewDataContainer());
 
             // Act
             var link = helper.ActionCrud();
@@ -56,13 +51,47 @@ namespace Repertoir.Tests.Helpers
             context.RouteData = new RouteData();
             context.RouteData.Values["action"] = "toto";
             context.RouteData.Values["controller"] = "tutu";
-            var helper = new HtmlHelper(context, new VdcImplementation());
+            var helper = new HtmlHelper(context, Moq.GetViewDataContainer());
 
             // Act
             var link = helper.ActionCrud();
 
             // Assert
             Assert.IsTrue(HttpUtility.HtmlDecode(link.ToString()).Contains(">Créer</a>"));
+        }
+
+        [TestMethod]
+        public void ActionCrud_renvoie_lien_creer_people_si_sur_contacts()
+        {
+            // Arrange            
+            var routes = new RouteCollection();
+            MvcApplication.RegisterRoutes(routes);
+            var helper = new HtmlHelper(Moq.GetViewContext(), Moq.GetViewDataContainer(), routes);
+            helper.ViewContext.RouteData.Values["action"] = "toto";
+            helper.ViewContext.RouteData.Values["controller"] = "contacts";
+
+            // Act
+            var link = helper.ActionCrud();
+
+            // Assert
+            Assert.IsTrue(link.ToString().Contains("/people/create"));
+        }
+
+        [TestMethod]
+        public void ActionCrud_renvoie_lien_creer_xxxxx_si_pas_sur_contacts()
+        {
+            // Arrange            
+            var routes = new RouteCollection();
+            MvcApplication.RegisterRoutes(routes);
+            var helper = new HtmlHelper(Moq.GetViewContext(), Moq.GetViewDataContainer(), routes);
+            helper.ViewContext.RouteData.Values["action"] = "toto";
+            helper.ViewContext.RouteData.Values["controller"] = "xxxxx";
+
+            // Act
+            var link = helper.ActionCrud();
+
+            // Assert
+            Assert.IsTrue(link.ToString().Contains("/xxxxx/create"));
         }
 
         [TestMethod]
@@ -73,7 +102,7 @@ namespace Repertoir.Tests.Helpers
             context.RouteData = new RouteData();
             context.RouteData.Values["action"] = "create";
             context.RouteData.Values["controller"] = "tutu";
-            var helper = new HtmlHelper(context, new VdcImplementation());
+            var helper = new HtmlHelper(context, Moq.GetViewDataContainer());
 
             // Act
             var link = helper.ActionCrud();
@@ -90,7 +119,7 @@ namespace Repertoir.Tests.Helpers
             context.RouteData = new RouteData();
             context.RouteData.Values["action"] = "create";
             context.RouteData.Values["controller"] = "tutu";
-            var helper = new HtmlHelper(context, new VdcImplementation());
+            var helper = new HtmlHelper(context, Moq.GetViewDataContainer());
 
             // Act
             var link = helper.ActionCrud();
@@ -109,7 +138,7 @@ namespace Repertoir.Tests.Helpers
             context.RouteData.Values["slug"] = "slug";
             context.RouteData.Values["action"] = "create";
             context.RouteData.Values["controller"] = "tutu";
-            var helper = new HtmlHelper(context, new VdcImplementation());
+            var helper = new HtmlHelper(context, Moq.GetViewDataContainer());
 
             // Act
             var link = helper.ActionCrud();
@@ -128,7 +157,7 @@ namespace Repertoir.Tests.Helpers
             context.RouteData.Values["slug"] = "slug";
             context.RouteData.Values["action"] = "toto";
             context.RouteData.Values["controller"] = "tutu";
-            var helper = new HtmlHelper(context, new VdcImplementation());
+            var helper = new HtmlHelper(context, Moq.GetViewDataContainer());
 
             // Act
             var link = helper.ActionCrud();
@@ -147,7 +176,7 @@ namespace Repertoir.Tests.Helpers
             context.RouteData.Values["slug"] = "slug";
             context.RouteData.Values["action"] = "details";
             context.RouteData.Values["controller"] = "tutu";
-            var helper = new HtmlHelper(context, new VdcImplementation());
+            var helper = new HtmlHelper(context, Moq.GetViewDataContainer());
 
             // Act
             var link = helper.ActionCrud();
@@ -166,7 +195,7 @@ namespace Repertoir.Tests.Helpers
             context.RouteData.Values["slug"] = "slug";
             context.RouteData.Values["action"] = "toto";
             context.RouteData.Values["controller"] = "tutu";
-            var helper = new HtmlHelper(context, new VdcImplementation());
+            var helper = new HtmlHelper(context, Moq.GetViewDataContainer());
 
             // Act
             var link = helper.ActionCrud();
@@ -185,7 +214,7 @@ namespace Repertoir.Tests.Helpers
             context.RouteData.Values["slug"] = "slug";
             context.RouteData.Values["action"] = "edit";
             context.RouteData.Values["controller"] = "tutu";
-            var helper = new HtmlHelper(context, new VdcImplementation());
+            var helper = new HtmlHelper(context, Moq.GetViewDataContainer());
 
             // Act
             var link = helper.ActionCrud();
@@ -204,7 +233,7 @@ namespace Repertoir.Tests.Helpers
             context.RouteData.Values["slug"] = "slug";
             context.RouteData.Values["action"] = "toto";
             context.RouteData.Values["controller"] = "tutu";
-            var helper = new HtmlHelper(context, new VdcImplementation());
+            var helper = new HtmlHelper(context, Moq.GetViewDataContainer());
 
             // Act
             var link = helper.ActionCrud();
@@ -223,7 +252,7 @@ namespace Repertoir.Tests.Helpers
             context.RouteData.Values["slug"] = "slug";
             context.RouteData.Values["action"] = "delete";
             context.RouteData.Values["controller"] = "tutu";
-            var helper = new HtmlHelper(context, new VdcImplementation());
+            var helper = new HtmlHelper(context, Moq.GetViewDataContainer());
 
             // Act
             var link = helper.ActionCrud();
@@ -236,7 +265,7 @@ namespace Repertoir.Tests.Helpers
         public void ContactCss_renvoie_is_company_pour_les_societes()
         {
             // Arrange            
-            var helper = new HtmlHelper(new ViewContext(), new VdcImplementation());
+            var helper = new HtmlHelper(new ViewContext(), Moq.GetViewDataContainer());
 
             // Act
             var css = helper.ContactCss(true, null);
@@ -249,7 +278,7 @@ namespace Repertoir.Tests.Helpers
         public void ContactCss_renvoie_is_man_pour_les_monsieurs()
         {
             // Arrange            
-            var helper = new HtmlHelper(new ViewContext(), new VdcImplementation());
+            var helper = new HtmlHelper(new ViewContext(), Moq.GetViewDataContainer());
 
             // Act
             var css = helper.ContactCss(false, "M.");
@@ -262,7 +291,7 @@ namespace Repertoir.Tests.Helpers
         public void ContactCss_renvoie_is_woman_pour_les_madames()
         {
             // Arrange            
-            var helper = new HtmlHelper(new ViewContext(), new VdcImplementation());
+            var helper = new HtmlHelper(new ViewContext(), Moq.GetViewDataContainer());
 
             // Act
             var css = helper.ContactCss(false, "Mme");
@@ -275,7 +304,7 @@ namespace Repertoir.Tests.Helpers
         public void ContactCss_renvoie_vide_pour_les_personnes_sans_civilite()
         {
             // Arrange            
-            var helper = new HtmlHelper(new ViewContext(), new VdcImplementation());
+            var helper = new HtmlHelper(new ViewContext(), Moq.GetViewDataContainer());
 
             // Act
             var css = helper.ContactCss(false, null);

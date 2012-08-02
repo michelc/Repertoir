@@ -8,11 +8,6 @@ namespace Repertoir.Tests.Helpers
     [TestClass]
     public class FlashHelperTest
     {
-        private class VdcImplementation : IViewDataContainer
-        {
-            public ViewDataDictionary ViewData { get; set; }
-        }
-
         [TestMethod]
         public void Flash_enregistre_le_texte_dans_TempData()
         {
@@ -35,7 +30,7 @@ namespace Repertoir.Tests.Helpers
             {
                 TempData = controller.TempData
             };
-            var helper = new HtmlHelper(context, new VdcImplementation());
+            var helper = new HtmlHelper(context, Moq.GetViewDataContainer());
 
             // Act
             var flash = helper.Flash();
@@ -54,7 +49,7 @@ namespace Repertoir.Tests.Helpers
             {
                 TempData = controller.TempData
             };
-            var helper = new HtmlHelper(context, new VdcImplementation());
+            var helper = new HtmlHelper(context, Moq.GetViewDataContainer());
 
             // Act
             var flash = helper.Flash();
