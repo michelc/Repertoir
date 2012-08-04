@@ -10,9 +10,43 @@ namespace Repertoir.Tests.Helpers
     public class HtmlHelperTest
     {
         [TestMethod]
+        public void ActionCancel_renvoie_lien_index_si_id_est_null()
+        {
+            // Arrange
+            var routes = new RouteCollection();
+            MvcApplication.RegisterRoutes(routes);
+            var helper = new HtmlHelper(Moq.GetViewContext(), Moq.GetViewDataContainer(), routes);
+            //helper.ViewContext.RouteData.Values["action"] = "toto";
+            //helper.ViewContext.RouteData.Values["controller"] = "xxxxx";
+
+            // Act
+            var link = helper.ActionCancel();
+
+            // Assert
+            Assert.AreEqual("<a href=\"/\">Annuler</a>", link.ToString());
+        }
+
+        [TestMethod]
+        public void ActionCancel_renvoie_lien_detail_si_id_n_est_pas_null()
+        {
+            // Arrange
+            var routes = new RouteCollection();
+            MvcApplication.RegisterRoutes(routes);
+            var helper = new HtmlHelper(Moq.GetViewContext(), Moq.GetViewDataContainer(), routes);
+            helper.ViewContext.RouteData.Values["id"] = "5";
+            helper.ViewContext.RouteData.Values["slug"] = "xxxxx";
+
+            // Act
+            var link = helper.ActionCancel();
+
+            // Assert
+            Assert.IsTrue(link.ToString().Contains("/details/5/xxxxx"));
+        }
+
+        [TestMethod]
         public void ActionCrud_renvoie_lien_contacts_si_pas_sur_index()
         {
-            // Arrange            
+            // Arrange
             var context = new ViewContext();
             context.RouteData = new RouteData();
             context.RouteData.Values["action"] = "toto";
@@ -29,7 +63,7 @@ namespace Repertoir.Tests.Helpers
         [TestMethod]
         public void ActionCrud_ne_renvoie_pas_lien_contacts_si_deja_sur_index()
         {
-            // Arrange            
+            // Arrange
             var context = new ViewContext();
             context.RouteData = new RouteData();
             context.RouteData.Values["action"] = "index";
@@ -46,7 +80,7 @@ namespace Repertoir.Tests.Helpers
         [TestMethod]
         public void ActionCrud_renvoie_lien_creer_si_pas_sur_create()
         {
-            // Arrange            
+            // Arrange
             var context = new ViewContext();
             context.RouteData = new RouteData();
             context.RouteData.Values["action"] = "toto";
@@ -63,7 +97,7 @@ namespace Repertoir.Tests.Helpers
         [TestMethod]
         public void ActionCrud_renvoie_lien_creer_people_si_sur_contacts()
         {
-            // Arrange            
+            // Arrange
             var routes = new RouteCollection();
             MvcApplication.RegisterRoutes(routes);
             var helper = new HtmlHelper(Moq.GetViewContext(), Moq.GetViewDataContainer(), routes);
@@ -80,7 +114,7 @@ namespace Repertoir.Tests.Helpers
         [TestMethod]
         public void ActionCrud_renvoie_lien_creer_xxxxx_si_pas_sur_contacts()
         {
-            // Arrange            
+            // Arrange
             var routes = new RouteCollection();
             MvcApplication.RegisterRoutes(routes);
             var helper = new HtmlHelper(Moq.GetViewContext(), Moq.GetViewDataContainer(), routes);
@@ -97,7 +131,7 @@ namespace Repertoir.Tests.Helpers
         [TestMethod]
         public void ActionCrud_ne_renvoie_pas_lien_creer_si_deja_sur_create()
         {
-            // Arrange            
+            // Arrange
             var context = new ViewContext();
             context.RouteData = new RouteData();
             context.RouteData.Values["action"] = "create";
@@ -114,7 +148,7 @@ namespace Repertoir.Tests.Helpers
         [TestMethod]
         public void ActionCrud_ne_renvoie_pas_autres_liens_sans_id()
         {
-            // Arrange            
+            // Arrange
             var context = new ViewContext();
             context.RouteData = new RouteData();
             context.RouteData.Values["action"] = "create";
@@ -131,7 +165,7 @@ namespace Repertoir.Tests.Helpers
         [TestMethod]
         public void ActionCrud_renvoie_autres_liens_si_id()
         {
-            // Arrange            
+            // Arrange
             var context = new ViewContext();
             context.RouteData = new RouteData();
             context.RouteData.Values["id"] = "1";
@@ -150,7 +184,7 @@ namespace Repertoir.Tests.Helpers
         [TestMethod]
         public void ActionCrud_renvoie_lien_afficher_si_pas_sur_details()
         {
-            // Arrange            
+            // Arrange
             var context = new ViewContext();
             context.RouteData = new RouteData();
             context.RouteData.Values["id"] = "1";
@@ -169,7 +203,7 @@ namespace Repertoir.Tests.Helpers
         [TestMethod]
         public void ActionCrud_ne_renvoie_pas_lien_afficher_si_deja_sur_details()
         {
-            // Arrange            
+            // Arrange
             var context = new ViewContext();
             context.RouteData = new RouteData();
             context.RouteData.Values["id"] = "1";
@@ -188,7 +222,7 @@ namespace Repertoir.Tests.Helpers
         [TestMethod]
         public void ActionCrud_renvoie_lien_modifier_si_pas_sur_edit()
         {
-            // Arrange            
+            // Arrange
             var context = new ViewContext();
             context.RouteData = new RouteData();
             context.RouteData.Values["id"] = "1";
@@ -207,7 +241,7 @@ namespace Repertoir.Tests.Helpers
         [TestMethod]
         public void ActionCrud_ne_renvoie_pas_lien_modifier_si_deja_sur_edit()
         {
-            // Arrange            
+            // Arrange
             var context = new ViewContext();
             context.RouteData = new RouteData();
             context.RouteData.Values["id"] = "1";
@@ -226,7 +260,7 @@ namespace Repertoir.Tests.Helpers
         [TestMethod]
         public void ActionCrud_renvoie_lien_supprimer_si_pas_sur_delete()
         {
-            // Arrange            
+            // Arrange
             var context = new ViewContext();
             context.RouteData = new RouteData();
             context.RouteData.Values["id"] = "1";
@@ -245,7 +279,7 @@ namespace Repertoir.Tests.Helpers
         [TestMethod]
         public void ActionCrud_ne_renvoie_pas_lien_supprimer_si_deja_sur_delete()
         {
-            // Arrange            
+            // Arrange
             var context = new ViewContext();
             context.RouteData = new RouteData();
             context.RouteData.Values["id"] = "1";
@@ -264,7 +298,7 @@ namespace Repertoir.Tests.Helpers
         [TestMethod]
         public void ContactCss_renvoie_is_company_pour_les_societes()
         {
-            // Arrange            
+            // Arrange
             var helper = new HtmlHelper(new ViewContext(), Moq.GetViewDataContainer());
 
             // Act
@@ -277,7 +311,7 @@ namespace Repertoir.Tests.Helpers
         [TestMethod]
         public void ContactCss_renvoie_is_man_pour_les_monsieurs()
         {
-            // Arrange            
+            // Arrange
             var helper = new HtmlHelper(new ViewContext(), Moq.GetViewDataContainer());
 
             // Act
@@ -290,7 +324,7 @@ namespace Repertoir.Tests.Helpers
         [TestMethod]
         public void ContactCss_renvoie_is_woman_pour_les_madames()
         {
-            // Arrange            
+            // Arrange
             var helper = new HtmlHelper(new ViewContext(), Moq.GetViewDataContainer());
 
             // Act
@@ -303,7 +337,7 @@ namespace Repertoir.Tests.Helpers
         [TestMethod]
         public void ContactCss_renvoie_vide_pour_les_personnes_sans_civilite()
         {
-            // Arrange            
+            // Arrange
             var helper = new HtmlHelper(new ViewContext(), Moq.GetViewDataContainer());
 
             // Act

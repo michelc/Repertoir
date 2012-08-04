@@ -56,7 +56,7 @@
   <ItemGroup>
     <Compile Include="Controllers\ContactsControllerTest.cs" />
     <Compile Include="Helpers\FlashHelperTest.cs" />
-    <Compile Include="Helpers\_NewMockObject.cs" />
+    <Compile Include="Helpers\_GetMockObject.cs" />
     <Compile Include="Helpers\HtmlHelperTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\AboutControllerTest.cs" />

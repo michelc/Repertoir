@@ -24,7 +24,7 @@ namespace Repertoir.Tests.Helpers
         [TestMethod]
         public void Flash_renvoie_null_quand_pas_de_message()
         {
-            // Arrange            
+            // Arrange
             var controller = new AboutController();
             var context = new ViewContext
             {
@@ -42,7 +42,7 @@ namespace Repertoir.Tests.Helpers
         [TestMethod]
         public void Flash_renvoie_le_message_quand_il_existe()
         {
-            // Arrange            
+            // Arrange
             var controller = new AboutController();
             controller.Flash("Raton-laveur");
             var context = new ViewContext
