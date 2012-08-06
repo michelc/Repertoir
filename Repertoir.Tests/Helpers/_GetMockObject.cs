@@ -17,7 +17,7 @@ namespace Repertoir.Tests.Helpers
             mock.SetupGet(v => v.HttpContext).Returns(GetHttpContext());
             mock.SetupGet(v => v.Controller).Returns(new Mock<ControllerBase>().Object);
             mock.SetupGet(v => v.View).Returns(new Mock<IView>().Object);
-            mock.SetupGet(v => v.ViewData).Returns(new ViewDataDictionary());
+            mock.Setup(v => v.ViewData).Returns(new ViewDataDictionary());
             mock.SetupGet(v => v.TempData).Returns(new TempDataDictionary());
             mock.SetupGet(v => v.RouteData).Returns(new RouteData());
 
@@ -46,7 +46,10 @@ namespace Repertoir.Tests.Helpers
 
         public static IViewDataContainer GetViewDataContainer()
         {
-            return new Mock<IViewDataContainer>().Object;
+            var mock = new Mock<IViewDataContainer>();
+            mock.Setup(v => v.ViewData).Returns(new ViewDataDictionary());
+
+            return mock.Object;
         }
     }
 }

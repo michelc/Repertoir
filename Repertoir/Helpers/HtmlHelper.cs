@@ -12,6 +12,7 @@ namespace Repertoir.Helpers
     {
         // http://blog.orangelightning.co.uk/?p=20
         // http://weblogs.asp.net/gunnarpeipman/archive/2012/06/17/asp-net-mvc-how-to-show-asterisk-after-required-field-label.aspx
+
         public static MvcHtmlString CaptionFor<TModel, TValue>(this HtmlHelper<TModel> html, Expression<Func<TModel, TValue>> expression)
         {
             var metadata = ModelMetadata.FromLambdaExpression(expression, html.ViewData);
@@ -23,24 +24,19 @@ namespace Repertoir.Helpers
             }
 
             var tag = new TagBuilder("label");
-            tag.Attributes.Add("for", html.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldId(htmlFieldName));
+            tag.Attributes.Add("for", TagBuilder.CreateSanitizedId(html.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(htmlFieldName)));
+            tag.SetInnerText(labelText);
 
-            bool isRequired = false;
             if (metadata.ContainerType != null)
             {
-                isRequired = metadata.ContainerType.GetProperty(metadata.PropertyName)
-                                     .GetCustomAttributes(typeof(RequiredAttribute), false)
-                                     .Length == 1;
-            }
-
-            if (isRequired)
-            {
-                tag.AddCssClass("is_required");
-                tag.InnerHtml = String.Format("{0}<span>*</span>", labelText);
-            }
-            else
-            {
-                tag.SetInnerText(labelText);
+                bool isRequired = metadata.ContainerType.GetProperty(metadata.PropertyName)
+                                          .GetCustomAttributes(typeof(RequiredAttribute), false)
+                                          .Length == 1;
+                if (isRequired)
+                {
+                    tag.AddCssClass("is_required");
+                    tag.InnerHtml += "<span>*</span>";
+                }
             }
 
             return new MvcHtmlString(tag.ToString(TagRenderMode.Normal));

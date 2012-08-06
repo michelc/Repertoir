@@ -3,6 +3,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Repertoir.Helpers;
+using Repertoir.Models;
 
 namespace Repertoir.Tests.Helpers
 {
@@ -10,14 +11,64 @@ namespace Repertoir.Tests.Helpers
     public class HtmlHelperTest
     {
         [TestMethod]
+        public void CaptionFor_renvoie_is_required_si_attribut_required()
+        {
+            // Arrange
+            var helper = new HtmlHelper<ViewPerson>(Moq.GetViewContext(), Moq.GetViewDataContainer());
+
+            // Act
+            var link = helper.CaptionFor(x => x.LastName);
+
+            // Assert
+            Assert.IsTrue(link.ToString().Contains(" class=\"is_required\""));
+        }
+
+        [TestMethod]
+        public void CaptionFor_renvoie_span_etoile_si_attribut_required()
+        {
+            // Arrange
+            var helper = new HtmlHelper<ViewPerson>(Moq.GetViewContext(), Moq.GetViewDataContainer());
+
+            // Act
+            var link = helper.CaptionFor(x => x.LastName);
+
+            // Assert
+            Assert.IsTrue(link.ToString().Contains("<span>*</span>"));
+        }
+
+        [TestMethod]
+        public void CaptionFor_ne_renvoie_pas_is_required_si_pas_attribut_required()
+        {
+            // Arrange
+            var helper = new HtmlHelper<ViewPerson>(Moq.GetViewContext(), Moq.GetViewDataContainer());
+
+            // Act
+            var link = helper.CaptionFor(x => x.FirstName);
+
+            // Assert
+            Assert.IsFalse(link.ToString().Contains(" class=\"is_required\""));
+        }
+
+        [TestMethod]
+        public void CaptionFor_ne_renvoie_pas_span_etoile_si_pas_attribut_required()
+        {
+            // Arrange
+            var helper = new HtmlHelper<ViewPerson>(Moq.GetViewContext(), Moq.GetViewDataContainer());
+
+            // Act
+            var link = helper.CaptionFor(x => x.FirstName);
+
+            // Assert
+            Assert.IsFalse(link.ToString().Contains("<span>*</span>"));
+        }
+
+        [TestMethod]
         public void ActionCancel_renvoie_lien_index_si_id_est_null()
         {
             // Arrange
             var routes = new RouteCollection();
             MvcApplication.RegisterRoutes(routes);
             var helper = new HtmlHelper(Moq.GetViewContext(), Moq.GetViewDataContainer(), routes);
-            //helper.ViewContext.RouteData.Values["action"] = "toto";
-            //helper.ViewContext.RouteData.Values["controller"] = "xxxxx";
 
             // Act
             var link = helper.ActionCancel();
