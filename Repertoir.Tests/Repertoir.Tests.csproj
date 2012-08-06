@@ -55,6 +55,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\ContactsControllerTest.cs" />
+    <Compile Include="Helpers\BinderHelperTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Helpers\FlashHelperTest.cs" />
     <Compile Include="Helpers\_GetMockObject.cs" />
     <Compile Include="Helpers\HtmlHelperTest.cs" />
