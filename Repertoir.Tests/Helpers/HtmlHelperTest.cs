@@ -3,21 +3,27 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Repertoir.Helpers;
-using Repertoir.Models;
 
 namespace Repertoir.Tests.Helpers
 {
     [TestClass]
     public class HtmlHelperTest
     {
+        private class CaptionForViewModel
+        {
+            [System.ComponentModel.DataAnnotations.Required]
+            public string Obligatoire { get; set; }
+            public string Facultatif { get; set; }
+        }
+
         [TestMethod]
         public void CaptionFor_renvoie_is_required_si_attribut_required()
         {
             // Arrange
-            var helper = new HtmlHelper<ViewPerson>(Moq.GetViewContext(), Moq.GetViewDataContainer());
+            var helper = new HtmlHelper<CaptionForViewModel>(Moq.GetViewContext(), Moq.GetViewDataContainer());
 
             // Act
-            var link = helper.CaptionFor(x => x.LastName);
+            var link = helper.CaptionFor(x => x.Obligatoire);
 
             // Assert
             Assert.IsTrue(link.ToString().Contains(" class=\"is_required\""));
@@ -27,10 +33,10 @@ namespace Repertoir.Tests.Helpers
         public void CaptionFor_renvoie_span_etoile_si_attribut_required()
         {
             // Arrange
-            var helper = new HtmlHelper<ViewPerson>(Moq.GetViewContext(), Moq.GetViewDataContainer());
+            var helper = new HtmlHelper<CaptionForViewModel>(Moq.GetViewContext(), Moq.GetViewDataContainer());
 
             // Act
-            var link = helper.CaptionFor(x => x.LastName);
+            var link = helper.CaptionFor(x => x.Obligatoire);
 
             // Assert
             Assert.IsTrue(link.ToString().Contains("<span>*</span>"));
@@ -40,10 +46,10 @@ namespace Repertoir.Tests.Helpers
         public void CaptionFor_ne_renvoie_pas_is_required_si_pas_attribut_required()
         {
             // Arrange
-            var helper = new HtmlHelper<ViewPerson>(Moq.GetViewContext(), Moq.GetViewDataContainer());
+            var helper = new HtmlHelper<CaptionForViewModel>(Moq.GetViewContext(), Moq.GetViewDataContainer());
 
             // Act
-            var link = helper.CaptionFor(x => x.FirstName);
+            var link = helper.CaptionFor(x => x.Facultatif);
 
             // Assert
             Assert.IsFalse(link.ToString().Contains(" class=\"is_required\""));
@@ -53,10 +59,10 @@ namespace Repertoir.Tests.Helpers
         public void CaptionFor_ne_renvoie_pas_span_etoile_si_pas_attribut_required()
         {
             // Arrange
-            var helper = new HtmlHelper<ViewPerson>(Moq.GetViewContext(), Moq.GetViewDataContainer());
+            var helper = new HtmlHelper<CaptionForViewModel>(Moq.GetViewContext(), Moq.GetViewDataContainer());
 
             // Act
-            var link = helper.CaptionFor(x => x.FirstName);
+            var link = helper.CaptionFor(x => x.Facultatif);
 
             // Assert
             Assert.IsFalse(link.ToString().Contains("<span>*</span>"));
