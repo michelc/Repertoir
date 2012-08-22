@@ -30,10 +30,17 @@ a:focus
     color: #88f;
 }
 
-/* Menu des actions CRUD */
-h2.crud
+/* Centre le texte du pied de page */
+footer
 {
-    font-size: smaller;
+    margin: 20px 0 10px 0;
+    text-align: center;
+}
+
+/* Menu des actions CRUD */
+.crud
+{
+    font-size: medium;
     font-variant: small-caps;
 }
 
@@ -50,6 +57,7 @@ table
 /* Aération des cellules */
 thead th,
 tbody td,
+tfoot td,
 tfoot th
 {
     border: 1px dotted #aaa;
@@ -113,10 +121,6 @@ table a.delete
     overflow: hidden;
     margin: -3px 0;
 }
-
-a.icon.is_company    { background-image: url(icons/home.png); }
-a.icon.is_man        { background-image: url(icons/male_user.png); }
-a.icon.is_woman      { background-image: url(icons/female_user.png); }
 
 
 /* #Buttons
@@ -280,7 +284,7 @@ textarea:focus
 }
 
 /* Espacement et alignement verticaux des blocs de saisie */
-.display-label, 
+.display-label,
 .editor-label
 {
     padding: 10px 0 0 0;
@@ -292,8 +296,8 @@ textarea:focus
 
 
 /* Formulaires sont en horizontal par défaut avec saisies de largeurs variables */
-.display-label, 
-.editor-label 
+.display-label,
+.editor-label
 {
     text-align: right;
 }
@@ -335,12 +339,12 @@ input[type="text"].inputbig
 /* Formulaires passent en vertical pour les petites largeurs */
 @media only screen and (max-width: 767px)
 {
-    .display-label, 
-    .editor-label 
+    .display-label,
+    .editor-label
     {
         text-align: left !important;
     }
-    
+
     input[type="email"],
     input[type="password"],
     input[type="phone"],
@@ -364,38 +368,20 @@ input[type="text"].inputbig
   text-align: center;
 }
 
-
-/* #Liste contacts
-================================================== */
-
-/* Ajoute un effet lors du survol d'un contact de liste */
-.list_contact:hover
-{
-    background-color: #fcfec5; /* jaune postit de Msdn */
+/* Message flash suite à un problème */
+.flash_alert {
+  background-color: #fcc;
+  border-top: 1px solid #600;
+  border-bottom: 4px solid #600;
+  color: #933;
+  padding: 6px;
+  text-align: center;
 }
 
-/* Icones géantes en mode liste */
-.list_contact
-{
-    background-position: 0 0;
-    background-repeat: no-repeat;
-    margin-bottom: 5px;
-    min-height: 48px;
-}
-.list_contact.is_company    { background-image: url(icons/home_48.png); }
-.list_contact.is_man        { background-image: url(icons/male_user_48.png); }
-.list_contact.is_woman      { background-image: url(icons/female_user_48.png); }
-
-/* Numéro de téléphone cadré à droite */
-.list_contact h4.omega
-{
-    text-align: right;
-}
-
-/* Masque les icones pour les petites largeurs */
-@media only screen and (max-width: 767px)
-{
-    .list_contact { background-image: none !important; }
+/* Affichage d'une information importante */
+.important {
+    color: #f00;
+    font-weight: bold;
 }
 
 
@@ -409,13 +395,13 @@ input[type="text"].inputbig
         margin-top: -5px !important;
     }
 
-    .editor-field 
+    .editor-field
     {
         margin-top: -11px !important;
     }
 
-	h3 { font-size: 21px; line-height: 30px; margin-bottom: 4px; }
-	h4 { font-size: 17px; line-height: 24px; margin-bottom: 0px; }
+    h3 { font-size: 21px; line-height: 30px; margin-bottom: 4px; }
+    h4 { font-size: 17px; line-height: 24px; margin-bottom: 0px; }
 
     legend
     {
@@ -426,4 +412,43 @@ input[type="text"].inputbig
     {
         height: 10px;
     }
+}
+
+
+/* #Styles spécifiques pour Repertoir
+================================================== */
+
+/* Ajoute un effet lors du survol d'un contact dans la liste */
+.list_contact:hover
+{
+    background-color: #fcfec5; /* jaune postit de Msdn */
+}
+
+/* Numéro de téléphone cadré à droite */
+.list_contact h4.omega
+{
+    text-align: right;
+}
+
+/* Icones pour chaque type de contact */
+a.icon.is_company    { background-image: url(icons/home.png); }
+a.icon.is_man        { background-image: url(icons/male_user.png); }
+a.icon.is_woman      { background-image: url(icons/female_user.png); }
+
+/* Icones géantes en mode liste */
+.list_contact
+{
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    margin-bottom: 5px;
+    min-height: 48px;
+}
+.list_contact.is_company    { background-image: url(icons/home_48.png); }
+.list_contact.is_man        { background-image: url(icons/male_user_48.png); }
+.list_contact.is_woman      { background-image: url(icons/female_user_48.png); }
+
+/* Masque les icones pour les petites largeurs */
+@media only screen and (max-width: 767px)
+{
+    .list_contact { background-image: none !important; }
 }
