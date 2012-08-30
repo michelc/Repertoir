@@ -8,16 +8,12 @@
     @Html.ActionCrud()
 </h2>
 
-<fieldset class="sixteen columns">
+<fieldset class="navigation sixteen columns">
     <legend>
         <span class="ten columns alpha">@Model.DisplayName</span>
         <span class="six columns omega">@Model.Phone1</span>
     </legend>
     @Html.Partial("_Display", Model)
+    <a class="prev" href="@Url.Action("Previous", new { id = Model.Contact_ID, slug = Model.Slug })"></a>
+    <a class="next" href="@Url.Action("Next", new { id = Model.Contact_ID, slug = Model.Slug })"></a>
 </fieldset>
-
-<p>
-    @Html.ActionLink("Avant", "Previous", new { id = Model.Contact_ID, slug = Model.Slug })
-    /
-    @Html.ActionLink("Après", "Next", new { id = Model.Contact_ID, slug = Model.Slug })
-</p>
