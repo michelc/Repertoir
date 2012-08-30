@@ -50,11 +50,11 @@ namespace Repertoir.Helpers
             if (id != null)
             {
                 var slug = helper.ViewContext.RouteData.Values["slug"];
-                html = helper.ActionLink("Annuler", "Details", new { id = id.ToString(), slug = slug.ToString() });
+                html = helper.ActionLink("Annuler", "Details", new { id = id.ToString(), slug = slug.ToString() }, new { @class = "cancel" });
             }
             else
             {
-                html = helper.ActionLink("Annuler", "Index", "Contacts");
+                html = helper.ActionLink("Annuler", "Index", "Contacts", null, new { @class = "cancel" });
             }
 
             return html;
