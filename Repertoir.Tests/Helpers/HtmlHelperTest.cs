@@ -80,7 +80,7 @@ namespace Repertoir.Tests.Helpers
             var link = helper.ActionCancel();
 
             // Assert
-            Assert.AreEqual("<a href=\"/\">Annuler</a>", link.ToString());
+            Assert.AreEqual("<a class=\"cancel\" href=\"/\">Annuler</a>", link.ToString());
         }
 
         [TestMethod]
@@ -98,6 +98,23 @@ namespace Repertoir.Tests.Helpers
 
             // Assert
             Assert.IsTrue(link.ToString().Contains("/details/5/xxxxx"));
+        }
+
+        [TestMethod]
+        public void ActionCancel_renvoie_lien_avec_classe_cancel()
+        {
+            // Arrange
+            var routes = new RouteCollection();
+            MvcApplication.RegisterRoutes(routes);
+            var helper = new HtmlHelper(Moq.GetViewContext(), Moq.GetViewDataContainer(), routes);
+            helper.ViewContext.RouteData.Values["id"] = "5";
+            helper.ViewContext.RouteData.Values["slug"] = "xxxxx";
+
+            // Act
+            var link = helper.ActionCancel();
+
+            // Assert
+            Assert.IsTrue(link.ToString().Contains("class=\"cancel\""));
         }
 
         [TestMethod]
