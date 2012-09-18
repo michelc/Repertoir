@@ -314,6 +314,25 @@ textarea:focus
     padding: 4px 4px;
 }
 
+/* Mise en forme du rendu des zones multilignes en mode affichage */
+.display-field p
+{
+    letter-spacing: 0;
+    margin: 0 0 5px 0;
+}
+.display-field ul,
+.display-field li
+{
+    letter-spacing: 0;
+    margin: 0 0 5px 10px;
+    list-style-type: disc;
+}
+.display-field strong,
+.display-field em
+{
+    color: black;
+}
+
 /* Espacement et alignement verticaux des blocs de saisie */
 .display-label,
 .editor-label

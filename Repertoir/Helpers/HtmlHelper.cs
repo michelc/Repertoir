@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Text.RegularExpressions;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
 
@@ -154,6 +155,74 @@ namespace Repertoir.Helpers
             }
 
             return new MvcHtmlString(cssClass);
+        }
+
+        public static MvcHtmlString DisplayMarkdown(this HtmlHelper htmlHelper, string text)
+        {
+            // Cas le plus simple
+            if (string.IsNullOrEmpty(text)) return MvcHtmlString.Empty;
+
+            // Découpe le texte en paragraphes
+            text = text.Replace("\r\n", "\n").Replace("\r", "\n");
+            var paragraphes = text.Split('\n');
+
+            // Expressions régulières pour formattage "markdown" très basique
+            var strong = new Regex(@"(\*\*|__) ((.|\n)*?) (\*\*|__)", RegexOptions.IgnorePatternWhitespace | RegexOptions.Singleline);
+            var em = new Regex(@"(\*|_) ((.|\n)*?) (\*|_)", RegexOptions.IgnorePatternWhitespace | RegexOptions.Singleline);
+            var link = new Regex("(https?://[^ ]+)", RegexOptions.IgnoreCase | RegexOptions.Singleline);
+            var email = new Regex(@"([a-zA-Z_0-9.-]+\@[a-zA-Z_0-9.-]+\.\w+)", RegexOptions.IgnoreCase | RegexOptions.Singleline);
+
+            // Converti chaque paragraphe séparément
+            text = "";
+            bool list = false;
+            foreach (var p in paragraphes)
+            {
+                // Remplace tous les espaces multiples par un seul espace
+                var temp = Regex.Replace(p, @"\s+", " ").Trim();
+
+                // Traite le cas des listes à puces
+                if ((temp.StartsWith("* ")) || (temp.StartsWith("+ ")) || (temp.StartsWith("- ")))
+                {
+                    if (!list)
+                    {
+                        // Démarre une nouvelle liste
+                        list = true;
+                        text += "<ul>\n";
+                    }
+                    temp = temp.Substring(1).Trim();
+                }
+                else if (list)
+                {
+                    // Termine la liste en cours
+                    list = false;
+                    text += "</ul>\n";
+                }
+
+                // Gère le gras, l'italique, les liens et les adresses méls
+                temp = strong.Replace(temp, "<strong>$2</strong>"); // $2 car $1 contient ** ou __
+                temp = em.Replace(temp, "<em>$2</em>");
+                temp = link.Replace(temp, "<a href=\"$1\">$1</a>");
+                temp = email.Replace(temp, "<a href=\"mailto:$1\">$1</a>");
+
+                // Concatène le paragraphe html
+                if (list)
+                {
+                    text += "  <li>" + temp + "</li>\n";
+                }
+                else
+                {
+                    text += "<p>" + temp + "</p>\n";
+                }
+            }
+
+            // Termine la liste en cours si nécessaire
+            if (list)
+            {
+                list = false;
+                text += "</ul>\n";
+            }
+
+            return new MvcHtmlString(text);
         }
     }
 }
