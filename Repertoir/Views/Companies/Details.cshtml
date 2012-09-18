@@ -21,3 +21,45 @@
 <h2 class="crud">Personnes / @Html.ActionLink("Créer", "Create", "People", new { ParentID = Model.Contact_ID }, null)</h2>
 
 @Html.Partial(@"../Contacts/_List", Model.People)
+
+<h2 class="crud">Localisation</h2>
+
+<div class="gmaps sixteen columns">
+    <div id="gmaps"></div>
+</div>
+
+@section JavaScript
+{
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+<script>
+    if (window.google && window.google.maps) {
+        document.write(unescape("%3Cscript src='@Url.Content("~/Scripts/gmaps.js")'%3E%3C/script%3E"));
+    }
+
+    $(document).ready(function () {
+        if (window.google && window.google.maps) {
+            var map = new GMaps({
+                div: '#gmaps',
+                lat: -12.043333,
+                lng: -77.028333
+            });
+            var regex_br = /<br\s*[\/]?>/gi;
+            var adr = $("#gmaps_address").html().replace(regex_br, " ");
+            GMaps.geocode({
+                address: adr,
+                callback: function (results, status) {
+                    if (status == 'OK') {
+                        var latlng = results[0].geometry.location;
+                        map.setCenter(latlng.lat(), latlng.lng());
+                        map.addMarker({
+                            lat: latlng.lat(),
+                            lng: latlng.lng()
+                        });
+                    }
+                }
+            });
+        }
+    });
+
+</script>
+}

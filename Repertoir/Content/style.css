@@ -446,6 +446,30 @@ input[type="text"].inputbig
 }
 
 
+/* #Styles pour les cartes gmaps.js
+   (http://hpneo.github.com/gmaps/)
+================================================== */
+
+/* La carte */
+#gmaps
+{
+    background-color: #fafafa;
+    border: 1px solid #f0f0f0;
+    height: 300px;
+}
+
+/* La bordure autour de la carte */
+.gmaps
+{
+    background: #fff;
+    border: 1px solid #f0f0f0;
+    box-sizing: border-box;
+    clear: left;
+    margin: 0 !important;
+    padding: 20px;
+}
+
+
 /* #Styles spécifiques pour Repertoir
 ================================================== */
 
