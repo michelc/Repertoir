@@ -43,6 +43,7 @@ Gestion d'un petit répertoire de contacts pour servir de banc d'essai
   partielle _Display.cshtml
 * Création d'un helper HtmlCrud() pour afficher un menu des actions CRUD
 * Utilisation du CDN Microsoft pour les fichiers jQuery
+* Affichage d'une carte Google Maps pour localiser les contacts
 
 
 ## Idées et Todo
@@ -59,5 +60,3 @@ Gestion d'un petit répertoire de contacts pour servir de banc d'essai
 * Détail d'une personne => afficher le détail de sa société
 * Gérer des tags, notes, liens, pièces jointes ... sur les contacts
 * Gérer les doublons
-* Afficher carte localisation contact (reprendre adresse société si besoin)
-

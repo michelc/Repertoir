@@ -1,0 +1,37 @@
+﻿<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+<script>
+    if (window.google && window.google.maps) {
+        document.write(unescape("%3Cscript src='@Url.Content("~/Scripts/gmaps.js")'%3E%3C/script%3E"));
+    }
+</script>
+<script>
+    $(document).ready(function () {
+        if (window.google && window.google.maps) {
+            /* Retrouve l'adresse à géolocaliser */
+            var regex_br = /<br\s*[\/]?>/gi;
+            var adr = $("#gmaps_address").html().replace(regex_br, " ").trim();
+            /* Rien à faire si l'adresse est vide */
+            if (adr === "") return;
+            /* Création d'un objet carte */
+            var map = new GMaps({
+                div: '#gmaps',
+                lat: 42.696252,
+                lng: 2.8797220
+            });
+            /* Géolocalisation de l'adresse du contact */
+            GMaps.geocode({
+                address: adr,
+                callback: function (results, status) {
+                    if (status == 'OK') {
+                        var latlng = results[0].geometry.location;
+                        map.setCenter(latlng.lat(), latlng.lng());
+                        map.addMarker({
+                            lat: latlng.lat(),
+                            lng: latlng.lng()
+                        });
+                    }
+                }
+            });
+        }
+    });
+</script>

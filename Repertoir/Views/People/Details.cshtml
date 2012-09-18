@@ -17,3 +17,14 @@
     <a class="prev" href="@Url.Action("Previous", new { id = Model.Contact_ID, slug = Model.Slug })"></a>
     <a class="next" href="@Url.Action("Next", new { id = Model.Contact_ID, slug = Model.Slug })"></a>
 </fieldset>
+
+<h2 class="crud">Localisation</h2>
+
+<div class="gmaps sixteen columns">
+    <div id="gmaps"></div>
+</div>
+
+@section JavaScript
+{
+    @Html.Partial("_GmapsScripts")
+}
