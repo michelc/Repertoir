@@ -420,5 +420,187 @@ namespace Repertoir.Tests.Helpers
             // Assert
             Assert.AreEqual(string.Empty, css.ToString());
         }
+
+        [TestMethod]
+        public void DisplayMarkdown_renvoie_vide_si_texte_est_vide()
+        {
+            // Arrange
+            var helper = new HtmlHelper(new ViewContext(), Moq.GetViewDataContainer());
+
+            // Act
+            var html = helper.DisplayMarkdown(string.Empty).ToString();
+
+            // Assert
+            Assert.AreEqual(string.Empty, html);
+        }
+
+        [TestMethod]
+        public void DisplayMarkdown_renvoie_vide_si_texte_est_nul()
+        {
+            // Arrange
+            var helper = new HtmlHelper(new ViewContext(), Moq.GetViewDataContainer());
+
+            // Act
+            var html = helper.DisplayMarkdown(null).ToString();
+
+            // Assert
+            Assert.AreEqual(string.Empty, html);
+        }
+
+        [TestMethod]
+        public void DisplayMarkdown_genere_paragraphes_si_saut_de_lignes()
+        {
+            // Arrange
+            var helper = new HtmlHelper(new ViewContext(), Moq.GetViewDataContainer());
+
+            // Act
+            var html = helper.DisplayMarkdown("un\ndeux").ToString();
+
+            // Assert
+            Assert.AreEqual("<p>un</p>\n<p>deux</p>\n", html);
+        }
+
+        [TestMethod]
+        public void DisplayMarkdown_genere_paragraphes_si_nouvelles_lignes()
+        {
+            // Arrange
+            var helper = new HtmlHelper(new ViewContext(), Moq.GetViewDataContainer());
+
+            // Act
+            var html = helper.DisplayMarkdown("un" + System.Environment.NewLine + "deux").ToString();
+
+            // Assert
+            Assert.AreEqual("<p>un</p>\n<p>deux</p>\n", html);
+        }
+
+        [TestMethod]
+        public void DisplayMarkdown_genere_liste_si_lignes_commencent_par_asterisques()
+        {
+            // Arrange
+            var helper = new HtmlHelper(new ViewContext(), Moq.GetViewDataContainer());
+
+            // Act
+            var html = helper.DisplayMarkdown("* un\n* deux").ToString();
+
+            // Assert
+            Assert.AreEqual("<ul>\n  <li>un</li>\n  <li>deux</li>\n</ul>\n", html);
+        }
+
+        [TestMethod]
+        public void DisplayMarkdown_genere_liste_seulement_si_lignes_commencent_par_asterisques()
+        {
+            // Arrange
+            var helper = new HtmlHelper(new ViewContext(), Moq.GetViewDataContainer());
+
+            // Act
+            var html = helper.DisplayMarkdown("u*n\nde*ux").ToString();
+
+            // Assert
+            Assert.AreEqual("<p>u*n</p>\n<p>de*ux</p>\n", html);
+        }
+
+        [TestMethod]
+        public void DisplayMarkdown_genere_strong_si_double_asterisques()
+        {
+            // Arrange
+            var helper = new HtmlHelper(new ViewContext(), Moq.GetViewDataContainer());
+
+            // Act
+            var html = helper.DisplayMarkdown("un **deux** trois").ToString();
+
+            // Assert
+            Assert.AreEqual("<p>un <strong>deux</strong> trois</p>\n", html);
+        }
+
+        [TestMethod]
+        public void DisplayMarkdown_genere_strong_si_double_soulignes()
+        {
+            // Arrange
+            var helper = new HtmlHelper(new ViewContext(), Moq.GetViewDataContainer());
+
+            // Act
+            var html = helper.DisplayMarkdown("un __deux__ trois").ToString();
+
+            // Assert
+            Assert.AreEqual("<p>un <strong>deux</strong> trois</p>\n", html);
+        }
+
+        [TestMethod]
+        public void DisplayMarkdown_genere_em_si_simple_asterisque()
+        {
+            // Arrange
+            var helper = new HtmlHelper(new ViewContext(), Moq.GetViewDataContainer());
+
+            // Act
+            var html = helper.DisplayMarkdown("un *deux* trois").ToString();
+
+            // Assert
+            Assert.AreEqual("<p>un <em>deux</em> trois</p>\n", html);
+        }
+
+        [TestMethod]
+        public void DisplayMarkdown_genere_em_si_simple_souligne()
+        {
+            // Arrange
+            var helper = new HtmlHelper(new ViewContext(), Moq.GetViewDataContainer());
+
+            // Act
+            var html = helper.DisplayMarkdown("un _deux_ trois").ToString();
+
+            // Assert
+            Assert.AreEqual("<p>un <em>deux</em> trois</p>\n", html);
+        }
+
+        [TestMethod]
+        public void DisplayMarkdown_genere_lien_si_url_en_http()
+        {
+            // Arrange
+            var helper = new HtmlHelper(new ViewContext(), Moq.GetViewDataContainer());
+
+            // Act
+            var html = helper.DisplayMarkdown("un http://lien !").ToString();
+
+            // Assert
+            Assert.AreEqual("<p>un <a href=\"http://lien\">http://lien</a> !</p>\n", html);
+        }
+
+        [TestMethod]
+        public void DisplayMarkdown_genere_lien_si_url_en_https()
+        {
+            // Arrange
+            var helper = new HtmlHelper(new ViewContext(), Moq.GetViewDataContainer());
+
+            // Act
+            var html = helper.DisplayMarkdown("un https://lien !").ToString();
+
+            // Assert
+            Assert.AreEqual("<p>un <a href=\"https://lien\">https://lien</a> !</p>\n", html);
+        }
+
+        [TestMethod]
+        public void DisplayMarkdown_genere_lien_mailto_si_email()
+        {
+            // Arrange
+            var helper = new HtmlHelper(new ViewContext(), Moq.GetViewDataContainer());
+
+            // Act
+            var html = helper.DisplayMarkdown("un e@mail.com !").ToString();
+
+            // Assert
+            Assert.AreEqual("<p>un <a href=\"mailto:e@mail.com\">e@mail.com</a> !</p>\n", html);
+        }
+
+        [TestMethod]
+        public void DisplayMarkdown_encode_le_html_eventuel()
+        {
+            // Arrange
+            var helper = new HtmlHelper(new ViewContext(), Moq.GetViewDataContainer());
+
+            // Act
+            var html = helper.DisplayMarkdown("un <b>tag</b> !").ToString();
+
+            // Assert
+            Assert.AreEqual("<p>un &lt;b&gt;tag&lt;/b&gt; !</p>\n", html);
+        }
     }
 }

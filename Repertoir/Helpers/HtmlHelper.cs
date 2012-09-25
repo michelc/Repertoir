@@ -162,6 +162,9 @@ namespace Repertoir.Helpers
             // Cas le plus simple
             if (string.IsNullOrEmpty(text)) return MvcHtmlString.Empty;
 
+            // Converti le HTML éventuel en chaine codée en HTML
+            text = System.Web.HttpUtility.HtmlEncode(text);
+
             // Découpe le texte en paragraphes
             text = text.Replace("\r\n", "\n").Replace("\r", "\n");
             var paragraphes = text.Split('\n');
