@@ -61,6 +61,7 @@
     <Compile Include="Helpers\BinderHelperTest.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Helpers\StringHelperTest.cs" />
     <Compile Include="Helpers\FlashHelperTest.cs" />
     <Compile Include="Helpers\_GetMockObject.cs" />
     <Compile Include="Helpers\HtmlHelperTest.cs" />
