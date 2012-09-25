@@ -190,9 +190,9 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\gmaps.js" />
-    <Content Include="Scripts\jquery-1.8.1-vsdoc.js" />
-    <Content Include="Scripts\jquery-1.8.1.js" />
-    <Content Include="Scripts\jquery-1.8.1.min.js" />
+    <Content Include="Scripts\jquery-1.8.2-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.8.2.js" />
+    <Content Include="Scripts\jquery-1.8.2.min.js" />
     <Content Include="Scripts\jquery-ui-1.8.23.js" />
     <Content Include="Scripts\jquery-ui-1.8.23.min.js" />
     <Content Include="Scripts\jquery.validate-vsdoc.js" />
