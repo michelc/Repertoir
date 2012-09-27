@@ -1,27 +1,33 @@
-﻿using System.Web.Mvc;
+﻿using System.Data.Entity;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Repertoir.Controllers;
+using Repertoir.Models;
 
 namespace Repertoir.Tests.Controllers
 {
     [TestClass]
     public class ContactsControllerTest
     {
+        private RepertoirContext db;
+
+        public ContactsControllerTest()
+        {
+            Database.SetInitializer<RepertoirContext>(new DropCreateDatabaseAlways<RepertoirContext>());
+            db = new RepertoirContext();
+        }
+
         [TestMethod]
         public void ContactsIndex_doit_renvoyer_la_vue_par_defaut()
         {
             // Arrange
-            var controller = new ContactsController();
+            var controller = new ContactsController(db);
 
             // Act
-            // var result = controller.Index();
-            ViewResult result = null;
+            var result = controller.Index();
 
             // Assert
-            Assert.Inconclusive("Mise en quarantaine de Contacts.Index() car il passe par la bdd");
             Assert.IsNotNull(result);
             Assert.IsTrue(string.IsNullOrEmpty(result.ViewName));
         }
-
     }
 }

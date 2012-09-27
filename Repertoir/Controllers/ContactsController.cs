@@ -9,7 +9,17 @@ namespace Repertoir.Controllers
 { 
     public class ContactsController : Controller
     {
-        private RepertoirContext db = new RepertoirContext();
+        private RepertoirContext db  { get; set; }
+
+        public ContactsController()
+        {
+            db = new RepertoirContext();
+        }
+
+        public ContactsController(RepertoirContext context)
+        {
+            db = context;
+        }
 
         //
         // GET: /Contacts/
