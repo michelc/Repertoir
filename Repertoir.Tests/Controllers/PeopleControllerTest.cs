@@ -140,5 +140,69 @@ namespace Repertoir.Tests.Controllers
             Assert.AreEqual(contact1.DisplayName, model.DisplayName, "Model aurait dû correspondre au contact demandé");
             Assert.AreEqual(contact1.Phone1, model.Phone1, "Model aurait dû correspondre au contact demandé");
         }
+
+        [TestMethod]
+        public void PeopleCreate_get_doit_renvoyer_la_vue_par_defaut()
+        {
+            // Arrange
+            var controller = new PeopleController(db);
+
+            // Act
+            var result = controller.Create();
+
+            // Assert
+            Assert.IsNotNull(result, "People.Create() aurait dû renvoyer un ViewResult");
+            Assert.IsTrue(string.IsNullOrEmpty(result.ViewName), "People.Create() aurait dû utiliser la vue par défaut");
+        }
+
+        [TestMethod]
+        public void PeopleCreate_get_doit_renvoyer_un_objet_ViewPerson_a_la_vue()
+        {
+            // Arrange
+            var controller = new PeopleController(db);
+
+            // Act
+            var result = controller.Create();
+
+            // Assert
+            var model = result.ViewData.Model as ViewPerson;
+            Assert.IsNotNull(model, "Model devrait être du type ViewPerson");
+        }
+
+        [TestMethod]
+        public void PeopleCreate_get_doit_initialiser_la_liste_des_societes()
+        {
+            // Arrange
+            var controller = new PeopleController(db);
+
+            // Act
+            var result = controller.Create();
+
+            // Assert
+            var model = result.ViewData.Model as ViewPerson;
+            Assert.IsNotNull(model.Companies, "Model.Companies devrait être initialisée");
+        }
+
+        [TestMethod]
+        public void PeopleCreate_get_doit_initialiser_la_societe_parente_si_elle_est_renseignee()
+        {
+            // Arrange
+            var controller = new PeopleController(db);
+            var societe = new Contact
+            {
+                DisplayName = "soc",
+                Phone1 = "9",
+                IsCompany = true
+            };
+            db.Contacts.Add(societe);
+            db.SaveChanges();
+
+            // Act
+            var result = controller.Create(societe.Contact_ID);
+
+            // Assert
+            var model = result.ViewData.Model as ViewPerson;
+            Assert.AreEqual(societe.Contact_ID, model.Company_ID, "Model.Company_ID aurait dû correspondre à la société en paramètre");
+        }
     }
 }
