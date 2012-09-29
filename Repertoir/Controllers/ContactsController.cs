@@ -11,15 +11,8 @@ namespace Repertoir.Controllers
     {
         private RepertoirContext db  { get; set; }
 
-        public ContactsController()
-        {
-            db = new RepertoirContext();
-        }
-
-        public ContactsController(RepertoirContext context)
-        {
-            db = context;
-        }
+        public ContactsController() { db = new RepertoirContext(); }
+        public ContactsController(RepertoirContext context) { db = context; }
 
         //
         // GET: /Contacts/

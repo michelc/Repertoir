@@ -28,8 +28,8 @@ namespace Repertoir.Tests.Controllers
             var result = controller.Index();
 
             // Assert
-            Assert.IsNotNull(result);
-            Assert.IsTrue(string.IsNullOrEmpty(result.ViewName));
+            Assert.IsNotNull(result, "Contacts.Index() aurait dû renvoyer un ViewResult");
+            Assert.IsTrue(string.IsNullOrEmpty(result.ViewName), "Contacts.Index() aurait dû utiliser la vue par défaut");
         }
 
         [TestMethod]
@@ -56,8 +56,8 @@ namespace Repertoir.Tests.Controllers
             var result = controller.Table();
 
             // Assert
-            Assert.IsNotNull(result);
-            Assert.IsTrue(string.IsNullOrEmpty(result.ViewName));
+            Assert.IsNotNull(result, "Contacts.Table() aurait dû renvoyer un ViewResult");
+            Assert.IsTrue(string.IsNullOrEmpty(result.ViewName), "Contacts.Table() aurait dû utiliser la vue par défaut");
         }
 
         [TestMethod]

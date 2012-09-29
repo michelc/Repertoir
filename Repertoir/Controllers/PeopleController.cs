@@ -10,6 +10,9 @@ namespace Repertoir.Controllers
     {
         private RepertoirContext db = new RepertoirContext();
 
+        public PeopleController() { db = new RepertoirContext(); }
+        public PeopleController(RepertoirContext context) { db = context; }
+
         //
         // GET: /People/Details/5
 
