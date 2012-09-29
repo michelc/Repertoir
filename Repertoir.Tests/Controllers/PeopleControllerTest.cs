@@ -204,5 +204,86 @@ namespace Repertoir.Tests.Controllers
             var model = result.ViewData.Model as ViewPerson;
             Assert.AreEqual(societe.Contact_ID, model.Company_ID, "Model.Company_ID aurait dû correspondre à la société en paramètre");
         }
+
+        [TestMethod]
+        public void PeopleCreate_post_doit_renvoyer_la_vue_par_defaut_quand_saisie_incorrecte()
+        {
+            // Arrange
+            var controller = new PeopleController();
+            var person = new ViewPerson
+            {
+                LastName = "test",
+                Phone1 = "0"
+            };
+            controller.ModelState.AddModelError("global", "message");
+
+            // Act
+            var result = controller.Create(person) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result, "People.Create() aurait dû renvoyer un ViewResult");
+            Assert.IsTrue(string.IsNullOrEmpty(result.ViewName), "People.Create() aurait dû utiliser la vue par défaut");
+        }
+
+        [TestMethod]
+        public void PeopleCreate_post_doit_renvoyer_les_erreurs_quand_saisie_incorrecte()
+        {
+            // Arrange
+            var controller = new PeopleController();
+            var person = new ViewPerson
+            {
+                LastName = "test",
+                Phone1 = "0"
+            };
+            controller.ModelState.AddModelError("global", "message");
+
+            // Act
+            var result = controller.Create(person) as ViewResult;
+
+            // Assert
+            Assert.IsTrue(result.ViewData.ModelState.Count > 0, "People.Create() aurait dû renvoyer des erreurs dans ModelState");
+        }
+
+        [TestMethod]
+        public void PeopleCreate_post_doit_initialiser_la_liste_des_societes_quand_saisie_incorrecte()
+        {
+            // Arrange
+            var controller = new PeopleController(db);
+            var person = new ViewPerson
+            {
+                LastName = "test",
+                Phone1 = "0"
+            };
+            controller.ModelState.AddModelError("global", "message");
+
+            // Act
+            var result = controller.Create(person) as ViewResult;
+
+            // Assert
+            var model = result.ViewData.Model as ViewPerson;
+            Assert.IsNotNull(model.Companies, "Model.Companies devrait être initialisée");
+        }
+
+        [TestMethod]
+        public void PeopleCreate_post_renvoie_le_meme_objet_ViewPerson_a_la_vue_quand_saisie_incorrecte()
+        {
+            // Arrange
+            var controller = new PeopleController(db);
+            var person = new ViewPerson
+            {
+                LastName = "test",
+                Phone1 = "0"
+            };
+            controller.ModelState.AddModelError("global", "message");
+
+            // Act
+            var result = controller.Create(person) as ViewResult;
+
+            // Assert
+            var model = result.ViewData.Model as ViewPerson;
+            Assert.IsNotNull(model, "Model devrait être du type ViewPerson");
+            Assert.AreEqual(person.LastName, model.LastName, "Model aurait dû correspondre à la saisie");
+            Assert.AreEqual(person.Phone1, model.Phone1, "Model aurait dû correspondre à la saisie");
+        }
     }
 }
