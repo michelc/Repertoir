@@ -226,25 +226,6 @@ namespace Repertoir.Tests.Controllers
         }
 
         [TestMethod]
-        public void PeopleCreate_post_doit_renvoyer_les_erreurs_quand_saisie_incorrecte()
-        {
-            // Arrange
-            var controller = new PeopleController();
-            var person = new ViewPerson
-            {
-                LastName = "test",
-                Phone1 = "0"
-            };
-            controller.ModelState.AddModelError("global", "message");
-
-            // Act
-            var result = controller.Create(person) as ViewResult;
-
-            // Assert
-            Assert.IsTrue(result.ViewData.ModelState.Count > 0, "People.Create() aurait dû renvoyer des erreurs dans ModelState");
-        }
-
-        [TestMethod]
         public void PeopleCreate_post_doit_initialiser_la_liste_des_societes_quand_saisie_incorrecte()
         {
             // Arrange
