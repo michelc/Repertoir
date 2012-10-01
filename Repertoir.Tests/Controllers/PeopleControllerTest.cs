@@ -1,7 +1,9 @@
 ﻿using System.Data.Entity;
+using System.Linq;
 using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Repertoir.Controllers;
+using Repertoir.Helpers;
 using Repertoir.Models;
 
 namespace Repertoir.Tests.Controllers
@@ -39,7 +41,7 @@ namespace Repertoir.Tests.Controllers
         }
 
         [TestMethod]
-        public void PeopleDetails_renvoie_un_objet_ViewPerson_la_vue()
+        public void PeopleDetails_doit_renvoyer_un_objet_ViewPerson_a_la_vue()
         {
             // Arrange
             var controller = new PeopleController(db);
@@ -60,7 +62,7 @@ namespace Repertoir.Tests.Controllers
         }
 
         [TestMethod]
-        public void PeopleDetails_renvoie_le_contact_demande_a_la_vue()
+        public void PeopleDetails_doit_renvoyer_le_contact_demande_a_la_vue()
         {
             // Arrange
             var controller = new PeopleController(db);
@@ -101,7 +103,7 @@ namespace Repertoir.Tests.Controllers
         }
 
         [TestMethod]
-        public void PeopleDisplay_renvoie_un_objet_ViewPerson_la_vue()
+        public void PeopleDisplay_doit_renvoyer_un_objet_ViewPerson_a_la_vue()
         {
             // Arrange
             var controller = new PeopleController(db);
@@ -122,7 +124,7 @@ namespace Repertoir.Tests.Controllers
         }
 
         [TestMethod]
-        public void PeopleDisplay_renvoie_le_contact_demande_a_la_vue()
+        public void PeopleDisplay_doit_renvoyer_le_contact_demande_a_la_vue()
         {
             // Arrange
             var controller = new PeopleController(db);
@@ -246,7 +248,7 @@ namespace Repertoir.Tests.Controllers
         }
 
         [TestMethod]
-        public void PeopleCreate_post_renvoie_le_meme_objet_ViewPerson_a_la_vue_quand_saisie_incorrecte()
+        public void PeopleCreate_post_doit_renvoyer_le_meme_objet_ViewPerson_quand_saisie_incorrecte()
         {
             // Arrange
             var controller = new PeopleController(db);
@@ -265,6 +267,72 @@ namespace Repertoir.Tests.Controllers
             Assert.IsNotNull(model, "Model devrait être du type ViewPerson");
             Assert.AreEqual(person.LastName, model.LastName, "Model aurait dû correspondre à la saisie");
             Assert.AreEqual(person.Phone1, model.Phone1, "Model aurait dû correspondre à la saisie");
+        }
+
+        [TestMethod]
+        public void PeopleCreate_post_doit_enregistrer_contact_quand_saisie_correcte()
+        {
+            // Arrange
+            var controller = new PeopleController(db);
+            var person = new ViewPerson
+            {
+                LastName = "test" + System.DateTime.Now.Ticks.ToString(),
+                Phone1 = "0"
+            };
+
+            // Act
+            var result = controller.Create(person);
+
+            // Assert
+            var contact = db.Contacts.Where(x => x.LastName == person.LastName).FirstOrDefault();
+            Assert.IsNotNull(contact, "People.Create() aurait dû enregistrer le contact");
+        }
+
+        [TestMethod]
+        public void PeopleCreate_post_doit_definir_message_de_succes_quand_saisie_correcte()
+        {
+            // Arrange
+            var controller = new PeopleController(db);
+            var person = new ViewPerson
+            {
+                LastName = "test",
+                Phone1 = "0"
+            };
+            var context = new ViewContext
+            {
+                TempData = controller.TempData
+            };
+            var helper = new HtmlHelper(context, Repertoir.Tests.Helpers.Moq.GetViewDataContainer());
+
+            // Act
+            var result = controller.Create(person);
+
+            // Assert
+            var flash = helper.Flash();
+            Assert.IsNotNull(flash, "People.Create() aurait dû définir un message flash");
+            Assert.IsTrue(flash.ToString().Contains("La fiche de test a été insérée"), "People.Create() aurait dû initialiser le bon message");
+        }
+
+        [TestMethod]
+        public void PeopleCreate_post_doit_rediriger_vers_details_quand_saisie_correcte()
+        {
+            // Arrange
+            var controller = new PeopleController(db);
+            var person = new ViewPerson
+            {
+                LastName = "test",
+                Phone1 = "0"
+            };
+
+            // Act
+            var result = controller.Create(person) as RedirectToRouteResult;
+
+            // Assert
+            Assert.IsNotNull(result, "People.Create() aurait dû renvoyer un RedirectToRouteResult");
+            Assert.IsNull(result.RouteValues["controller"], "People.Create() aurait dû rediriger vers le contrôleur en cours");
+            Assert.AreEqual("Details", result.RouteValues["action"], "People.Create() aurait dû rediriger vers l'action Details");
+            Assert.IsNotNull(result.RouteValues["id"], "People.Create() aurait dû définir 'id'");
+            Assert.IsNotNull(result.RouteValues["slug"], "People.Create() aurait dû définir 'slug'");
         }
     }
 }
