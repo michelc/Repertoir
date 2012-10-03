@@ -176,6 +176,14 @@ namespace Repertoir.Tests.Controllers
         {
             // Arrange
             var controller = new PeopleController(db);
+            var company = new ViewCompany
+            {
+                CompanyName = "soc",
+                Phone1 = "9"
+            };
+            var contact = new Contact().Update_With_ViewCompany(company);
+            db.Contacts.Add(contact);
+            db.SaveChanges();
 
             // Act
             var result = controller.Create();
@@ -183,6 +191,10 @@ namespace Repertoir.Tests.Controllers
             // Assert
             var model = result.ViewData.Model as ViewPerson;
             Assert.IsNotNull(model.Companies, "Model.Companies devrait être initialisée");
+            var count = model.Companies.Count();
+            Assert.IsTrue(count > 0, "Model.Companies devrait contenir des sociétés");
+            var check = model.Companies.Where(x => x.Text == "soc").Count();
+            Assert.IsTrue(check > 0, "Model.Companies devrait contenir 'soc'");
         }
 
         [TestMethod]
@@ -190,21 +202,21 @@ namespace Repertoir.Tests.Controllers
         {
             // Arrange
             var controller = new PeopleController(db);
-            var societe = new Contact
+            var company = new ViewCompany
             {
-                DisplayName = "soc",
-                Phone1 = "9",
-                IsCompany = true
+                CompanyName = "soc",
+                Phone1 = "9"
             };
-            db.Contacts.Add(societe);
+            var contact = new Contact().Update_With_ViewCompany(company);
+            db.Contacts.Add(contact);
             db.SaveChanges();
 
             // Act
-            var result = controller.Create(societe.Contact_ID);
+            var result = controller.Create(contact.Contact_ID);
 
             // Assert
             var model = result.ViewData.Model as ViewPerson;
-            Assert.AreEqual(societe.Contact_ID, model.Company_ID, "Model.Company_ID aurait dû correspondre à la société en paramètre");
+            Assert.AreEqual(contact.Contact_ID, model.Company_ID, "Model.Company_ID aurait dû correspondre à la société en paramètre");
         }
 
         [TestMethod]
