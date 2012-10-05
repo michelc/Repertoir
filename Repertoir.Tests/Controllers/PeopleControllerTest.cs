@@ -24,13 +24,7 @@ namespace Repertoir.Tests.Controllers
         {
             // Arrange
             var controller = new PeopleController(db);
-            var contact = new Contact
-            {
-                DisplayName = "test",
-                Phone1 = "0"
-            };
-            db.Contacts.Add(contact);
-            db.SaveChanges();
+            var contact = InsertPerson("test", "0");
 
             // Act
             var result = controller.Details(contact.Contact_ID);
@@ -45,13 +39,7 @@ namespace Repertoir.Tests.Controllers
         {
             // Arrange
             var controller = new PeopleController(db);
-            var contact = new Contact
-            {
-                DisplayName = "test",
-                Phone1 = "0"
-            };
-            db.Contacts.Add(contact);
-            db.SaveChanges();
+            var contact = InsertPerson("test", "0");
 
             // Act
             var result = controller.Details(contact.Contact_ID);
@@ -66,11 +54,8 @@ namespace Repertoir.Tests.Controllers
         {
             // Arrange
             var controller = new PeopleController(db);
-            var contact1 = new Contact { DisplayName = "test1", Phone1 = "1" };
-            db.Contacts.Add(contact1);
-            var contact2 = new Contact { DisplayName = "test2", Phone1 = "2" };
-            db.Contacts.Add(contact2);
-            db.SaveChanges();
+            var contact1 = InsertPerson("test1", "1");
+            var contact2 = InsertPerson("test2", "2");
 
             // Act
             var result = controller.Details(contact1.Contact_ID);
@@ -86,13 +71,7 @@ namespace Repertoir.Tests.Controllers
         {
             // Arrange
             var controller = new PeopleController(db);
-            var contact = new Contact
-            {
-                DisplayName = "test",
-                Phone1 = "0"
-            };
-            db.Contacts.Add(contact);
-            db.SaveChanges();
+            var contact = InsertPerson("test", "0");
 
             // Act
             var result = controller.Display(contact.Contact_ID);
@@ -107,13 +86,7 @@ namespace Repertoir.Tests.Controllers
         {
             // Arrange
             var controller = new PeopleController(db);
-            var contact = new Contact
-            {
-                DisplayName = "test",
-                Phone1 = "0"
-            };
-            db.Contacts.Add(contact);
-            db.SaveChanges();
+            var contact = InsertPerson("test", "0");
 
             // Act
             var result = controller.Display(contact.Contact_ID);
@@ -128,11 +101,8 @@ namespace Repertoir.Tests.Controllers
         {
             // Arrange
             var controller = new PeopleController(db);
-            var contact1 = new Contact { DisplayName = "test1", Phone1 = "1" };
-            db.Contacts.Add(contact1);
-            var contact2 = new Contact { DisplayName = "test2", Phone1 = "2" };
-            db.Contacts.Add(contact2);
-            db.SaveChanges();
+            var contact1 = InsertPerson("test1", "1");
+            var contact2 = InsertPerson("test2", "2");
 
             // Act
             var result = controller.Display(contact1.Contact_ID);
@@ -176,14 +146,7 @@ namespace Repertoir.Tests.Controllers
         {
             // Arrange
             var controller = new PeopleController(db);
-            var company = new ViewCompany
-            {
-                CompanyName = "soc",
-                Phone1 = "9"
-            };
-            var contact = new Contact().Update_With_ViewCompany(company);
-            db.Contacts.Add(contact);
-            db.SaveChanges();
+            InsertCompany("soc", "9");
 
             // Act
             var result = controller.Create();
@@ -202,14 +165,7 @@ namespace Repertoir.Tests.Controllers
         {
             // Arrange
             var controller = new PeopleController(db);
-            var company = new ViewCompany
-            {
-                CompanyName = "soc",
-                Phone1 = "9"
-            };
-            var contact = new Contact().Update_With_ViewCompany(company);
-            db.Contacts.Add(contact);
-            db.SaveChanges();
+            var contact = InsertCompany("soc", "9");
 
             // Act
             var result = controller.Create(contact.Contact_ID);
@@ -345,6 +301,101 @@ namespace Repertoir.Tests.Controllers
             Assert.AreEqual("Details", result.RouteValues["action"], "People.Create() aurait dû rediriger vers l'action Details");
             Assert.IsNotNull(result.RouteValues["id"], "People.Create() aurait dû définir 'id'");
             Assert.IsNotNull(result.RouteValues["slug"], "People.Create() aurait dû définir 'slug'");
+        }
+
+        [TestMethod]
+        public void PeopleEdit_get_doit_renvoyer_la_vue_par_defaut()
+        {
+            // Arrange
+            var controller = new PeopleController(db);
+            var contact = InsertPerson("test", "0");
+
+            // Act
+            var result = controller.Edit(contact.Contact_ID);
+
+            // Assert
+            Assert.IsNotNull(result, "People.Create() aurait dû renvoyer un ViewResult");
+            Assert.IsTrue(string.IsNullOrEmpty(result.ViewName), "People.Create() aurait dû utiliser la vue par défaut");
+        }
+
+        [TestMethod]
+        public void PeopleEdit_get_doit_renvoyer_un_objet_ViewPerson_a_la_vue()
+        {
+            // Arrange
+            var controller = new PeopleController(db);
+            var contact = InsertPerson("test", "0");
+
+            // Act
+            var result = controller.Edit(contact.Contact_ID);
+
+            // Assert
+            var model = result.ViewData.Model as ViewPerson;
+            Assert.IsNotNull(model, "Model devrait être du type ViewPerson");
+        }
+
+        [TestMethod]
+        public void PeopleEdit_get_doit_renvoyer_le_contact_demande_a_la_vue()
+        {
+            // Arrange
+            var controller = new PeopleController(db);
+            var contact1 = InsertPerson("test1", "1");
+            var contact2 = InsertPerson("test2", "2");
+
+            // Act
+            var result = controller.Edit(contact1.Contact_ID);
+
+            // Assert
+            var model = result.ViewData.Model as ViewPerson;
+            Assert.AreEqual(contact1.DisplayName, model.DisplayName, "Model aurait dû correspondre au contact demandé");
+            Assert.AreEqual(contact1.Phone1, model.Phone1, "Model aurait dû correspondre au contact demandé");
+        }
+
+        [TestMethod]
+        public void PeopleEdit_get_doit_initialiser_la_liste_des_societes()
+        {
+            // Arrange
+            var controller = new PeopleController(db);
+            InsertCompany("soc", "9");
+            var contact = InsertPerson("test", "0");
+
+            // Act
+            var result = controller.Edit(contact.Contact_ID);
+
+            // Assert
+            var model = result.ViewData.Model as ViewPerson;
+            Assert.IsNotNull(model.Companies, "Model.Companies devrait être initialisée");
+            var count = model.Companies.Count();
+            Assert.IsTrue(count > 0, "Model.Companies devrait contenir des sociétés");
+            var check = model.Companies.Where(x => x.Text == "soc").Count();
+            Assert.IsTrue(check > 0, "Model.Companies devrait contenir 'soc'");
+        }
+
+        private Contact InsertPerson (string name, string phone)
+        {
+            var person = new ViewPerson
+            {
+                LastName = name,
+                Phone1 = phone
+            };
+            var contact = new Contact().Update_With_ViewPerson(person);
+            db.Contacts.Add(contact);
+            db.SaveChanges();
+
+            return contact;
+        }
+
+        private Contact InsertCompany (string name, string phone)
+        {
+            var company = new ViewCompany
+            {
+                CompanyName = name,
+                Phone1 = phone
+            };
+            var contact = new Contact().Update_With_ViewCompany(company);
+            db.Contacts.Add(contact);
+            db.SaveChanges();
+
+            return contact;
         }
     }
 }
