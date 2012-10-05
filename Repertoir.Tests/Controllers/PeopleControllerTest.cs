@@ -370,6 +370,68 @@ namespace Repertoir.Tests.Controllers
             Assert.IsTrue(check > 0, "Model.Companies devrait contenir 'soc'");
         }
 
+        [TestMethod]
+        public void PeopleEdit_post_doit_renvoyer_la_vue_par_defaut_quand_saisie_incorrecte()
+        {
+            // Arrange
+            var controller = new PeopleController();
+            var person = new ViewPerson
+            {
+                LastName = "test",
+                Phone1 = "0"
+            };
+            controller.ModelState.AddModelError("global", "message");
+
+            // Act
+            var result = controller.Edit(person) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result, "People.Edit() aurait dû renvoyer un ViewResult");
+            Assert.IsTrue(string.IsNullOrEmpty(result.ViewName), "People.Edit() aurait dû utiliser la vue par défaut");
+        }
+
+        [TestMethod]
+        public void PeopleEdit_post_doit_initialiser_la_liste_des_societes_quand_saisie_incorrecte()
+        {
+            // Arrange
+            var controller = new PeopleController(db);
+            var person = new ViewPerson
+            {
+                LastName = "test",
+                Phone1 = "0"
+            };
+            controller.ModelState.AddModelError("global", "message");
+
+            // Act
+            var result = controller.Edit(person) as ViewResult;
+
+            // Assert
+            var model = result.ViewData.Model as ViewPerson;
+            Assert.IsNotNull(model.Companies, "Model.Companies devrait être initialisée");
+        }
+
+        [TestMethod]
+        public void PeopleEdit_post_doit_renvoyer_le_meme_objet_ViewPerson_quand_saisie_incorrecte()
+        {
+            // Arrange
+            var controller = new PeopleController(db);
+            var person = new ViewPerson
+            {
+                LastName = "test",
+                Phone1 = "0"
+            };
+            controller.ModelState.AddModelError("global", "message");
+
+            // Act
+            var result = controller.Edit(person) as ViewResult;
+
+            // Assert
+            var model = result.ViewData.Model as ViewPerson;
+            Assert.IsNotNull(model, "Model devrait être du type ViewPerson");
+            Assert.AreEqual(person.LastName, model.LastName, "Model aurait dû correspondre à la saisie");
+            Assert.AreEqual(person.Phone1, model.Phone1, "Model aurait dû correspondre à la saisie");
+        }
+
         private Contact InsertPerson (string name, string phone)
         {
             var person = new ViewPerson
