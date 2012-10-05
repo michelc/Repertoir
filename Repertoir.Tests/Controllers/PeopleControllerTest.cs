@@ -432,6 +432,61 @@ namespace Repertoir.Tests.Controllers
             Assert.AreEqual(person.Phone1, model.Phone1, "Model aurait dû correspondre à la saisie");
         }
 
+        [TestMethod]
+        public void PeopleEdit_post_doit_enregistrer_modification_quand_saisie_correcte()
+        {
+            // Arrange
+            var controller = new PeopleController(db);
+            var contact = InsertPerson("test", "0");
+            contact.LastName = "maj";
+
+            // Act
+            var result = controller.Edit(contact.To_ViewPerson());
+
+            // Assert
+            var updated_contact = db.Contacts.Where(x => x.LastName == contact.LastName).FirstOrDefault();
+            Assert.IsNotNull(updated_contact, "People.Edit() aurait dû mettre à jour le contact");
+        }
+
+        [TestMethod]
+        public void PeopleEdit_post_doit_definir_message_de_succes_quand_saisie_correcte()
+        {
+            // Arrange
+            var controller = new PeopleController(db);
+            var contact = InsertPerson("test", "0");
+            var context = new ViewContext
+            {
+                TempData = controller.TempData
+            };
+            var helper = new HtmlHelper(context, Repertoir.Tests.Helpers.Moq.GetViewDataContainer());
+
+            // Act
+            var result = controller.Edit(contact.To_ViewPerson());
+
+            // Assert
+            var flash = helper.Flash();
+            Assert.IsNotNull(flash, "People.Edit() aurait dû définir un message flash");
+            Assert.IsTrue(flash.ToString().Contains("La fiche de test a été mise à jour"), "People.Edit() aurait dû initialiser le bon message");
+        }
+
+        [TestMethod]
+        public void PeopleEdit_post_doit_rediriger_vers_details_quand_saisie_correcte()
+        {
+            // Arrange
+            var controller = new PeopleController(db);
+            var contact = InsertPerson("test", "0");
+
+            // Act
+            var result = controller.Edit(contact.To_ViewPerson()) as RedirectToRouteResult;
+
+            // Assert
+            Assert.IsNotNull(result, "People.Edit() aurait dû renvoyer un RedirectToRouteResult");
+            Assert.IsNull(result.RouteValues["controller"], "People.Edit() aurait dû rediriger vers le contrôleur en cours");
+            Assert.AreEqual("Details", result.RouteValues["action"], "People.Edit() aurait dû rediriger vers l'action Details");
+            Assert.IsNotNull(result.RouteValues["id"], "People.Edit() aurait dû définir 'id'");
+            Assert.IsNotNull(result.RouteValues["slug"], "People.Edit() aurait dû définir 'slug'");
+        }
+
         private Contact InsertPerson (string name, string phone)
         {
             var person = new ViewPerson
