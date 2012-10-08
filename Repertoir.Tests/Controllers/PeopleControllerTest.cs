@@ -487,6 +487,105 @@ namespace Repertoir.Tests.Controllers
             Assert.IsNotNull(result.RouteValues["slug"], "People.Edit() aurait dû définir 'slug'");
         }
 
+        [TestMethod]
+        public void PeopleDelete_doit_renvoyer_la_vue_par_defaut()
+        {
+            // Arrange
+            var controller = new PeopleController(db);
+            var person = InsertPerson("test", "0");
+
+            // Act
+            var result = controller.Delete(person.Contact_ID);
+
+            // Assert
+            Assert.IsNotNull(result, "People.Delete() aurait dû renvoyer un ViewResult");
+            Assert.IsTrue(string.IsNullOrEmpty(result.ViewName), "People.Delete() aurait dû utiliser la vue par défaut");
+        }
+
+        [TestMethod]
+        public void PeopleDelete_doit_renvoyer_un_objet_ViewPerson_a_la_vue()
+        {
+            // Arrange
+            var controller = new PeopleController(db);
+            var person = InsertPerson("test", "0");
+
+            // Act
+            var result = controller.Delete(person.Contact_ID);
+
+            // Assert
+            var model = result.ViewData.Model as ViewPerson;
+            Assert.IsNotNull(model, "Model devrait être du type ViewPerson");
+        }
+
+        [TestMethod]
+        public void PeopleDelete_doit_renvoyer_le_contact_demande_a_la_vue()
+        {
+            // Arrange
+            var controller = new PeopleController(db);
+            var person1 = InsertPerson("test1", "1");
+            var person2 = InsertPerson("test2", "2");
+
+            // Act
+            var result = controller.Delete(person1.Contact_ID);
+
+            // Assert
+            var model = result.ViewData.Model as ViewPerson;
+            Assert.AreEqual("test1", model.DisplayName, "Model aurait dû correspondre au contact demandé");
+            Assert.AreEqual("1", model.Phone1, "Model aurait dû correspondre au contact demandé");
+        }
+
+        [TestMethod]
+        public void PeopleDeleteConfirmed_doit_supprimer_le_contact()
+        {
+            // Arrange
+            var controller = new PeopleController(db);
+            var person = InsertPerson("test", "0");
+
+            // Act
+            var result = controller.DeleteConfirmed(person.Contact_ID);
+
+            // Assert
+            var contact = db.Contacts.Find(person.Contact_ID);
+            Assert.IsNull(contact, "People.DeleteConfirmed() aurait dû supprimer le contact");
+        }
+
+        [TestMethod]
+        public void PeopleDeleteConfirmed_doit_definir_message_de_succes()
+        {
+            // Arrange
+            var controller = new PeopleController(db);
+            var person = InsertPerson("test", "0");
+            var context = new ViewContext
+            {
+                TempData = controller.TempData
+            };
+            var helper = new HtmlHelper(context, Repertoir.Tests.Helpers.Moq.GetViewDataContainer());
+
+            // Act
+            var result = controller.DeleteConfirmed(person.Contact_ID);
+
+            // Assert
+            var flash = helper.Flash();
+            Assert.IsNotNull(flash, "People.DeleteConfirmed() aurait dû définir un message flash");
+            Assert.IsTrue(flash.ToString().Contains("La fiche de test a été supprimée"), "People.DeleteConfirmed() aurait dû initialiser le bon message");
+        }
+
+        [TestMethod]
+        public void PeopleDeleteConfirmed_doit_rediriger_vers_liste_des_contacts()
+        {
+            // Arrange
+            var controller = new PeopleController(db);
+            var person = InsertPerson("test", "0");
+
+            // Act
+            var result = controller.DeleteConfirmed(person.Contact_ID) as RedirectToRouteResult;
+
+            // Assert
+            Assert.IsNotNull(result, "People.DeleteConfirmed() aurait dû renvoyer un RedirectToRouteResult");
+            Assert.AreEqual("Contacts", result.RouteValues["controller"], "People.DeleteConfirmed() aurait dû rediriger vers le contrôleur Contacts");
+            Assert.AreEqual("Index", result.RouteValues["action"], "People.DeleteConfirmed() aurait dû rediriger vers l'action Index");
+        }
+
         private Contact InsertPerson (string name, string phone)
         {
             var person = new ViewPerson
