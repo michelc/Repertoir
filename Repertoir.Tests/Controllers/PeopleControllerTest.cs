@@ -46,7 +46,7 @@ namespace Repertoir.Tests.Controllers
 
             // Assert
             var model = result.ViewData.Model as ViewPerson;
-            Assert.IsNotNull(model, "Model devrait être du type ViewPerson");
+            Assert.IsNotNull(model, "People.Details() aurait dû renvoyer un ViewPerson");
         }
 
         [TestMethod]
@@ -62,8 +62,8 @@ namespace Repertoir.Tests.Controllers
 
             // Assert
             var model = result.ViewData.Model as ViewPerson;
-            Assert.AreEqual(contact1.DisplayName, model.DisplayName, "Model aurait dû correspondre au contact demandé");
-            Assert.AreEqual(contact1.Phone1, model.Phone1, "Model aurait dû correspondre au contact demandé");
+            Assert.AreEqual(contact1.FirstName, model.FirstName, "People.Details() aurait dû renvoyer le contact demandé");
+            Assert.AreEqual(contact1.Phone1, model.Phone1, "People.Details() aurait dû renvoyer le contact demandé");
         }
 
         [TestMethod]
@@ -93,7 +93,7 @@ namespace Repertoir.Tests.Controllers
 
             // Assert
             var model = result.ViewData.Model as ViewPerson;
-            Assert.IsNotNull(model, "Model devrait être du type ViewPerson");
+            Assert.IsNotNull(model, "People.Display() aurait dû renvoyer un ViewPerson");
         }
 
         [TestMethod]
@@ -109,8 +109,8 @@ namespace Repertoir.Tests.Controllers
 
             // Assert
             var model = result.ViewData.Model as ViewPerson;
-            Assert.AreEqual(contact1.DisplayName, model.DisplayName, "Model aurait dû correspondre au contact demandé");
-            Assert.AreEqual(contact1.Phone1, model.Phone1, "Model aurait dû correspondre au contact demandé");
+            Assert.AreEqual(contact1.FirstName, model.FirstName, "People.Display() aurait dû renvoyer le contact demandé");
+            Assert.AreEqual(contact1.Phone1, model.Phone1, "People.Display() aurait dû renvoyer le contact demandé");
         }
 
         [TestMethod]
@@ -138,7 +138,7 @@ namespace Repertoir.Tests.Controllers
 
             // Assert
             var model = result.ViewData.Model as ViewPerson;
-            Assert.IsNotNull(model, "Model devrait être du type ViewPerson");
+            Assert.IsNotNull(model, "People.Create() aurait dû renvoyer un ViewPerson");
         }
 
         [TestMethod]
@@ -153,11 +153,11 @@ namespace Repertoir.Tests.Controllers
 
             // Assert
             var model = result.ViewData.Model as ViewPerson;
-            Assert.IsNotNull(model.Companies, "Model.Companies devrait être initialisée");
+            Assert.IsNotNull(model.Companies, "People.Create() aurait dû initialiser Model.Companies");
             var count = model.Companies.Count();
-            Assert.IsTrue(count > 0, "Model.Companies devrait contenir des sociétés");
+            Assert.IsTrue(count > 0, "People.Create() aurait dû remplir Model.Companies");
             var check = model.Companies.Where(x => x.Text == "soc").Count();
-            Assert.IsTrue(check > 0, "Model.Companies devrait contenir 'soc'");
+            Assert.IsTrue(check > 0, "People.Create() aurait dû remplir Model.Companies avec 'soc'");
         }
 
         [TestMethod]
@@ -172,7 +172,7 @@ namespace Repertoir.Tests.Controllers
 
             // Assert
             var model = result.ViewData.Model as ViewPerson;
-            Assert.AreEqual(contact.Contact_ID, model.Company_ID, "Model.Company_ID aurait dû correspondre à la société en paramètre");
+            Assert.AreEqual(contact.Contact_ID, model.Company_ID, "People.Create() aurait dû initialiser Model.Company_ID avec société en paramètre");
         }
 
         [TestMethod]
@@ -212,7 +212,7 @@ namespace Repertoir.Tests.Controllers
 
             // Assert
             var model = result.ViewData.Model as ViewPerson;
-            Assert.IsNotNull(model.Companies, "Model.Companies devrait être initialisée");
+            Assert.IsNotNull(model.Companies, "People.Create() aurait dû initialiser Model.Companies");
         }
 
         [TestMethod]
@@ -232,9 +232,9 @@ namespace Repertoir.Tests.Controllers
 
             // Assert
             var model = result.ViewData.Model as ViewPerson;
-            Assert.IsNotNull(model, "Model devrait être du type ViewPerson");
-            Assert.AreEqual(person.LastName, model.LastName, "Model aurait dû correspondre à la saisie");
-            Assert.AreEqual(person.Phone1, model.Phone1, "Model aurait dû correspondre à la saisie");
+            Assert.IsNotNull(model, "People.Create() aurait dû renvoyer un ViewPerson");
+            Assert.AreEqual(person.LastName, model.LastName, "People.Create() aurait dû renvoyer le contact saisi");
+            Assert.AreEqual(person.Phone1, model.Phone1, "People.Create() aurait dû renvoyer le contact saisi");
         }
 
         [TestMethod]
@@ -314,7 +314,7 @@ namespace Repertoir.Tests.Controllers
             var result = controller.Edit(contact.Contact_ID);
 
             // Assert
-            Assert.IsNotNull(result, "People.Create() aurait dû renvoyer un ViewResult");
+            Assert.IsNotNull(result, "People.Edit() aurait dû renvoyer un ViewResult");
             Assert.IsTrue(string.IsNullOrEmpty(result.ViewName), "People.Create() aurait dû utiliser la vue par défaut");
         }
 
@@ -330,7 +330,7 @@ namespace Repertoir.Tests.Controllers
 
             // Assert
             var model = result.ViewData.Model as ViewPerson;
-            Assert.IsNotNull(model, "Model devrait être du type ViewPerson");
+            Assert.IsNotNull(model, "People.Edit() aurait dû renvoyer un ViewPerson");
         }
 
         [TestMethod]
@@ -346,8 +346,8 @@ namespace Repertoir.Tests.Controllers
 
             // Assert
             var model = result.ViewData.Model as ViewPerson;
-            Assert.AreEqual(contact1.DisplayName, model.DisplayName, "Model aurait dû correspondre au contact demandé");
-            Assert.AreEqual(contact1.Phone1, model.Phone1, "Model aurait dû correspondre au contact demandé");
+            Assert.AreEqual(contact1.FirstName, model.FirstName, "People.Edit() aurait dû renvoyer le contact demandé");
+            Assert.AreEqual(contact1.Phone1, model.Phone1, "People.Edit() aurait dû renvoyer le contact demandé");
         }
 
         [TestMethod]
@@ -363,11 +363,11 @@ namespace Repertoir.Tests.Controllers
 
             // Assert
             var model = result.ViewData.Model as ViewPerson;
-            Assert.IsNotNull(model.Companies, "Model.Companies devrait être initialisée");
+            Assert.IsNotNull(model.Companies, "People.Edit() aurait dû initialiser Model.Companies");
             var count = model.Companies.Count();
-            Assert.IsTrue(count > 0, "Model.Companies devrait contenir des sociétés");
+            Assert.IsTrue(count > 0, "People.Edit() aurait dû remplir Model.Companies");
             var check = model.Companies.Where(x => x.Text == "soc").Count();
-            Assert.IsTrue(check > 0, "Model.Companies devrait contenir 'soc'");
+            Assert.IsTrue(check > 0, "People.Edit() aurait dû remplir Model.Companies avec 'soc'");
         }
 
         [TestMethod]
@@ -407,7 +407,7 @@ namespace Repertoir.Tests.Controllers
 
             // Assert
             var model = result.ViewData.Model as ViewPerson;
-            Assert.IsNotNull(model.Companies, "Model.Companies devrait être initialisée");
+            Assert.IsNotNull(model.Companies, "People.Edit() aurait dû initialiser Model.Companies");
         }
 
         [TestMethod]
@@ -427,9 +427,9 @@ namespace Repertoir.Tests.Controllers
 
             // Assert
             var model = result.ViewData.Model as ViewPerson;
-            Assert.IsNotNull(model, "Model devrait être du type ViewPerson");
-            Assert.AreEqual(person.LastName, model.LastName, "Model aurait dû correspondre à la saisie");
-            Assert.AreEqual(person.Phone1, model.Phone1, "Model aurait dû correspondre à la saisie");
+            Assert.IsNotNull(model, "People.Edit() aurait dû renvoyer un ViewPerson");
+            Assert.AreEqual(person.LastName, model.LastName, "People.Edit() aurait dû renvoyer le contact saisi");
+            Assert.AreEqual(person.Phone1, model.Phone1, "People.Edit() aurait dû renvoyer le contact saisi");
         }
 
         [TestMethod]
@@ -514,7 +514,7 @@ namespace Repertoir.Tests.Controllers
 
             // Assert
             var model = result.ViewData.Model as ViewPerson;
-            Assert.IsNotNull(model, "Model devrait être du type ViewPerson");
+            Assert.IsNotNull(model, "People.Delete() aurait dû renvoyer un ViewPerson");
         }
 
         [TestMethod]
@@ -530,8 +530,8 @@ namespace Repertoir.Tests.Controllers
 
             // Assert
             var model = result.ViewData.Model as ViewPerson;
-            Assert.AreEqual("test1", model.DisplayName, "Model aurait dû correspondre au contact demandé");
-            Assert.AreEqual("1", model.Phone1, "Model aurait dû correspondre au contact demandé");
+            Assert.AreEqual(person1.FirstName, model.FirstName, "People.Delete() aurait dû renvoyer le contact demandé");
+            Assert.AreEqual(person1.Phone1, model.Phone1, "People.Delete() aurait dû renvoyer le contact demandé");
         }
 
         [TestMethod]

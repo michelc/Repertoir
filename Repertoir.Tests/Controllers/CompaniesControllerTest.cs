@@ -154,8 +154,8 @@ namespace Repertoir.Tests.Controllers
             // Assert
             var model = result.ViewData.Model as ViewCompany;
             Assert.IsNotNull(model, "Companies.Create() aurait dû renvoyer un ViewCompany");
-            Assert.AreEqual(company.CompanyName, model.CompanyName, "Companies.Create() aurait dû renvoyer le ViewCompany saisi");
-            Assert.AreEqual(company.Phone1, model.Phone1, "Companies.Create() aurait dû renvoyer le ViewCompany saisi");
+            Assert.AreEqual(company.CompanyName, model.CompanyName, "Companies.Create() aurait dû renvoyer le contact saisi");
+            Assert.AreEqual(company.Phone1, model.Phone1, "Companies.Create() aurait dû renvoyer le contact saisi");
         }
 
         [TestMethod]
@@ -309,8 +309,8 @@ namespace Repertoir.Tests.Controllers
             // Assert
             var model = result.ViewData.Model as ViewCompany;
             Assert.IsNotNull(model, "Companies.Edit() aurait dû renvoyer un ViewCompany");
-            Assert.AreEqual(company.CompanyName, model.CompanyName, "Companies.Edit() aurait dû renvoyer le ViewCompany saisi");
-            Assert.AreEqual(company.Phone1, model.Phone1, "Companies.Edit() aurait dû renvoyer le ViewCompany saisi");
+            Assert.AreEqual(company.CompanyName, model.CompanyName, "Companies.Edit() aurait dû renvoyer le contact saisi");
+            Assert.AreEqual(company.Phone1, model.Phone1, "Companies.Edit() aurait dû renvoyer le contact saisi");
         }
 
         [TestMethod]
