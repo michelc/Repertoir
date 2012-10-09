@@ -8,7 +8,10 @@ namespace Repertoir.Controllers
 {
     public class CompaniesController : Controller
     {
-        private RepertoirContext db = new RepertoirContext();
+        private RepertoirContext db;
+
+        public CompaniesController() { db = new RepertoirContext(); }
+        public CompaniesController(RepertoirContext context) { db = context; }
 
         //
         // GET: /Companies/Details/5

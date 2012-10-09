@@ -8,7 +8,7 @@ namespace Repertoir.Controllers
 {
     public class PeopleController : Controller
     {
-        private RepertoirContext db = new RepertoirContext();
+        private RepertoirContext db;
 
         public PeopleController() { db = new RepertoirContext(); }
         public PeopleController(RepertoirContext context) { db = context; }
