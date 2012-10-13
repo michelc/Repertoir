@@ -14,8 +14,8 @@
         <span class="six columns omega">@Model.Phone1</span>
     </legend>
     @Html.Partial("_Display", Model)
-    <a class="prev" href="@Url.Action("Previous", new { id = Model.Contact_ID, slug = Model.Slug })"></a>
-    <a class="next" href="@Url.Action("Next", new { id = Model.Contact_ID, slug = Model.Slug })"></a>
+    <a class="prev" href="@Url.Action("Previous", "Contacts", new { id = Model.Contact_ID, slug = Model.Slug })"></a>
+    <a class="next" href="@Url.Action("Next", "Contacts", new { id = Model.Contact_ID, slug = Model.Slug })"></a>
 </fieldset>
 
 <h2 class="crud">Personnes / @Html.ActionLink("Créer", "Create", "People", new { ParentID = Model.Contact_ID }, null)</h2>

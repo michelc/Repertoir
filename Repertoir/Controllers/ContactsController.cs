@@ -35,6 +35,70 @@ namespace Repertoir.Controllers
         }
 
         //
+        // GET: /Contacts/Next/5
+
+        public RedirectToRouteResult Next(int id)
+        {
+            var contact = db.Contacts.Find(id);
+
+            var next = (from c in db.Contacts
+                        where (c.DisplayName.CompareTo(contact.DisplayName) > 0)
+                        orderby c.DisplayName ascending
+                        select new
+                        {
+                            c.Contact_ID,
+                            c.Slug,
+                            ControllerName = c.IsCompany ? "Companies" : "People"
+                        }).FirstOrDefault();
+
+            if (next == null)
+            {
+                next = (from c in db.Contacts
+                        orderby c.DisplayName ascending
+                        select new
+                        {
+                            c.Contact_ID,
+                            c.Slug,
+                            ControllerName = c.IsCompany ? "Companies" : "People"
+                        }).FirstOrDefault();
+            }
+
+            return RedirectToAction("Details", next.ControllerName, new { id = next.Contact_ID, slug = next.Slug });
+        }
+
+        //
+        // GET: /Contacts/Previous/5
+
+        public RedirectToRouteResult Previous(int id)
+        {
+            var contact = db.Contacts.Find(id);
+
+            var prev = (from c in db.Contacts
+                        where (c.DisplayName.CompareTo(contact.DisplayName) < 0)
+                        orderby c.DisplayName descending
+                        select new
+                        {
+                            c.Contact_ID,
+                            c.Slug,
+                            ControllerName = c.IsCompany ? "Companies" : "People"
+                        }).FirstOrDefault();
+
+            if (prev == null)
+            {
+                prev = (from c in db.Contacts
+                        orderby c.DisplayName descending
+                        select new
+                        {
+                            c.Contact_ID,
+                            c.Slug,
+                            ControllerName = c.IsCompany ? "Companies" : "People"
+                        }).FirstOrDefault();
+            }
+
+            return RedirectToAction("Details", prev.ControllerName, new { id = prev.Contact_ID, slug = prev.Slug });
+        }
+
+        //
         // GET: /Contacts/Export
 
         public JsonResult Export()

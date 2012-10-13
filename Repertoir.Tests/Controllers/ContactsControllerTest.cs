@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
+using System.Linq;
 using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Repertoir.Controllers;
@@ -75,6 +76,106 @@ namespace Repertoir.Tests.Controllers
         }
 
         [TestMethod]
+        public void ContactsNext_doit_rediriger_vers_une_action_detail()
+        {
+            // Arrange
+            var controller = new ContactsController(db);
+            var contact = InsertPerson("test", "0");
+
+            // Act
+            var result = controller.Next(contact.Contact_ID) as RedirectToRouteResult;
+
+            // Assert
+            Assert.IsNotNull(result, "Contacts.Next() aurait dû renvoyer un RedirectToRouteResult");
+            Assert.IsNotNull(result.RouteValues["controller"], "Contacts.Next() aurait dû définir le contrôleur");
+            Assert.AreEqual("Details", result.RouteValues["action"], "Contacts.Next() aurait dû rediriger vers l'action Details");
+            Assert.IsNotNull(result.RouteValues["id"], "Contacts.Next() aurait dû définir 'id'");
+            Assert.IsNotNull(result.RouteValues["slug"], "Contacts.Next() aurait dû définir 'slug'");
+        }
+
+        [TestMethod]
+        public void ContactsNext_doit_rediriger_vers_le_contact_suivant()
+        {
+            // Arrange
+            var controller = new ContactsController(db);
+            var contact1 = InsertPerson("next1", "0");
+            var contact2 = InsertCompany("next2", "9");
+
+            // Act
+            var result = controller.Next(contact1.Contact_ID) as RedirectToRouteResult;
+
+            // Assert
+            Assert.AreEqual(contact2.Contact_ID, result.RouteValues["id"], "Contacts.Next() aurait dû renvoyer l'id du contact suivant");
+        }
+
+        [TestMethod]
+        public void ContactsNext_doit_rediriger_du_dernier_vers_le_premier_contact()
+        {
+            // Arrange
+            var controller = new ContactsController(db);
+            var first = db.Contacts.Where(x => x.LastName == "aaaa").FirstOrDefault()
+                        ?? InsertPerson("aaaa", "0");
+            var last = db.Contacts.Where(x => x.CompanyName == "zzzz").FirstOrDefault() 
+                        ?? InsertCompany("zzzz", "9");
+
+            // Act
+            var result = controller.Next(last.Contact_ID) as RedirectToRouteResult;
+
+            // Assert
+            Assert.AreEqual(first.Contact_ID, result.RouteValues["id"], "Contacts.Next() aurait dû renvoyer l'id du premier contact");
+        }
+
+        [TestMethod]
+        public void ContactsPrevious_doit_rediriger_vers_une_action_detail()
+        {
+            // Arrange
+            var controller = new ContactsController(db);
+            var contact = InsertCompany("test", "0");
+
+            // Act
+            var result = controller.Previous(contact.Contact_ID) as RedirectToRouteResult;
+
+            // Assert
+            Assert.IsNotNull(result, "Contacts.Previous() aurait dû renvoyer un RedirectToRouteResult");
+            Assert.IsNotNull(result.RouteValues["controller"], "Contacts.Previous() aurait dû définir le contrôleur");
+            Assert.AreEqual("Details", result.RouteValues["action"], "Contacts.Previous() aurait dû rediriger vers l'action Details");
+            Assert.IsNotNull(result.RouteValues["id"], "Contacts.Previous() aurait dû définir 'id'");
+            Assert.IsNotNull(result.RouteValues["slug"], "Contacts.Previous() aurait dû définir 'slug'");
+        }
+
+        [TestMethod]
+        public void ContactsPrevious_doit_rediriger_vers_le_contact_precedant()
+        {
+            // Arrange
+            var controller = new ContactsController(db);
+            var contact1 = InsertCompany("prev1", "9");
+            var contact2 = InsertPerson("prev2", "0");
+
+            // Act
+            var result = controller.Previous(contact2.Contact_ID) as RedirectToRouteResult;
+
+            // Assert
+            Assert.AreEqual(contact1.Contact_ID, result.RouteValues["id"], "Contacts.Previous() aurait dû renvoyer l'id du contact précédant");
+        }
+
+        [TestMethod]
+        public void ContactsPrevious_doit_rediriger_du_premier_vers_le_dernier_contact()
+        {
+            // Arrange
+            var controller = new ContactsController(db);
+            var first = db.Contacts.Where(x => x.LastName == "aaaa").FirstOrDefault()
+                        ?? InsertPerson("aaaa", "0");
+            var last = db.Contacts.Where(x => x.CompanyName == "zzzz").FirstOrDefault()
+                        ?? InsertCompany("zzzz", "9");
+
+            // Act
+            var result = controller.Previous(first.Contact_ID) as RedirectToRouteResult;
+
+            // Assert
+            Assert.AreEqual(last.Contact_ID, result.RouteValues["id"], "Contacts.Next() aurait dû renvoyer l'id du dernier contact");
+        }
+
+        [TestMethod]
         public void ContactsExport_renvoie_un_JsonResult()
         {
             // Arrange
@@ -99,6 +200,34 @@ namespace Repertoir.Tests.Controllers
             // Assert
             var model = result.Data as List<FlatContact>;
             Assert.IsNotNull(model, "Data devrait être du type List<FlatContact>");
+        }
+
+        private Contact InsertPerson(string name, string phone)
+        {
+            var person = new ViewPerson
+            {
+                LastName = name,
+                Phone1 = phone
+            };
+            var contact = new Contact().Update_With_ViewPerson(person);
+            db.Contacts.Add(contact);
+            db.SaveChanges();
+
+            return contact;
+        }
+
+        private Contact InsertCompany(string name, string phone)
+        {
+            var company = new ViewCompany
+            {
+                CompanyName = name,
+                Phone1 = phone
+            };
+            var contact = new Contact().Update_With_ViewCompany(company);
+            db.Contacts.Add(contact);
+            db.SaveChanges();
+
+            return contact;
         }
     }
 }
