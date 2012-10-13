@@ -41,27 +41,22 @@ namespace Repertoir.Controllers
         {
             var contact = db.Contacts.Find(id);
 
-            var next = (from c in db.Contacts
-                        where (c.DisplayName.CompareTo(contact.DisplayName) > 0)
-                        orderby c.DisplayName ascending
-                        select new
-                        {
-                            c.Contact_ID,
-                            c.Slug,
-                            ControllerName = c.IsCompany ? "Companies" : "People"
-                        }).FirstOrDefault();
+            var query = (from c in db.Contacts
+                         orderby c.DisplayName ascending
+                         select new
+                         {
+                             c.DisplayName,
+                             c.Contact_ID,
+                             c.Slug,
+                             ControllerName = c.IsCompany ? "Companies" : "People"
+                         });
 
-            if (next == null)
-            {
-                next = (from c in db.Contacts
-                        orderby c.DisplayName ascending
-                        select new
-                        {
-                            c.Contact_ID,
-                            c.Slug,
-                            ControllerName = c.IsCompany ? "Companies" : "People"
-                        }).FirstOrDefault();
-            }
+            var next = (from c in query
+                        where (c.DisplayName.CompareTo(contact.DisplayName) > 0)
+                        select c).FirstOrDefault()
+                        ??
+                        (from c in query
+                        select c).FirstOrDefault();
 
             return RedirectToAction("Details", next.ControllerName, new { id = next.Contact_ID, slug = next.Slug });
         }
@@ -73,27 +68,22 @@ namespace Repertoir.Controllers
         {
             var contact = db.Contacts.Find(id);
 
-            var prev = (from c in db.Contacts
-                        where (c.DisplayName.CompareTo(contact.DisplayName) < 0)
-                        orderby c.DisplayName descending
-                        select new
-                        {
-                            c.Contact_ID,
-                            c.Slug,
-                            ControllerName = c.IsCompany ? "Companies" : "People"
-                        }).FirstOrDefault();
+            var query = (from c in db.Contacts
+                         orderby c.DisplayName descending
+                         select new
+                         {
+                             c.DisplayName,
+                             c.Contact_ID,
+                             c.Slug,
+                             ControllerName = c.IsCompany ? "Companies" : "People"
+                         });
 
-            if (prev == null)
-            {
-                prev = (from c in db.Contacts
-                        orderby c.DisplayName descending
-                        select new
-                        {
-                            c.Contact_ID,
-                            c.Slug,
-                            ControllerName = c.IsCompany ? "Companies" : "People"
-                        }).FirstOrDefault();
-            }
+            var prev = (from c in query
+                        where (c.DisplayName.CompareTo(contact.DisplayName) < 0)
+                        select c).FirstOrDefault()
+                        ??
+                        (from c in query
+                         select c).FirstOrDefault();
 
             return RedirectToAction("Details", prev.ControllerName, new { id = prev.Contact_ID, slug = prev.Slug });
         }
