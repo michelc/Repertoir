@@ -80,7 +80,7 @@ namespace Repertoir.Tests.Controllers
         {
             // Arrange
             var controller = new ContactsController(db);
-            var contact = InsertPerson("test", "0");
+            var contact = GetOrInsertPerson("test", "0");
 
             // Act
             var result = controller.Next(contact.Contact_ID) as RedirectToRouteResult;
@@ -94,12 +94,30 @@ namespace Repertoir.Tests.Controllers
         }
 
         [TestMethod]
+        public void ContactsNext_doit_rediriger_vers_le_bon_controleur()
+        {
+            // Arrange
+            var controller = new ContactsController(db);
+            var contact1 = GetOrInsertPerson("next_1", "0");
+            var contact2 = GetOrInsertCompany("next_2", "9");
+            var contact3 = GetOrInsertPerson("next_3", "0");
+
+            // Act
+            var result1 = controller.Next(contact1.Contact_ID) as RedirectToRouteResult;
+            var result2 = controller.Next(contact2.Contact_ID) as RedirectToRouteResult;
+
+            // Assert
+            Assert.AreEqual("Companies", result1.RouteValues["controller"], "Contacts.Next() aurait dû rediriger vers le contrôleur Companies");
+            Assert.AreEqual("People", result2.RouteValues["controller"], "Contacts.Next() aurait dû rediriger vers le contrôleur People");
+        }
+
+        [TestMethod]
         public void ContactsNext_doit_rediriger_vers_le_contact_suivant()
         {
             // Arrange
             var controller = new ContactsController(db);
-            var contact1 = InsertPerson("next1", "0");
-            var contact2 = InsertCompany("next2", "9");
+            var contact1 = GetOrInsertPerson("next1", "0");
+            var contact2 = GetOrInsertCompany("next2", "9");
 
             // Act
             var result = controller.Next(contact1.Contact_ID) as RedirectToRouteResult;
@@ -113,10 +131,8 @@ namespace Repertoir.Tests.Controllers
         {
             // Arrange
             var controller = new ContactsController(db);
-            var first = db.Contacts.Where(x => x.LastName == "aaaa").FirstOrDefault()
-                        ?? InsertPerson("aaaa", "0");
-            var last = db.Contacts.Where(x => x.CompanyName == "zzzz").FirstOrDefault() 
-                        ?? InsertCompany("zzzz", "9");
+            var first = GetOrInsertPerson("aaaa", "0");
+            var last = GetOrInsertCompany("zzzz", "9");
 
             // Act
             var result = controller.Next(last.Contact_ID) as RedirectToRouteResult;
@@ -130,7 +146,7 @@ namespace Repertoir.Tests.Controllers
         {
             // Arrange
             var controller = new ContactsController(db);
-            var contact = InsertCompany("test", "0");
+            var contact = GetOrInsertCompany("test", "0");
 
             // Act
             var result = controller.Previous(contact.Contact_ID) as RedirectToRouteResult;
@@ -144,12 +160,30 @@ namespace Repertoir.Tests.Controllers
         }
 
         [TestMethod]
+        public void ContactsPrevious_doit_rediriger_vers_le_bon_controleur()
+        {
+            // Arrange
+            var controller = new ContactsController(db);
+            var contact1 = GetOrInsertPerson("prev_1", "0");
+            var contact2 = GetOrInsertCompany("prev_2", "9");
+            var contact3 = GetOrInsertCompany("prev_3", "9");
+
+            // Act
+            var result1 = controller.Previous(contact3.Contact_ID) as RedirectToRouteResult;
+            var result2 = controller.Previous(contact2.Contact_ID) as RedirectToRouteResult;
+
+            // Assert
+            Assert.AreEqual("Companies", result1.RouteValues["controller"], "Contacts.Previous() aurait dû rediriger vers le contrôleur Companies");
+            Assert.AreEqual("People", result2.RouteValues["controller"], "Contacts.Previous() aurait dû rediriger vers le contrôleur People");
+        }
+
+        [TestMethod]
         public void ContactsPrevious_doit_rediriger_vers_le_contact_precedant()
         {
             // Arrange
             var controller = new ContactsController(db);
-            var contact1 = InsertCompany("prev1", "9");
-            var contact2 = InsertPerson("prev2", "0");
+            var contact1 = GetOrInsertPerson("prev1", "0");
+            var contact2 = GetOrInsertCompany("prev2", "9");
 
             // Act
             var result = controller.Previous(contact2.Contact_ID) as RedirectToRouteResult;
@@ -163,10 +197,8 @@ namespace Repertoir.Tests.Controllers
         {
             // Arrange
             var controller = new ContactsController(db);
-            var first = db.Contacts.Where(x => x.LastName == "aaaa").FirstOrDefault()
-                        ?? InsertPerson("aaaa", "0");
-            var last = db.Contacts.Where(x => x.CompanyName == "zzzz").FirstOrDefault()
-                        ?? InsertCompany("zzzz", "9");
+            var first = GetOrInsertPerson("aaaa", "0");
+            var last = GetOrInsertCompany("zzzz", "9");
 
             // Act
             var result = controller.Previous(first.Contact_ID) as RedirectToRouteResult;
@@ -202,8 +234,11 @@ namespace Repertoir.Tests.Controllers
             Assert.IsNotNull(model, "Data devrait être du type List<FlatContact>");
         }
 
-        private Contact InsertPerson(string name, string phone)
+        private Contact GetOrInsertPerson(string name, string phone)
         {
+            var get = db.Contacts.Where(x => x.LastName == name && x.Phone1 == phone && x.IsCompany == false).FirstOrDefault();
+            if (get != null) return get;
+
             var person = new ViewPerson
             {
                 LastName = name,
@@ -216,8 +251,11 @@ namespace Repertoir.Tests.Controllers
             return contact;
         }
 
-        private Contact InsertCompany(string name, string phone)
+        private Contact GetOrInsertCompany(string name, string phone)
         {
+            var get = db.Contacts.Where(x => x.CompanyName == name && x.Phone1 == phone && x.IsCompany == true).FirstOrDefault();
+            if (get != null) return get;
+
             var company = new ViewCompany
             {
                 CompanyName = name,
