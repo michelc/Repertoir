@@ -53,7 +53,12 @@ Gestion d'un petit répertoire de contacts pour servir de banc d'essai
 * Rechercher si AntiXSS est nécessaire en plus de AntiForgeryToken : OUI !!!
   * [Securing Your ASP.NET Applications](http://msdn.microsoft.com/en-us/magazine/hh708755.aspx)
   * [ASP.NET MVC security and hacking: Defense-in-depth](https://sites.google.com/site/muazkh/asp-net-mvc-security-and-hacking-defense-in-depth)
-* Ajouter des tests unitaires (en cours...)
+* Compléter les tests unitaires
+  * ListCompanies dans le contrôleur People
+  * Présence de l'attribut ValidateAntiForgeryToken
+  * Models et ViewModels
+* Utiliser AutoMapper pour les ViewModels
+
 
 ### Pour l'application
 
