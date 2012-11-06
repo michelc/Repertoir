@@ -1,33 +1,23 @@
-﻿@model System.String
+﻿@model String
+
 @{
-    var man_attrs = new Dictionary<string, object>();
-    var woman_attrs = new Dictionary<string, object>();
-    var null_attrs = new Dictionary<string, object>();
+    var values = new List<SelectListItem>
+    {
+        new SelectListItem { Text = "Monsieur", Value = "M.", Selected = Model != null && Model == "M." },
+        new SelectListItem { Text = "Madame", Value = "Mme", Selected = Model != null && Model == "Mme" }
+    };
+
+    var is_required = ViewData.ModelMetadata.IsRequired;
+    if (!is_required)
+    {
+        values.Add(new SelectListItem { Text = "(vide)", Value = "", Selected = string.IsNullOrEmpty(Model) });
+    }
 
     var fieldId = ViewData.TemplateInfo.GetFullHtmlFieldId("");
-    man_attrs.Add("id", fieldId + "_Man");
-    woman_attrs.Add("id", fieldId + "_Woman");
-    null_attrs.Add("id", fieldId + "_Null");
-
-    var is_nullable = ViewData.ModelMetadata.IsNullableValueType;
-    var is_required = ViewData.ModelMetadata.IsRequired;
-
-    if (Model == "M.")
-    {
-        man_attrs.Add("checked", "checked");
-    }
-    else if (Model == "Mme")
-    {
-        woman_attrs.Add("checked", "checked");
-    }
-    else if (!is_required)
-    {
-        null_attrs.Add("checked", "checked");
-    }
 }
-@Html.RadioButtonFor(x => x, "M.", man_attrs)<label for="@(fieldId)_Man">Monsieur</label>
-@Html.RadioButtonFor(x => x, "Mme", woman_attrs)<label for="@(fieldId)_Woman">Madame</label>
-@if (!is_required)
+
+@foreach (var v in values)
 {
-    @Html.RadioButtonFor(x => x, "", null_attrs)<label for="@(fieldId)_Null">(vide)</label>
+    @Html.RadioButton("", v.Value, v.Selected, new { @id = @fieldId + "_" + @v.Value })
+    <label for="@(fieldId + "_" + v.Value)">@v.Text</label>
 }
