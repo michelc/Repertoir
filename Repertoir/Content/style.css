@@ -122,6 +122,12 @@ table a.delete
     margin: -3px 0;
 }
 
+table th.iconwidth,
+table td.iconwidth
+{
+    width: 28px;
+}
+
 /* Icones pour gérer la navigation */
 .navigation
 {
