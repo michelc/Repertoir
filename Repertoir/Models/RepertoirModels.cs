@@ -15,7 +15,7 @@ namespace Repertoir.Models
         public int? Company_ID { get; set; }
         [ForeignKey("Company_ID")]
         public virtual Contact Company { get; set; }
-        
+
         // 1 société regroupe plusieurs personnes
         public virtual ICollection<Contact> People { get; set; }
 
@@ -76,6 +76,9 @@ namespace Repertoir.Models
 
         [Column(TypeName = "ntext")]
         public string Notes { get; set; }
+
+        // 1 contact peut avoir plusieurs tags
+        public virtual ICollection<Tag> Tags { get; set; }
     }
 
     public class Tag
@@ -86,6 +89,9 @@ namespace Repertoir.Models
         [Required]
         [StringLength(50)]
         public string Caption { get; set; }
+
+        // 1 tag peut s'appliquer à plusieurs contacts
+        public virtual ICollection<Contact> Contacts { get; set; }
     }
 
     public class RepertoirContext : DbContext
@@ -96,6 +102,28 @@ namespace Repertoir.Models
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<RepertoirContext, Configuration>());
+
+            // Le lien Many-To-Many entre les tables Contacts et Tags (et la table
+            // qui sert à enregistrer cette association) est généré automatiquement
+            // grace à la présence des 2 propriétés suivantes :
+            // * Contact class : public virtual ICollection<Tag> Tags { get; set; }
+            // * Tag class     : public virtual ICollection<Contact> Contacts { get; set; }
+            //
+            // Utilisation de Fluid API pour spécifier
+            // * le nom de la table :
+            //   - Contacts_Tags et pas ContactTags
+            // * le nom des colonnes :
+            //   - Contact_ID et pas Contact_Contact_ID
+            //   - Tag_ID et pas Tag_Tag_ID
+            modelBuilder.Entity<Contact>()
+                .HasMany(contact => contact.Tags)
+                .WithMany(tag => tag.Contacts)
+                .Map(x =>
+                {
+                    x.ToTable("Contacts_Tags");
+                    x.MapLeftKey("Contact_ID");
+                    x.MapRightKey("Tag_ID");
+                });
         }
     }
 
