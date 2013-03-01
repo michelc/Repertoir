@@ -29,6 +29,16 @@
 </div>
 
 <div class="display-label five columns">
+    @Html.LabelFor(model => model.Tags)
+</div>
+<div class="display-field eleven columns">
+    @foreach (var tag in Model.Tags)
+    {
+        <text>[</text>@tag.Caption<text>]</text>
+    }
+</div>
+
+<div class="display-label five columns">
     @Html.LabelFor(model => model.AddressLine1)
 </div>
 <div id="gmaps_address" class="display-field eleven columns">

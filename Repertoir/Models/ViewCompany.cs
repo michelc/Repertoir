@@ -36,7 +36,13 @@ namespace Repertoir.Models
                 Municipality = model.Municipality,
                 Country = model.Country,
                 Notes = model.Notes,
-                People = new List<ContactList>()
+                People = new List<ContactList>(),
+                Tags = (from t in model.Tags
+                        orderby t.Caption
+                        select new ViewTag
+                        {
+                            Caption = t.Caption
+                        }).ToList()
             };
 
             return view_model;

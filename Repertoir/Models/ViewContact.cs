@@ -63,6 +63,6 @@ namespace Repertoir.Models
         [DataType(DataType.MultilineText)]
         public string Notes { get; set; }
 
-        public ICollection<Tag> Tags { get; set; }
+        public ICollection<ViewTag> Tags { get; set; }
     }
 }

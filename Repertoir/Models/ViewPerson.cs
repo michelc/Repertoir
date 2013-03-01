@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Web.Mvc;
 using Repertoir.Helpers;
 
@@ -62,7 +63,13 @@ namespace Repertoir.Models
                 Company_ID = model.Company_ID,
                 CompanySlug = model.Company_ID.HasValue ? model.Company.Slug : null,
                 CompanyName = model.Company_ID.HasValue ? model.Company.CompanyName : null,
-                Companies = null
+                Companies = null,
+                Tags = (from t in model.Tags
+                        orderby t.Caption
+                        select new ViewTag
+                        {
+                            Caption = t.Caption
+                        }).ToList()
             };
 
             return view_model;
