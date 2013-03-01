@@ -63,28 +63,28 @@ namespace Repertoir.Helpers
 
         public static MvcHtmlString ActionCrud(this HtmlHelper helper)
         {
+            var current_controller = helper.ViewContext.RouteData.Values["controller"].ToString().ToLower();
             var current_action = helper.ViewContext.RouteData.Values["action"].ToString().ToLower();
 
             var html = "";
+            var index_title = current_controller == "tags" ? "Tags" : "Contacts";
 
             // Si on n'est pas sur la page Index
             if (current_action != "index")
             {
                 // Alors, il faut un lien vers la page Index
-                html += helper.ActionLink("Contacts", "Index", "Contacts").ToString();
+                html += helper.ActionLink(index_title, "Index", "Contacts").ToString();
             }
             else
             {
                 // Sinon, il n'y a pas besoin d'un lien vers la page Index
-                html += "Contacts";
+                html += index_title;
             }
 
-            // Si on n'est pas sur la page Create
+            // Si on n'est pas sur la page Create, alors il faut faire un lien vers la page Create
             html += " / ";
             if (current_action != "create")
             {
-                // Alors, il faut un lien vers la page Create
-                var current_controller = helper.ViewContext.RouteData.Values["controller"].ToString().ToLower();
                 // Si on est sur l'index des contacts
                 if (current_controller == "contacts")
                 {
@@ -123,7 +123,14 @@ namespace Repertoir.Helpers
                     if (current_action != action.Key)
                     {
                         // Alors, il faut un lien vers la page Action
-                        html += helper.ActionLink(action.Value, action.Key, new { id = id.ToString(), slug = slug.ToString() }).ToString();
+                        if (slug != null)
+                        {
+                            html += helper.ActionLink(action.Value, action.Key, new { id = id.ToString(), slug = slug.ToString() }).ToString();
+                        }
+                        else
+                        {
+                            html += helper.ActionLink(action.Value, action.Key, new { id }).ToString();
+                        }
                     }
                     else
                     {

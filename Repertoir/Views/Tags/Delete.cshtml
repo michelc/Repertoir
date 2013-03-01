@@ -1,0 +1,29 @@
+﻿@model Repertoir.Models.ViewTag
+
+@{
+    ViewBag.Title = "Supprimer un tag";
+}
+
+<h2 class="crud">
+    @Html.ActionCrud()
+</h2>
+
+<fieldset class="sixteen columns">
+    <legend>@ViewBag.Title</legend>
+
+    <div class="display-label five columns">
+        @Html.LabelFor(model => model.Caption)
+    </div>
+    <div class="display-field eleven columns">
+        @Html.DisplayFor(model => model.Caption)
+    </div>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <p class="offset-by-five eleven columns alpha">
+            <input type="submit" value="Ok pour supprimer !" />
+            @Html.ActionLink("Annuler", "Index", null, new { @class = "cancel" })
+        </p>
+    }
+</fieldset>

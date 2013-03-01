@@ -1,0 +1,35 @@
+﻿@model Repertoir.Models.ViewTag
+
+@{
+    ViewBag.Title = "Créer un tag";
+}
+
+<h2 class="crud">
+    @Html.ActionCrud()
+</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <fieldset class="sixteen columns">
+        <legend>@ViewBag.Title</legend>
+
+        <div class="editor-label five columns">
+            @Html.CaptionFor(model => model.Caption)
+        </div>
+        <div class="editor-field eleven columns">
+            @Html.EditorFor(model => model.Caption)
+            @Html.ValidationMessageFor(model => model.Caption)
+        </div>
+
+        <p class="offset-by-five eleven columns alpha">
+            <input type="submit" value="Enregistrer" />
+            @Html.ActionLink("Annuler", "Index", null, new { @class = "cancel" })
+        </p>
+    </fieldset>
+}
+
+@section JavaScript
+{
+    @Html.Partial("_FormScripts")
+}

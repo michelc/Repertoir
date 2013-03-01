@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Repertoir.Models.ViewTag>
+
+@{
+    ViewBag.Title = "Tous les tags";
+}
+
+<h2 class="crud">
+    @Html.ActionCrud()
+</h2>
+
+<table>
+<thead>
+    <tr>
+        <th class="iconwidth"></th>
+        <th>
+            @Html.LabelFor(model => model.First().Caption)
+        </th>
+        <th class="iconwidth"></th>
+    </tr>
+</thead>
+<tbody>
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink("Modifier", "Edit", "Tags", new { id = item.Tag_ID }, new { @class = "edit" })
+        </td>
+        <td>
+            @Html.DisplayFor(model => item.Caption)
+        </td>
+        <td>
+            @Html.ActionLink("Supprimer", "Delete", "Tags", new { id = item.Tag_ID }, new { @class = "delete" })
+        </td>
+    </tr>
+}
+</tbody>
+</table>

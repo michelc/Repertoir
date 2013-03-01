@@ -78,9 +78,20 @@ namespace Repertoir.Models
         public string Notes { get; set; }
     }
 
+    public class Tag
+    {
+        [Key]
+        public int Tag_ID { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        public string Caption { get; set; }
+    }
+
     public class RepertoirContext : DbContext
     {
         public DbSet<Contact> Contacts { get; set; }
+        public DbSet<Tag> Tags { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

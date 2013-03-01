@@ -63,6 +63,7 @@
   <ItemGroup>
     <Compile Include="Controllers\CompaniesControllerTest.cs" />
     <Compile Include="Controllers\ContactsControllerTest.cs" />
+    <Compile Include="Controllers\TagsControllerTest.cs" />
     <Compile Include="Controllers\PeopleControllerTest.cs" />
     <Compile Include="Helpers\BinderHelperTest.cs">
       <SubType>Code</SubType>
