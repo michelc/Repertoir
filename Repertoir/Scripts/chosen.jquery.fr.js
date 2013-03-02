@@ -1,6 +1,6 @@
 // Chosen, a Select Box Enhancer for jQuery and Protoype
 // by Patrick Filler for Harvest, http://getharvest.com
-// 
+//
 // Version 0.9.11
 // Full source at https://github.com/harvesthq/chosen
 // Copyright (c) 2011 Harvest http://getharvest.com
@@ -840,11 +840,25 @@ Copyright (c) 2011 by Harvest
       }
     };
 
+    // Define the String.unaccentize() method
+    // (Replace "accented" characters in a string with their equivalent English character)
+    String.prototype.unaccentize = function() {
+      if (!this) return this;
+      return this.replace(/[áàäâÁÀÄÂ]/g, "a")
+                 .replace(/[éèëêÉÈËÊ]/g, "e")
+                 .replace(/[íìïîÍÌÏÎ]/g, "i")
+                 .replace(/[óòöôÓÒÖÔ]/g, "o")
+                 .replace(/[úùüûÚÙÜÛ]/g, "u")
+                 .replace(/[ÿŸ]/g, "y")
+                 .replace(/[çÇ]/g, "c");
+    };
+
     Chosen.prototype.winnow_results = function() {
       var found, option, part, parts, regex, regexAnchor, result, result_id, results, searchText, startpos, text, zregex, _i, _j, _len, _len1, _ref;
       this.no_results_clear();
       results = 0;
       searchText = this.search_field.val() === this.default_text ? "" : $('<div/>').text($.trim(this.search_field.val())).html();
+      searchText = searchText.unaccentize();
       regexAnchor = this.search_contains ? "" : "^";
       regex = new RegExp(regexAnchor + searchText.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&"), 'i');
       zregex = new RegExp(searchText.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&"), 'i');
@@ -858,7 +872,7 @@ Copyright (c) 2011 by Harvest
             found = false;
             result_id = option.dom_id;
             result = $("#" + result_id);
-            if (regex.test(option.html)) {
+            if (regex.test(option.html.unaccentize())) {
               found = true;
               results += 1;
             } else if (this.enable_split_word_search && (option.html.indexOf(" ") >= 0 || option.html.indexOf("[") === 0)) {
@@ -866,7 +880,7 @@ Copyright (c) 2011 by Harvest
               if (parts.length) {
                 for (_j = 0, _len1 = parts.length; _j < _len1; _j++) {
                   part = parts[_j];
-                  if (regex.test(part)) {
+                  if (regex.test(part.unaccentize())) {
                     found = true;
                     results += 1;
                   }
@@ -875,7 +889,7 @@ Copyright (c) 2011 by Harvest
             }
             if (found) {
               if (searchText.length) {
-                startpos = option.html.search(zregex);
+                startpos = option.html.unaccentize().search(zregex);
                 text = option.html.substr(0, startpos + searchText.length) + '</em>' + option.html.substr(startpos + searchText.length);
                 text = text.substr(0, startpos) + '<em>' + text.substr(startpos);
               } else {
