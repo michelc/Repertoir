@@ -272,7 +272,8 @@ textarea
     padding: 4px;
     margin: 2px;
 }
-.editor-field .chzn-container-multi .chzn-choices
+.editor-field .chzn-container-multi .chzn-choices,
+.editor-field .chzn-container-single a.chzn-single
 {
     background-color: #fff;
     border: 1px dotted #85b1de;
@@ -283,7 +284,9 @@ textarea
     outline: 0;
 }
 .editor-field .chzn-container-multi .chzn-choices,
-.editor-field .chzn-container-multi .chzn-drop
+.editor-field .chzn-container-multi .chzn-drop,
+.editor-field .chzn-container-single a.chzn-single,
+.editor-field .chzn-container-single .chzn-drop,
 {
     margin-left: 2px;
 }

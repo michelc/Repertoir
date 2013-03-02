@@ -37,9 +37,13 @@
             SetConfirmUnload(false);
         });
 
-        /* Utilise le plugin select2 pour la saisie des tags */
-        /* ------------------------------------------------- */
+        /* Utilise le plugin chosen pour la saisie des tags */
+        /* ------------------------------------------------ */
         $("select#Tags_IDs").chosen({ search_contains: true })
+
+        /* Utilise le plugin chosen pour la saisie des sociétés */
+        /* ---------------------------------------------------- */
+        $("select#Company_ID").chosen({ search_contains: true })
 
     });
 
