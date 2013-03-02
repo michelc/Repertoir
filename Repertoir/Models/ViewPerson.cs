@@ -105,6 +105,7 @@ namespace Repertoir.Models
             model.Notes = view_model.Notes;
             model.Company_ID = view_model.Company_ID;
             model.CompanyName = null;
+
             return model;
         }
     }

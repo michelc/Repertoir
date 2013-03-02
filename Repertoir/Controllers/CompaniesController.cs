@@ -60,9 +60,12 @@ namespace Repertoir.Controllers
             {
                 var contact = new Contact();
                 contact.Update_With_ViewCompany(company);
-                contact.Tags = (from t in db.Tags
-                                where company.Tags_IDs.Contains(t.Tag_ID)
-                                select t).ToList();
+                if (company.Tags_IDs != null)
+                {
+                    contact.Tags = (from t in db.Tags
+                                    where company.Tags_IDs.Contains(t.Tag_ID)
+                                    select t).ToList();
+                }
                 db.Contacts.Add(contact);
                 db.SaveChanges();
 
@@ -96,10 +99,13 @@ namespace Repertoir.Controllers
             {
                 var contact = db.Contacts.Find(company.Contact_ID);
                 contact.Update_With_ViewCompany(company);
-                contact.Tags.Clear();
-                contact.Tags = (from t in db.Tags
-                                where company.Tags_IDs.Contains(t.Tag_ID)
-                                select t).ToList();
+                if (contact.Tags != null) contact.Tags.Clear();
+                if (company.Tags_IDs != null)
+                {
+                    contact.Tags = (from t in db.Tags
+                                    where company.Tags_IDs.Contains(t.Tag_ID)
+                                    select t).ToList();
+                }
                 db.Entry(contact).State = EntityState.Modified;
                 db.SaveChanges();
 
