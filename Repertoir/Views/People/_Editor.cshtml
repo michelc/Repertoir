@@ -84,7 +84,7 @@
     @Html.LabelFor(model => model.Tags)
 </div>
 <div class="editor-field eleven columns">
-    @Html.ListBox("Tags_IDs", Model.AvailableTags)
+    @Html.ListBox("Tags_IDs", Model.AvailableTags, new { @class = "inputbig" })
 </div>
 
 <div class="editor-label five columns">

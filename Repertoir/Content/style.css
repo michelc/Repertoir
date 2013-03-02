@@ -282,6 +282,11 @@ textarea
     letter-spacing: 1px;
     outline: 0;
 }
+.editor-field .chzn-container-multi .chzn-choices,
+.editor-field .chzn-container-multi .chzn-drop
+{
+    margin-left: 2px;
+}
 
 /* Mise en évidence des labels associés aux zones de saisie obligatoires */
 label.is_required
@@ -330,6 +335,16 @@ textarea:focus
     margin: 5px 0;
     min-height: 2.1em;
     padding: 4px 4px;
+}
+
+/* Mise en forme du rendu des tags en mode affichage */
+.display-tags span
+{
+    background-color: #ddd;
+    border: 2px solid #fafafa;
+    display: inline-block;
+    letter-spacing: 0;
+    padding: 1px 4px;
 }
 
 /* Mise en forme du rendu des zones multilignes en mode affichage */
@@ -390,17 +405,17 @@ textarea
     height: 7em;
 }
 
-input[type="text"].inputshort
+.inputshort
 {
-    width: 100px;
+    width: 100px !important;
 }
-input[type="text"].inputmedium
+.inputmedium
 {
-    width: 400px;
+    width: 400px !important;
 }
-input[type="text"].inputbig
+.inputbig
 {
-    width: 600px;
+    width: 600px !important;
 }
 
 
@@ -419,7 +434,11 @@ input[type="text"].inputbig
     input[type="text"],
     input[type="url"],
     select,
-    textarea
+    .editor-field .chzn-container-active .chzn-choices,
+    .editor-field .chzn-container-active .chzn-drop,
+    textarea,
+    .inputmedium,
+    .inputbig
     {
         width: 96% !important;
     }
@@ -480,6 +499,11 @@ input[type="text"].inputbig
     {
         height: 10px;
     }
+    
+    .crud
+    {
+        font-size: small;
+    }    
 }
 
 
@@ -509,6 +533,12 @@ input[type="text"].inputbig
 
 /* #Styles spécifiques pour Repertoir
 ================================================== */
+
+/* Alterne la couleur de fond des contacts dans la liste */
+section > .list_contact:nth-child(even)
+{
+    background-color: #f9f9f9; /* idem Twitter Bootstrap */
+}
 
 /* Ajoute un effet lors du survol d'un contact dans la liste */
 .list_contact:hover
