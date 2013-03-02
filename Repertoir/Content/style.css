@@ -272,6 +272,16 @@ textarea
     padding: 4px;
     margin: 2px;
 }
+.editor-field .chzn-container-multi .chzn-choices
+{
+    background-color: #fff;
+    border: 1px dotted #85b1de;
+    color: #000;
+    font-family: Arial, "Liberation Sans", FreeSans, sans-serif;
+    font-size: 110%;
+    letter-spacing: 1px;
+    outline: 0;
+}
 
 /* Mise en évidence des labels associés aux zones de saisie obligatoires */
 label.is_required
@@ -292,6 +302,8 @@ input[type="phone"]:focus,
 input[type="text"]:focus,
 input[type="url"]:focus,
 select:focus,
+.editor-field .chzn-container-active .chzn-choices,
+.editor-field .chzn-container-active .chzn-drop,
 textarea:focus
 {
     /* box-shadow: #08f 0 0 7px; */

@@ -10,8 +10,8 @@
         document.write(unescape("%3Cscript src='@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")'%3E%3C/script%3E"));
     }
 </script>
-<script src='@Url.Content("~/Scripts/select2.js")'></script>
-<link rel="stylesheet" href="@Url.Content("~/Content/select2/select2.css")">
+<script src='@Url.Content("~/Scripts/chosen.jquery.min.js")'></script>
+<link rel="stylesheet" href="@Url.Content("~/Content/chosen/chosen.css")">
 <script>
     $(document).ready(function () {
 
@@ -39,7 +39,7 @@
 
         /* Utilise le plugin select2 pour la saisie des tags */
         /* ------------------------------------------------- */
-        $("select#Tags_IDs").select2({ width: '300px' });
+        $("select#Tags_IDs").chosen({ search_contains: true })
 
     });
 
