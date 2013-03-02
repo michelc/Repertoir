@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web.Mvc;
 using Repertoir.Helpers;
@@ -48,6 +49,7 @@ namespace Repertoir.Controllers
             }
             var person = contact.To_ViewPerson();
 
+            person.AvailableTags = ListTags(person.Tags_IDs);
             person.Companies = ListCompanies(person.Company_ID);
             return View(person);
         }
@@ -62,6 +64,9 @@ namespace Repertoir.Controllers
             {
                 var contact = new Contact();
                 contact.Update_With_ViewPerson(person);
+                contact.Tags = (from t in db.Tags
+                                where person.Tags_IDs.Contains(t.Tag_ID)
+                                select t).ToList();
                 db.Contacts.Add(contact);
                 db.SaveChanges();
 
@@ -69,6 +74,7 @@ namespace Repertoir.Controllers
                 return RedirectToAction("Details", new { id = contact.Contact_ID, slug = contact.Slug });
             }
 
+            person.AvailableTags = ListTags(person.Tags_IDs);
             person.Companies = ListCompanies(person.Company_ID);
             return View(person);
         }
@@ -81,6 +87,7 @@ namespace Repertoir.Controllers
             var contact = db.Contacts.Find(id);
             var person = contact.To_ViewPerson();
 
+            person.AvailableTags = ListTags(person.Tags_IDs);
             person.Companies = ListCompanies(person.Company_ID);
             return View(person);
         }
@@ -95,6 +102,10 @@ namespace Repertoir.Controllers
             {
                 var contact = db.Contacts.Find(person.Contact_ID);
                 contact.Update_With_ViewPerson(person);
+                contact.Tags.Clear();
+                contact.Tags = (from t in db.Tags
+                                where person.Tags_IDs.Contains(t.Tag_ID)
+                                select t).ToList();
                 db.Entry(contact).State = EntityState.Modified;
                 db.SaveChanges();
 
@@ -102,6 +113,7 @@ namespace Repertoir.Controllers
                 return RedirectToAction("Details", new { id = contact.Contact_ID, slug = contact.Slug });
             }
 
+            person.AvailableTags = ListTags(person.Tags_IDs);
             person.Companies = ListCompanies(person.Company_ID);
             return View(person);
         }
@@ -134,6 +146,11 @@ namespace Repertoir.Controllers
         protected SelectList ListCompanies(int? Company_ID)
         {
             return new SelectList(db.Contacts.Where(x => x.IsCompany == true).OrderBy(x => x.DisplayName), "Contact_ID", "DisplayName", Company_ID);
+        }
+
+        protected MultiSelectList ListTags(ICollection<int> tags_ids)
+        {
+            return new MultiSelectList(db.Tags.OrderBy(x => x.Caption), "Tag_ID", "Caption", tags_ids);
         }
 
         protected override void Dispose(bool disposing)

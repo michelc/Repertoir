@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Web.Mvc;
 
 namespace Repertoir.Models
 {
@@ -64,5 +65,7 @@ namespace Repertoir.Models
         public string Notes { get; set; }
 
         public ICollection<ViewTag> Tags { get; set; }
+        public ICollection<int> Tags_IDs { get; set; }
+        public MultiSelectList AvailableTags { get; set; }
     }
 }

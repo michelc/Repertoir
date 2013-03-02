@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web.Mvc;
 using Repertoir.Helpers;
@@ -64,13 +65,19 @@ namespace Repertoir.Models
                 CompanySlug = model.Company_ID.HasValue ? model.Company.Slug : null,
                 CompanyName = model.Company_ID.HasValue ? model.Company.CompanyName : null,
                 Companies = null,
-                Tags = (from t in model.Tags
-                        orderby t.Caption
-                        select new ViewTag
-                        {
-                            Caption = t.Caption
-                        }).ToList()
+                Tags = new Collection<ViewTag>()
             };
+            if (model.Tags != null)
+            {
+                view_model.Tags = (from t in model.Tags
+                                   orderby t.Caption
+                                   select new ViewTag
+                                   {
+                                       Caption = t.Caption,
+                                       Tag_ID = t.Tag_ID
+                                   }).ToList<ViewTag>();
+            }
+            view_model.Tags_IDs = (from t in view_model.Tags select t.Tag_ID).ToList();
 
             return view_model;
         }

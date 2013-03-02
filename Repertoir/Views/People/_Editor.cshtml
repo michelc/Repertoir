@@ -81,6 +81,13 @@
 </div>
 
 <div class="editor-label five columns">
+    @Html.LabelFor(model => model.Tags)
+</div>
+<div class="editor-field eleven columns">
+    @Html.ListBox("Tags_IDs", Model.AvailableTags)
+</div>
+
+<div class="editor-label five columns">
     @Html.CaptionFor(model => model.Notes)
 </div>
 <div class="editor-field eleven columns">
