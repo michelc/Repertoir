@@ -130,6 +130,10 @@
     <Content Include="Content\icons\home_48.png" />
     <Content Include="Content\icons\male_user.png" />
     <Content Include="Content\icons\male_user_48.png" />
+    <Content Include="Content\select2\select2-spinner.gif" />
+    <Content Include="Content\select2\select2.css" />
+    <Content Include="Content\select2\select2.png" />
+    <Content Include="Content\select2\select2x2.png" />
     <Content Include="Content\skeleton\javascripts\tabs.js" />
     <Content Include="Content\skeleton\stylesheets\base.css" />
     <Content Include="Content\skeleton\stylesheets\layout.css" />
@@ -211,6 +215,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\sample_db.js" />
+    <Content Include="Scripts\select2.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
