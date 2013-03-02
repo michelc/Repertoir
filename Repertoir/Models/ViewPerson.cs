@@ -1,4 +1,4 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web.Mvc;
@@ -65,7 +65,7 @@ namespace Repertoir.Models
                 CompanySlug = model.Company_ID.HasValue ? model.Company.Slug : null,
                 CompanyName = model.Company_ID.HasValue ? model.Company.CompanyName : null,
                 Companies = null,
-                Tags = new Collection<ViewTag>()
+                Tags = new List<ViewTag>()
             };
             if (model.Tags != null)
             {
@@ -75,7 +75,7 @@ namespace Repertoir.Models
                                    {
                                        Caption = t.Caption,
                                        Tag_ID = t.Tag_ID
-                                   }).ToList<ViewTag>();
+                                   }).ToList();
             }
             view_model.Tags_IDs = (from t in view_model.Tags select t.Tag_ID).ToList();
 

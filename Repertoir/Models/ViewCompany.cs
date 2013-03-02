@@ -37,13 +37,19 @@ namespace Repertoir.Models
                 Country = model.Country,
                 Notes = model.Notes,
                 People = new List<ContactList>(),
-                Tags = (from t in model.Tags
-                        orderby t.Caption
-                        select new ViewTag
-                        {
-                            Caption = t.Caption
-                        }).ToList()
+                Tags = new List<ViewTag>()
             };
+            if (model.Tags != null)
+            {
+                view_model.Tags = (from t in model.Tags
+                                   orderby t.Caption
+                                   select new ViewTag
+                                   {
+                                       Caption = t.Caption,
+                                       Tag_ID = t.Tag_ID
+                                   }).ToList();
+            }
+            view_model.Tags_IDs = (from t in view_model.Tags select t.Tag_ID).ToList();
 
             return view_model;
         }

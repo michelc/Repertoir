@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web.Mvc;
 using Repertoir.Helpers;
@@ -45,6 +46,7 @@ namespace Repertoir.Controllers
             var contact = new Contact();
             var company = contact.To_ViewCompany();
 
+            company.AvailableTags = ListTags(company.Tags_IDs);
             return View(company);
         }
 
@@ -58,6 +60,9 @@ namespace Repertoir.Controllers
             {
                 var contact = new Contact();
                 contact.Update_With_ViewCompany(company);
+                contact.Tags = (from t in db.Tags
+                                where company.Tags_IDs.Contains(t.Tag_ID)
+                                select t).ToList();
                 db.Contacts.Add(contact);
                 db.SaveChanges();
 
@@ -65,6 +70,7 @@ namespace Repertoir.Controllers
                 return RedirectToAction("Details", new { id = contact.Contact_ID, slug = contact.Slug });
             }
 
+            company.AvailableTags = ListTags(company.Tags_IDs);
             return View(company);
         }
 
@@ -76,6 +82,7 @@ namespace Repertoir.Controllers
             var contact = db.Contacts.Find(id);
             var company = contact.To_ViewCompany();
 
+            company.AvailableTags = ListTags(company.Tags_IDs);
             return View(company);
         }
 
@@ -89,6 +96,10 @@ namespace Repertoir.Controllers
             {
                 var contact = db.Contacts.Find(company.Contact_ID);
                 contact.Update_With_ViewCompany(company);
+                contact.Tags.Clear();
+                contact.Tags = (from t in db.Tags
+                                where company.Tags_IDs.Contains(t.Tag_ID)
+                                select t).ToList();
                 db.Entry(contact).State = EntityState.Modified;
                 db.SaveChanges();
 
@@ -96,6 +107,7 @@ namespace Repertoir.Controllers
                 return RedirectToAction("Details", new { id = contact.Contact_ID, slug = contact.Slug });
             }
 
+            company.AvailableTags = ListTags(company.Tags_IDs);
             return View(company);
         }
 
@@ -122,6 +134,11 @@ namespace Repertoir.Controllers
 
             this.Flash(string.Format("La fiche de {0} a été supprimée", contact.DisplayName));
             return RedirectToAction("Index", "Contacts");
+        }
+
+        protected MultiSelectList ListTags(ICollection<int> tags_ids)
+        {
+            return new MultiSelectList(db.Tags.OrderBy(x => x.Caption), "Tag_ID", "Caption", tags_ids);
         }
 
         protected override void Dispose(bool disposing)
