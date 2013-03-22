@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
+using AutoMapper;
 using Repertoir.Helpers;
 using Repertoir.Models;
 
@@ -93,32 +94,10 @@ namespace Repertoir.Controllers
 
         public JsonResult Export()
         {
-            var contacts = (from c in db.Contacts
-                            orderby c.IsCompany descending, c.DisplayName ascending
-                            select new FlatContact
-                            {
-                                Slug = c.Slug,
-                                DisplayName = c.DisplayName,
-                                IsCompany = c.IsCompany,
-                                CompanyName = c.Company_ID.HasValue ? c.Company.CompanyName : c.CompanyName,
-                                Civility = c.Civility,
-                                LastName = c.LastName,
-                                FirstName = c.FirstName,
-                                Title = c.Title,
-                                Phone1 = c.Phone1,
-                                Phone2 = c.Phone2,
-                                Fax = c.Fax,
-                                Email = c.Email,
-                                Url = c.Url,
-                                AddressLine1 = c.AddressLine1,
-                                AddressLine2 = c.AddressLine2,
-                                PostalCode = c.PostalCode,
-                                Municipality = c.Municipality,
-                                Country = c.Country,
-                                Notes = c.Notes
-                            }).ToList();
+            var contacts = db.Contacts.OrderByDescending(c => c.IsCompany).ThenBy(c => c.DisplayName);
+            var model = Mapper.Map<IList<FlatContact>>(contacts);
 
-            return Json(contacts, "application/json", JsonRequestBehavior.AllowGet);
+            return Json(model, "application/json", JsonRequestBehavior.AllowGet);
         }
 
         //

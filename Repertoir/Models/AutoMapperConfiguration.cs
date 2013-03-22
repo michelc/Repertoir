@@ -47,6 +47,13 @@ namespace Repertoir.Models
                                                            : "// " + contact.PostalCode + " " + contact.Municipality)
                             );
 
+            Mapper.CreateMap<Contact, FlatContact>()
+                  .ForMember(
+                             flat => flat.CompanyName,
+                             opt => opt.MapFrom(contact => contact.Company_ID.HasValue
+                                                           ? contact.CompanyName
+                                                           : contact.CompanyName)
+                            );
         }
     }
 }
