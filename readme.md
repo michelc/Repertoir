@@ -12,6 +12,7 @@ Gestion d'un petit répertoire de contacts pour servir de banc d'essai
 * Entity Migration : en vue d'un déploiement sur AppHarbor
 * MiniProfiler : pour connaitre le code SQL généré par EF
 * LowercaseMVC : pour avoir des URLs en minuscule
+* AutoMapper : pour passer des classes Model à ViewModel
 * Déploiement sur AppHarbor
 
 ### Charte graphique
@@ -44,6 +45,7 @@ Gestion d'un petit répertoire de contacts pour servir de banc d'essai
 * Création d'un helper HtmlCrud() pour afficher un menu des actions CRUD
 * Utilisation du CDN Microsoft pour les fichiers jQuery
 * Affichage d'une carte Google Maps pour localiser les contacts
+* Gestion de tags (tables Tags et Contacts_Tags plus saisie via Chosen)
 
 
 ## Idées et Todo
@@ -57,11 +59,10 @@ Gestion d'un petit répertoire de contacts pour servir de banc d'essai
   * ListCompanies dans le contrôleur People
   * Présence de l'attribut ValidateAntiForgeryToken
   * Models et ViewModels
-* Utiliser AutoMapper pour les ViewModels
 
 
 ### Pour l'application
 
 * Détail d'une personne => afficher le détail de sa société
-* Gérer des tags, notes, liens, pièces jointes ... sur les contacts
+* Gérer notes, liens, pièces jointes ... sur les contacts
 * Gérer les doublons
