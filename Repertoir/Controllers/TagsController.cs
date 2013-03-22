@@ -1,6 +1,8 @@
-﻿using System.Data;
+﻿using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web.Mvc;
+using AutoMapper;
 using Repertoir.Helpers;
 using Repertoir.Models;
 
@@ -18,15 +20,10 @@ namespace Repertoir.Controllers
 
         public ViewResult Index()
         {
-            var tags = (from t in db.Tags
-                        orderby t.Caption
-                        select new ViewTag
-                        {
-                            Tag_ID = t.Tag_ID,
-                            Caption = t.Caption
-                        }).ToList();
+            var tags = db.Tags.OrderBy(t => t.Caption);
+            var model = Mapper.Map<IList<ViewTag>>(tags);
 
-            return View(tags);
+            return View(model);
         }
 
         //
@@ -65,11 +62,7 @@ namespace Repertoir.Controllers
         public ViewResult Edit(int id)
         {
             var tag = db.Tags.Find(id);
-            var model = new ViewTag
-            {
-                Tag_ID = tag.Tag_ID,
-                Caption = tag.Caption
-            };
+            var model = Mapper.Map<ViewTag>(tag);
 
             return View(model);
         }
@@ -100,11 +93,7 @@ namespace Repertoir.Controllers
         public ViewResult Delete(int id)
         {
             var tag = db.Tags.Find(id);
-            var model = new ViewTag
-            {
-                Tag_ID = tag.Tag_ID,
-                Caption = tag.Caption
-            };
+            var model = Mapper.Map<ViewTag>(tag);
 
             return View(model);
         }

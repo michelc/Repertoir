@@ -111,6 +111,7 @@
     <Compile Include="Helpers\HtmlHelper.cs" />
     <Compile Include="Helpers\StringHelper.cs" />
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\AutoMapperConfiguration.cs" />
     <Compile Include="Models\FlatContact.cs" />
     <Compile Include="Models\RepertoirModels.cs" />
     <Compile Include="Models\RepertoirViewModels.cs" />

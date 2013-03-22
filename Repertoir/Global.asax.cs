@@ -3,6 +3,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using LowercaseRoutesMVC;
 using Repertoir.Helpers;
+using Repertoir.Models;
 using StackExchange.Profiling;
 
 namespace Repertoir
@@ -46,6 +47,8 @@ namespace Repertoir
 
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
+
+            AutoMapperConfiguration.Configure();
 
             MiniProfilerEF.Initialize(true);
         }

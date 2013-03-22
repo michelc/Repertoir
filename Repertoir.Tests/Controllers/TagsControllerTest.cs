@@ -18,6 +18,7 @@ namespace Repertoir.Tests.Controllers
         {
             Database.SetInitializer<RepertoirContext>(new DropCreateDatabaseAlways<RepertoirContext>());
             db = new RepertoirContext();
+            AutoMapperConfiguration.Configure();
         }
 
         [TestMethod]
