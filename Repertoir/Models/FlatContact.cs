@@ -27,34 +27,6 @@ namespace Repertoir.Models
 
     public static class FlatContactExtensions
     {
-        public static FlatContact To_FlatContact(this Contact model)
-        {
-            var view_model = new FlatContact
-            {
-                Slug = model.Slug,
-                DisplayName = model.DisplayName,
-                IsCompany = model.IsCompany,
-                CompanyName = model.Company_ID.HasValue ? model.Company.CompanyName : model.CompanyName,
-                Civility = model.Civility,
-                LastName = model.LastName,
-                FirstName = model.FirstName,
-                Title = model.Title,
-                Phone1 = model.Phone1,
-                Phone2 = model.Phone2,
-                Fax = model.Fax,
-                Email = model.Email,
-                Url = model.Url,
-                AddressLine1 = model.AddressLine1,
-                AddressLine2 = model.AddressLine2,
-                PostalCode = model.PostalCode,
-                Municipality = model.Municipality,
-                Country = model.Country,
-                Notes = model.Notes
-            };
-
-            return view_model;
-        }
-
         public static Contact Update_With_FlatContact(this Contact model, FlatContact view_model)
         {
             model.DisplayName = view_model.DisplayName;
