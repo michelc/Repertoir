@@ -19,7 +19,7 @@ namespace Repertoir.Controllers
 
         public ViewResult Index()
         {
-            var contacts = db.Contacts.To_ContactList();
+            var contacts = db.Contacts.List();
 
             return View(contacts);
         }
@@ -29,7 +29,7 @@ namespace Repertoir.Controllers
 
         public ViewResult Table()
         {
-            var contacts = db.Contacts.To_ContactList();
+            var contacts = db.Contacts.List();
 
             return View(contacts);
         }

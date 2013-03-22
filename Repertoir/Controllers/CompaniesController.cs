@@ -23,7 +23,7 @@ namespace Repertoir.Controllers
             var contact = db.Contacts.Find(id);
             var company = Mapper.Map<ViewCompany>(contact);
 
-            company.People = db.Contacts.Where(person => person.Company_ID == id).To_ContactList();
+            company.People = db.Contacts.List(id);
             return View(company);
         }
 
@@ -35,7 +35,7 @@ namespace Repertoir.Controllers
             var contact = db.Contacts.Find(id);
             var company = Mapper.Map<ViewCompany>(contact);
 
-            company.People = db.Contacts.Where(person => person.Company_ID == id).To_ContactList();
+            company.People = db.Contacts.List(id);
             return View("Details", company);
         }
 

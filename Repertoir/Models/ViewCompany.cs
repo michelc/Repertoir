@@ -53,11 +53,16 @@ namespace Repertoir.Models
             return model;
         }
 
-        public static ICollection<ContactList> To_ContactList(this IQueryable<Contact> model)
+        public static IList<ContactList> List(this IQueryable<Contact> model, int Parent_ID = 0)
         {
+            // Tous les contacts ou uniquement ceux de la société en cours
+            var query = Parent_ID == 0
+                        ? model
+                        : model.Where(contact => contact.Company_ID == Parent_ID);
+
             // Tri et sélection des colonnes nécessaires uniquement
             // (dans une liste d'objets anonymes car "select new Contact" n'est pas possible)
-            var list = (from c in model
+            var list = (from c in query
                         orderby c.DisplayName
                         select new
                         {
@@ -80,7 +85,7 @@ namespace Repertoir.Models
             // abrégeable en list.Select(Mapper.DynamicMap<Contact>).ToList();
 
             // Renvoie une liste d'objets ViewModel
-            return Mapper.Map<ICollection<ContactList>>(contacts);
+            return Mapper.Map<IList<ContactList>>(contacts);
         }
     }
 }
