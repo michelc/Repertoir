@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using System.Collections.Generic;
 
 namespace Repertoir.Models
 {
@@ -23,6 +24,16 @@ namespace Repertoir.Models
                             );
 
             Mapper.CreateMap<Tag, int>().ConvertUsing(tag => tag.Tag_ID);
+
+            Mapper.CreateMap<Contact, ViewCompany>()
+                  .ForMember(
+                             company => company.Tags_IDs,
+                             opt => opt.MapFrom(contact => contact.Tags)
+                            )
+                  .ForMember(
+                             company => company.People,
+                             opt => opt.UseValue(new List<ContactList>())
+                            );
         }
     }
 }
