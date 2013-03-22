@@ -2,6 +2,7 @@
 using System.Data;
 using System.Linq;
 using System.Web.Mvc;
+using AutoMapper;
 using Repertoir.Helpers;
 using Repertoir.Models; 
 
@@ -20,7 +21,7 @@ namespace Repertoir.Controllers
         public ViewResult Details(int id)
         {
             var contact = db.Contacts.Find(id);
-            var person = contact.To_ViewPerson();
+            var person = Mapper.Map<ViewPerson>(contact);
 
             return View(person);
         }
@@ -31,7 +32,7 @@ namespace Repertoir.Controllers
         public ViewResult Display(int id)
         {
             var contact = db.Contacts.Find(id);
-            var person = contact.To_ViewPerson();
+            var person = Mapper.Map<ViewPerson>(contact);
 
             return View(person);
         }
@@ -47,7 +48,7 @@ namespace Repertoir.Controllers
                 contact.Company_ID = ParentID;
                 contact.Company = db.Contacts.Find(ParentID);
             }
-            var person = contact.To_ViewPerson();
+            var person = Mapper.Map<ViewPerson>(contact);
 
             person.AvailableTags = ListTags(person.Tags_IDs);
             person.Companies = ListCompanies(person.Company_ID);
@@ -88,7 +89,7 @@ namespace Repertoir.Controllers
         public ViewResult Edit(int id)
         {
             var contact = db.Contacts.Find(id);
-            var person = contact.To_ViewPerson();
+            var person = Mapper.Map<ViewPerson>(contact);
 
             person.AvailableTags = ListTags(person.Tags_IDs);
             person.Companies = ListCompanies(person.Company_ID);
@@ -130,7 +131,7 @@ namespace Repertoir.Controllers
         public ViewResult Delete(int id)
         {
             var contact = db.Contacts.Find(id);
-            var person = contact.To_ViewPerson();
+            var person = Mapper.Map<ViewPerson>(contact);
 
             return View(person);
         }
@@ -149,14 +150,14 @@ namespace Repertoir.Controllers
             return RedirectToAction("Index", "Contacts");
         }
 
-        protected SelectList ListCompanies(int? Company_ID)
+        protected SelectList ListCompanies(int? Selected_ID)
         {
-            return new SelectList(db.Contacts.Where(x => x.IsCompany == true).OrderBy(x => x.DisplayName), "Contact_ID", "DisplayName", Company_ID);
+            return new SelectList(db.Contacts.Where(x => x.IsCompany == true).OrderBy(x => x.DisplayName), "Contact_ID", "DisplayName", Selected_ID);
         }
 
-        protected MultiSelectList ListTags(ICollection<int> tags_ids)
+        protected MultiSelectList ListTags(ICollection<int> Selected_IDs)
         {
-            return new MultiSelectList(db.Tags.OrderBy(x => x.Caption), "Tag_ID", "Caption", tags_ids);
+            return new MultiSelectList(db.Tags.OrderBy(x => x.Caption), "Tag_ID", "Caption", Selected_IDs);
         }
 
         protected override void Dispose(bool disposing)
