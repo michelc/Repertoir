@@ -23,6 +23,7 @@ namespace Repertoir.Models
         public string Municipality { get; set; }
         public string Country { get; set; }
         public string Notes { get; set; }
+        public string Tags { get; set; }
     }
 
     public static class FlatContactExtensions

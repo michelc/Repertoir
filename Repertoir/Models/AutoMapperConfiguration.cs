@@ -1,5 +1,6 @@
-﻿using AutoMapper;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
+using AutoMapper;
 
 namespace Repertoir.Models
 {
@@ -48,6 +49,10 @@ namespace Repertoir.Models
                             );
 
             Mapper.CreateMap<Contact, FlatContact>()
+                  .ForMember(
+                             flat => flat.Tags,
+                             opt => opt.MapFrom(contact => string.Join(",", contact.Tags.Select(t => t.Caption)))
+                            )
                   .ForMember(
                              flat => flat.CompanyName,
                              opt => opt.MapFrom(contact => contact.Company_ID.HasValue
