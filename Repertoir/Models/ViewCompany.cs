@@ -55,24 +55,32 @@ namespace Repertoir.Models
 
         public static ICollection<ContactList> To_ContactList(this IQueryable<Contact> model)
         {
-            var view_model = (from c in model
-                              orderby c.DisplayName
-                              select new ContactList
-                              {
-                                  Contact_ID = c.Contact_ID,
-                                  DisplayName = c.DisplayName,
-                                  Phone1 = c.Phone1,
-                                  Email = c.Email,
-                                  Informations = c.Company_ID.HasValue
-                                                    ? c.Title + " // " + c.Company.CompanyName
-                                                    : "// " + c.PostalCode + " " + c.Municipality,
-                                  Civility = c.Civility,
-                                  IsCompany = c.IsCompany,
-                                  Slug = c.Slug,
-                                  ControllerName = c.IsCompany ? "Companies" : "People"
-                              }).ToList();
+            // Tri et sélection des colonnes nécessaires uniquement
+            // (dans une liste d'objets anonymes car "select new Contact" n'est pas possible)
+            var list = (from c in model
+                        orderby c.DisplayName
+                        select new
+                        {
+                            Contact_ID = c.Contact_ID,
+                            DisplayName = c.DisplayName,
+                            Phone1 = c.Phone1,
+                            Email = c.Email,
+                            Company_ID = c.Company_ID,
+                            CompanyName = c.Company_ID.HasValue ? c.Company.CompanyName : c.CompanyName,
+                            Title = c.Title,
+                            PostalCode = c.PostalCode,
+                            Municipality = c.Municipality,
+                            Civility = c.Civility,
+                            IsCompany = c.IsCompany,
+                            Slug = c.Slug
+                        }).ToList();
 
-            return view_model;
+            // Transforme la liste anonyme en liste de contacts
+            var contacts = list.Select(a => Mapper.DynamicMap<Contact>(a)).ToList();
+            // abrégeable en list.Select(Mapper.DynamicMap<Contact>).ToList();
+
+            // Renvoie une liste d'objets ViewModel
+            return Mapper.Map<ICollection<ContactList>>(contacts);
         }
     }
 }

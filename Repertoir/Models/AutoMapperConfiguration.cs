@@ -34,6 +34,19 @@ namespace Repertoir.Models
                              company => company.People,
                              opt => opt.UseValue(new List<ContactList>())
                             );
+
+            Mapper.CreateMap<Contact, ContactList>()
+                  .ForMember(
+                             line => line.ControllerName,
+                             opt => opt.MapFrom(contact => contact.IsCompany ? "Companies" : "People")
+                            )
+                  .ForMember(
+                             line => line.Informations,
+                             opt => opt.MapFrom(contact => contact.Company_ID.HasValue
+                                                           ? contact.Title + " // " + contact.CompanyName
+                                                           : "// " + contact.PostalCode + " " + contact.Municipality)
+                            );
+
         }
     }
 }
