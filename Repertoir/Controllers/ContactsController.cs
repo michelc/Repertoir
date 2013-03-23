@@ -131,52 +131,16 @@ namespace Repertoir.Controllers
             }
             catch { }
 
-            // Enregistre les tags
-            var tags = new string[0];
+            var all_tags = new List<string>();
             foreach (var c in contacts)
             {
-                if (!string.IsNullOrEmpty(c.Tags))
-                {
-                    tags = tags.Concat(c.Tags.Split(',')).Distinct().ToArray();
-                }
-            }
-            foreach (var t in tags.OrderBy(t => t))
-            {
-                var tag = new Tag();
-                tag.Caption = t;
-                db.Tags.Add(tag);
-            }
-            db.SaveChanges();
+                // Contact de base
+                var contact = new Contact();
+                contact.Update_With_FlatContact(c);
 
-            // Enregistre les sociétés
-            foreach (var c in contacts)
-            {
-                if (c.IsCompany)
-                {
-                    var contact = new Contact();
-                    contact.Update_With_FlatContact(c);
-
-                    if (!string.IsNullOrEmpty(c.Tags))
-                    {
-                        tags = c.Tags.Split(',');
-                        contact.Tags = (from t in db.Tags
-                                        where tags.Contains(t.Caption)
-                                        select t).ToList();
-                    }
-
-                    db.Contacts.Add(contact);
-                }
-            }
-            db.SaveChanges();
-
-            // Enregistre les personnes
-            foreach (var c in contacts)
-            {
+                // Rattache les personnes à une société
                 if (!c.IsCompany)
                 {
-                    var contact = new Contact();
-                    contact.Update_With_FlatContact(c);
-
                     if (!string.IsNullOrEmpty(contact.CompanyName))
                     {
                         var slug = contact.CompanyName.Slugify();
@@ -186,17 +150,30 @@ namespace Repertoir.Controllers
                             contact.Company_ID = company.Contact_ID;
                         }
                     }
-
-                    if (!string.IsNullOrEmpty(c.Tags))
-                    {
-                        tags = c.Tags.Split(',');
-                        contact.Tags = (from t in db.Tags
-                                        where tags.Contains(t.Caption)
-                                        select t).ToList();
-                    }
-
-                    db.Contacts.Add(contact);
                 }
+
+                // Gère les tags
+                if (!string.IsNullOrEmpty(c.Tags))
+                {
+                    // Mise à jour de la table des tags
+                    var tags = c.Tags.Split(',');
+                    foreach (var t in tags)
+                    {
+                        if (!all_tags.Contains(t))
+                        {
+                            all_tags.Add(t);
+                            db.Tags.Add(new Tag { Caption = t });
+                            db.SaveChanges();
+                        }
+                    }
+                    // Mise à jour des tags du contact
+                    contact.Tags = (from t in db.Tags
+                                    where tags.Contains(t.Caption)
+                                    select t).ToList();
+                }
+
+                // Enregistre le contact
+                db.Contacts.Add(contact);
             }
             db.SaveChanges();
 
