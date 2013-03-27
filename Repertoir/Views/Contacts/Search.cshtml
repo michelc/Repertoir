@@ -1,0 +1,11 @@
+﻿@model IEnumerable<Repertoir.Models.ContactList>
+
+@{
+    ViewBag.Title = "Résultat de la recherche";
+}
+
+<h2 class="crud">
+    @Html.ActionCrud()
+</h2>
+
+@Html.Partial("_List")

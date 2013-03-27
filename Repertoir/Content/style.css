@@ -502,11 +502,11 @@ textarea
     {
         height: 10px;
     }
-    
+
     .crud
     {
         font-size: small;
-    }    
+    }
 }
 
 
@@ -576,4 +576,25 @@ a.icon.is_woman      { background-image: url(icons/female_user.png); }
 @media only screen and (max-width: 767px)
 {
     .list_contact { background-image: none !important; }
+}
+
+
+/* #Styles pour la zone de recherche
+================================================== */
+
+ul.tabs { margin-bottom: 0; }
+#search
+{
+    background-color: #f5f5f5;
+    border-bottom: solid 1px #ddd;
+    margin: 0 0 20px 0;
+    padding: 0;
+    text-align: right;
+}
+#search input[type="submit"]
+{
+    font-size: 100%;
+    font-weight: normal;
+    margin: 0px 0px 0 0;
+    padding: 10px 15px;
 }

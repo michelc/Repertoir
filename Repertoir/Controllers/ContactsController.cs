@@ -26,6 +26,26 @@ namespace Repertoir.Controllers
         }
 
         //
+        // GET: /Contacts/Search?q=xxx
+
+        public ViewResult Search(string q)
+        {
+            var contacts = db
+                .Contacts
+                .Where(contact => contact.DisplayName.Contains(q)
+                                || contact.Title.Contains(q)
+                                || contact.Municipality.Contains(q)
+                                || contact.PostalCode.Contains(q)
+                                || contact.Phone1.Contains(q)
+                                || contact.Phone2.Contains(q)
+                                || contact.Notes.Contains(q))
+                .List();
+
+            ViewBag.q = q;
+            return View(contacts);
+        }
+
+        //
         // GET: /Contacts/Table
 
         public ViewResult Table()

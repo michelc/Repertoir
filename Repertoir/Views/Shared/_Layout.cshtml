@@ -13,6 +13,12 @@
     <link rel="stylesheet" href="@Url.Content("~/Content/style.css")">
     <script src="@Url.Content("~/Scripts/modernizr-2.6.2.js")"></script>
 </head>
+
+@{
+    var ActionName = ViewContext.RouteData.Values["Action"].ToString().ToLowerInvariant();
+    var IsSearchEnable = !(new[] { "create", "edit", "delete", "copy" }).Contains(ActionName);
+}
+
 <body>
     @Html.Flash()
     <div class="container">
@@ -27,6 +33,16 @@
                     <li>@Html.ActionLink("A propos", "Index", "About")</li>
                 </ul>
             </nav>
+            <div id="search">
+            @if (IsSearchEnable)
+            {
+                using (Html.BeginForm("Search", "Contacts", FormMethod.Get))
+                {
+                    @Html.TextBox("q")
+                    <input type="submit" value="Rechercher" />
+                }
+            }
+            </div>
         </header>
         <section id="main" class="sixteen columns">
             @RenderBody()
