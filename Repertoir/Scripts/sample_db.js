@@ -10,7 +10,7 @@
       "Title": null,
       "Phone1": "02 02 02 02 02",
       "Phone2": null,
-      "Fax": null,
+      "Fax": "02 02 02 02 22",
       "Email": "contact@acme.com",
       "Url": "http://www.acme.com/",
       "AddressLine1": "Batiment A1",
@@ -18,7 +18,8 @@
       "PostalCode": "13000",
       "Municipality": "Marseille",
       "Country": "France",
-      "Notes": "Très bon fournisseur"
+      "Notes": "Très bon fournisseur",
+      "Tags": "Fournisseur,Local"
    },
    {
       "Slug": "charpentes-du-moulin",
@@ -39,7 +40,8 @@
       "PostalCode": "69000",
       "Municipality": "Lyon",
       "Country": null,
-      "Notes": null
+      "Notes": null,
+      "Tags": "Client"
    },
    {
       "Slug": "sortex-demenagement",
@@ -60,7 +62,8 @@
       "PostalCode": "44000",
       "Municipality": "Nantes",
       "Country": "France",
-      "Notes": null
+      "Notes": null,
+      "Tags": "Fournisseur"
    },
    {
       "Slug": "arnaud-berence",
@@ -81,7 +84,8 @@
       "PostalCode": null,
       "Municipality": null,
       "Country": null,
-      "Notes": null
+      "Notes": null,
+      "Tags": "Fournisseur,Local"
    },
    {
       "Slug": "denis-agard",
@@ -102,7 +106,8 @@
       "PostalCode": null,
       "Municipality": null,
       "Country": null,
-      "Notes": null
+      "Notes": null,
+      "Tags": "Prospect"
    },
    {
       "Slug": "francoise-martin",
@@ -123,7 +128,8 @@
       "PostalCode": null,
       "Municipality": null,
       "Country": null,
-      "Notes": null
+      "Notes": null,
+      "Tags": "Fournisseur,Local"
    },
    {
       "Slug": "nadege-giorno",
@@ -144,7 +150,8 @@
       "PostalCode": null,
       "Municipality": null,
       "Country": null,
-      "Notes": null
+      "Notes": null,
+      "Tags": "Fournisseur"
    },
    {
       "Slug": "pierre-dupond",
@@ -156,16 +163,17 @@
       "FirstName": "Pierre",
       "Title": "Développeur",
       "Phone1": "01 01 01 01 01",
-      "Phone2": null,
+      "Phone2": "06 01 01 01 01",
       "Fax": null,
       "Email": "pierre.dupond@acme.com",
       "Url": "http://www.pierre-dupond.com/",
-      "AddressLine1": null,
-      "AddressLine2": null,
-      "PostalCode": null,
-      "Municipality": null,
-      "Country": null,
-      "Notes": null
+      "AddressLine1": "Les Docks",
+      "AddressLine2": "BP 13",
+      "PostalCode": "13000",
+      "Municipality": "Marseille",
+      "Country": "France",
+      "Notes": "Lorem ipsum dolor sit amet, **consectetur adipiscing elit**. Sed lacus lacus, faucibus ac tincidunt non, dignissim ut quam. Maecenas non dolor euismod mi porttitor luctus. Nam at metus odio.\r\n* Ut eleifend eros quis nisl suscipit ut tincidunt libero consequat.\r\n* Mauris tincidunt, nisl vitae sodales fermentum, *libero ante luctus libero*, in vulputate mi odio at orci.\r\n* Cras ac lectus tellus, eu fringilla ante.\r\nPhasellus elementum pulvinar dolor ac pharetra. Phasellus est magna, blandit quis imperdiet ut, luctus ut nisl. Donec ligula nunc, adipiscing sit amet suscipit sit amet : http://www.euismod-a-dolor.com/.\r\nDuis interdum eros sed lorem iaculis in mollis ante vulputate. Pellentesque adipiscing nunc pretium arcu imperdiet pulvinar. Vivamus placerat@semper.mi.",
+      "Tags": "Fournisseur,Local"
    },
    {
       "Slug": "richard-durand",
@@ -186,7 +194,8 @@
       "PostalCode": null,
       "Municipality": null,
       "Country": null,
-      "Notes": null
+      "Notes": null,
+      "Tags": "Fournisseur"
    },
    {
       "Slug": "victoire-pottier",
@@ -207,6 +216,7 @@
       "PostalCode": "31000",
       "Municipality": "Toulouse",
       "Country": null,
-      "Notes": null
+      "Notes": null,
+      "Tags": "Client"
    }
 ]
