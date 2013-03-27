@@ -114,6 +114,8 @@ namespace Repertoir.Helpers
                     { "edit", "Modifier" },
                     { "delete", "Supprimer" }
                 };
+                // (mais pas de fiche détail pour les tags)
+                if (current_controller == "tags") crud.Remove("details");
 
                 var slug = helper.ViewContext.RouteData.Values["slug"];
                 foreach (var action in crud)
