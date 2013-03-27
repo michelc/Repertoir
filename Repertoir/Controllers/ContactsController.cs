@@ -194,8 +194,8 @@ namespace Repertoir.Controllers
 
                 // Enregistre le contact
                 db.Contacts.Add(contact);
+                db.SaveChanges();
             }
-            db.SaveChanges();
 
             return RedirectToAction("Index");
         }
