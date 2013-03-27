@@ -1,7 +1,7 @@
 # Répertoir
 
 Gestion d'un petit répertoire de contacts pour servir de banc d'essai
-à la création d'une application avec ASP.NET MVC 3.
+à la création d'une application avec ASP.NET MVC 4.
 
 
 ## Ce qui est déjà fait
@@ -11,7 +11,7 @@ Gestion d'un petit répertoire de contacts pour servir de banc d'essai
 * Entity Framework Code First
 * Entity Migration : en vue d'un déploiement sur AppHarbor
 * MiniProfiler : pour connaitre le code SQL généré par EF
-* LowercaseMVC : pour avoir des URLs en minuscule
+* LowercaseRoutesMVC : pour avoir des URLs en minuscule
 * AutoMapper : pour passer des classes Model à ViewModel
 * Déploiement sur AppHarbor
 
