@@ -544,6 +544,7 @@ section > .list_contact:nth-child(even)
 }
 
 /* Ajoute un effet lors du survol d'un contact dans la liste */
+section > .list_contact:hover,
 .list_contact:hover
 {
     background-color: #ffffcc; /* jaune postit */
