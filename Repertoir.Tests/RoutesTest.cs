@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MvcRouteUnitTester;
+using System.Web.Routing;
 
 namespace Repertoir.Tests
 {
@@ -10,7 +11,10 @@ namespace Repertoir.Tests
         public void TestIncomingRoutes()
         {
             // Arrange
-            var tester = new RouteTester<MvcApplication>();
+            var routes = new RouteCollection();
+            RouteConfig.RegisterRoutes(routes);
+            var tester = new RouteTester(routes);
+            // var tester = new RouteTester<MvcApplication>();
 
             // Assert
             tester.WithIncomingRequest("/").ShouldMatchRoute("Contacts", "Index");
@@ -27,7 +31,10 @@ namespace Repertoir.Tests
         public void TestOutgoingRoutes()
         {
             // Arrange
-            var tester = new RouteTester<MvcApplication>();
+            var routes = new RouteCollection();
+            RouteConfig.RegisterRoutes(routes);
+            var tester = new RouteTester(routes);
+            // var tester = new RouteTester<MvcApplication>();
 
             // Assert
             tester.WithRouteInfo("Contacts", "Index").ShouldGenerateUrl("/");

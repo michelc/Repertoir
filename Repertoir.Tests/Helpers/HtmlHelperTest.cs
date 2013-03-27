@@ -73,7 +73,7 @@ namespace Repertoir.Tests.Helpers
         {
             // Arrange
             var routes = new RouteCollection();
-            MvcApplication.RegisterRoutes(routes);
+            RouteConfig.RegisterRoutes(routes);
             var helper = new HtmlHelper(Moq.GetViewContext(), Moq.GetViewDataContainer(), routes);
 
             // Act
@@ -88,7 +88,7 @@ namespace Repertoir.Tests.Helpers
         {
             // Arrange
             var routes = new RouteCollection();
-            MvcApplication.RegisterRoutes(routes);
+            RouteConfig.RegisterRoutes(routes);
             var helper = new HtmlHelper(Moq.GetViewContext(), Moq.GetViewDataContainer(), routes);
             helper.ViewContext.RouteData.Values["id"] = "5";
             helper.ViewContext.RouteData.Values["slug"] = "xxxxx";
@@ -105,7 +105,7 @@ namespace Repertoir.Tests.Helpers
         {
             // Arrange
             var routes = new RouteCollection();
-            MvcApplication.RegisterRoutes(routes);
+            RouteConfig.RegisterRoutes(routes);
             var helper = new HtmlHelper(Moq.GetViewContext(), Moq.GetViewDataContainer(), routes);
             helper.ViewContext.RouteData.Values["id"] = "5";
             helper.ViewContext.RouteData.Values["slug"] = "xxxxx";
@@ -173,7 +173,7 @@ namespace Repertoir.Tests.Helpers
         {
             // Arrange
             var routes = new RouteCollection();
-            MvcApplication.RegisterRoutes(routes);
+            RouteConfig.RegisterRoutes(routes);
             var helper = new HtmlHelper(Moq.GetViewContext(), Moq.GetViewDataContainer(), routes);
             helper.ViewContext.RouteData.Values["action"] = "toto";
             helper.ViewContext.RouteData.Values["controller"] = "contacts";
@@ -190,7 +190,7 @@ namespace Repertoir.Tests.Helpers
         {
             // Arrange
             var routes = new RouteCollection();
-            MvcApplication.RegisterRoutes(routes);
+            RouteConfig.RegisterRoutes(routes);
             var helper = new HtmlHelper(Moq.GetViewContext(), Moq.GetViewDataContainer(), routes);
             helper.ViewContext.RouteData.Values["action"] = "toto";
             helper.ViewContext.RouteData.Values["controller"] = "xxxxx";
