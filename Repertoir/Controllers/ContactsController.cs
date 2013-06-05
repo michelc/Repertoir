@@ -146,8 +146,8 @@ namespace Repertoir.Controllers
             try
             {
                 // SQL Server pas CE
-                db.Database.ExecuteSqlCommand("TRUNCATE TABLE Contacts");
-                db.Database.ExecuteSqlCommand("TRUNCATE TABLE Tags");
+                db.Database.ExecuteSqlCommand("DBCC CHECKIDENT ('Contacts', RESEED, 0)");
+                db.Database.ExecuteSqlCommand("DBCC CHECKIDENT ('Tags', RESEED, 0)");
             }
             catch { }
 
