@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
@@ -78,6 +79,21 @@ namespace Repertoir.Tests.Controllers
         }
 
         [TestMethod]
+        public void TagsCreate_post_doit_renvoyer_erreur_quand_saisie_doublon()
+        {
+            // Arrange
+            var controller = new TagsController();
+            var tag1 = InsertTag("test");
+            var tag2 = new ViewTag { Caption = "test" };
+
+            // Act
+            var result = controller.Create(tag2) as ViewResult;
+
+            // Assert
+            Assert.IsFalse(controller.ModelState.IsValid, "Tags.Create() aurait dû définir ModelState.IsValid à False");
+        }
+
+        [TestMethod]
         public void TagsCreate_post_doit_renvoyer_la_vue_par_defaut_quand_saisie_incorrecte()
         {
             // Arrange
@@ -115,7 +131,7 @@ namespace Repertoir.Tests.Controllers
         {
             // Arrange
             var controller = new TagsController(db);
-            var tag = new ViewTag { Caption = "test" };
+            var tag = new ViewTag { Caption = Random_Caption("") };
 
             // Act
             var result = controller.Create(tag);
@@ -130,7 +146,7 @@ namespace Repertoir.Tests.Controllers
         {
             // Arrange
             var controller = new TagsController(db);
-            var tag = new ViewTag { Caption = "test" };
+            var tag = new ViewTag { Caption = Random_Caption("") };
             var context = new ViewContext
             {
                 TempData = controller.TempData
@@ -152,7 +168,7 @@ namespace Repertoir.Tests.Controllers
         {
             // Arrange
             var controller = new TagsController(db);
-            var tag = new ViewTag { Caption = "test" };
+            var tag = new ViewTag { Caption = Random_Caption("") };
 
             // Act
             var result = controller.Create(tag) as RedirectToRouteResult;
@@ -198,8 +214,8 @@ namespace Repertoir.Tests.Controllers
         {
             // Arrange
             var controller = new TagsController(db);
-            var tag1 = InsertTag("test1");
-            var tag2 = InsertTag("test2");
+            var tag1 = InsertTag("tag1");
+            var tag2 = InsertTag("tag2");
 
             // Act
             var result = controller.Edit(tag1.Tag_ID);
@@ -207,6 +223,26 @@ namespace Repertoir.Tests.Controllers
             // Assert
             var model = result.ViewData.Model as ViewTag;
             Assert.AreEqual(tag1.Caption, model.Caption, "Tag.Edit() aurait dû renvoyer le tag demandé");
+        }
+
+        [TestMethod]
+        public void TagsEdit_post_doit_renvoyer_erreur_quand_saisie_doublon()
+        {
+            // Arrange
+            var controller = new TagsController();
+            var tag1 = InsertTag("test");
+            var tag2 = InsertTag("maj");
+            var view_tag = new ViewTag
+            {
+                Tag_ID = tag2.Tag_ID,
+                Caption = "test"
+            };
+
+            // Act
+            var result = controller.Edit(view_tag) as ViewResult;
+
+            // Assert
+            Assert.IsFalse(controller.ModelState.IsValid, "Tags.Edit() aurait dû définir ModelState.IsValid à False");
         }
 
         [TestMethod]
@@ -247,11 +283,11 @@ namespace Repertoir.Tests.Controllers
         {
             // Arrange
             var controller = new TagsController(db);
-            var tag = InsertTag("test");
+            var tag = InsertTag("maj1");
             var view_tag = new ViewTag
             {
                 Tag_ID = tag.Tag_ID,
-                Caption = "màj"
+                Caption = Random_Caption("maj1")
             };
 
             // Act
@@ -267,7 +303,7 @@ namespace Repertoir.Tests.Controllers
         {
             // Arrange
             var controller = new TagsController(db);
-            var tag = InsertTag("test");
+            var tag = InsertTag("maj2");
             var context = new ViewContext
             {
                 TempData = controller.TempData
@@ -278,7 +314,7 @@ namespace Repertoir.Tests.Controllers
             var view_tag = new ViewTag
             {
                 Tag_ID = tag.Tag_ID,
-                Caption = tag.Caption
+                Caption = Random_Caption("maj2")
             };
             var result = controller.Edit(view_tag);
 
@@ -294,13 +330,13 @@ namespace Repertoir.Tests.Controllers
         {
             // Arrange
             var controller = new TagsController(db);
-            var tag = InsertTag("test");
+            var tag = InsertTag("maj3");
 
             // Act
             var view_tag = new ViewTag
             {
                 Tag_ID = tag.Tag_ID,
-                Caption = tag.Caption
+                Caption = Random_Caption("maj3")
             };
             var result = controller.Edit(view_tag) as RedirectToRouteResult;
 
@@ -345,8 +381,8 @@ namespace Repertoir.Tests.Controllers
         {
             // Arrange
             var controller = new TagsController(db);
-            var tag1 = InsertTag("test1");
-            var tag2 = InsertTag("test2");
+            var tag1 = InsertTag("tag1");
+            var tag2 = InsertTag("tag2");
 
             // Act
             var result = controller.Delete(tag1.Tag_ID);
@@ -412,11 +448,22 @@ namespace Repertoir.Tests.Controllers
         private Tag InsertTag(string caption)
         {
             var tag = new Tag { Caption = caption };
-            db.Tags.Add(tag);
-            db.SaveChanges();
+            try
+            {
+                db.Tags.Add(tag);
+                db.SaveChanges();
+            }
+            catch { }
 
             return tag;
         }
 
+        private static string Random_Caption(string caption)
+        {
+            if (string.IsNullOrEmpty(caption)) caption = "Test";
+            caption += " " + new Random().Next(1, 9999).ToString();
+
+            return caption;
+        }
     }
 }
