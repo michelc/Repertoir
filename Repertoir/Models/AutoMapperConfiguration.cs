@@ -11,6 +11,7 @@ namespace Repertoir.Models
             // Entités vers ViewModels
 
             Mapper.CreateMap<Tag, ViewTag>();
+            Mapper.CreateMap<Tag, ReplaceTag>();
 
             Mapper.CreateMap<Contact, ViewPerson>()
                   .ForMember(

@@ -1,7 +1,7 @@
-﻿@model Repertoir.Models.ViewTag
+@model Repertoir.Models.ReplaceTag
 
 @{
-    ViewBag.Title = "Modifier un tag";
+    ViewBag.Title = "Remplacer un tag";
 }
 
 <h2 class="crud">
@@ -16,12 +16,19 @@
 
         @Html.HiddenFor(model => model.Tag_ID)
 
+        <div class="display-label five columns">
+            @Html.LabelFor(model => model.Caption)
+        </div>
+        <div class="display-field eleven columns">
+            @Html.DisplayFor(model => model.Caption)
+        </div>
+
         <div class="editor-label five columns">
-            @Html.CaptionFor(model => model.Caption)
+            @Html.LabelFor(model => model.Other_ID)
         </div>
         <div class="editor-field eleven columns">
-            @Html.EditorFor(model => model.Caption)
-            @Html.ValidationMessageFor(model => model.Caption)
+            @Html.DropDownListFor(model => model.Other_ID, Model.Tags, string.Empty)
+            @Html.ValidationMessageFor(model => model.Other_ID)
         </div>
 
         <p class="offset-by-five eleven columns alpha">

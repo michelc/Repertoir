@@ -111,5 +111,59 @@ namespace Repertoir.Controllers
             this.Flash(string.Format("Le tag [{0}] a été supprimé", tag.Caption));
             return RedirectToAction("Index");
         }
+
+        //
+        // GET: /Tags/Replace/5
+
+        public ViewResult Replace(int id)
+        {
+            var tag = db.Tags.Find(id);
+            var model = Mapper.Map<ReplaceTag>(tag);
+
+            model.Tags = ListTags(model.Tag_ID);
+            return View(model);
+        }
+
+        //
+        // POST: /Tags/Replace/5
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public ActionResult Replace(ReplaceTag model)
+        {
+            if (ModelState.IsValid)
+            {
+                var source = db.Tags.Find(model.Tag_ID);
+                var destination = db.Tags.Find(model.Other_ID);
+
+                // Recopie les contacts liés au tag source
+                foreach (var c in source.Contacts)
+                {
+                    // Sur le tag destination
+                    destination.Contacts.Add(c);
+                }
+
+                // Supprime le tag source
+                db.Tags.Remove(source);
+
+                db.SaveChanges();
+
+                this.Flash(string.Format("Le tag [{0}] a été remplacé par [{1}]", source.Caption, destination.Caption));
+                return RedirectToAction("Index");
+            }
+
+            model.Tags = ListTags(model.Tag_ID);
+            return View(model);
+        }
+
+        protected SelectList ListTags(int Tag_ID)
+        {
+            return new SelectList(db.Tags.Where(x => x.Tag_ID != Tag_ID).OrderBy(x => x.Caption), "Tag_ID", "Caption", "");
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            db.Dispose();
+            base.Dispose(disposing);
+        }
     }
 }

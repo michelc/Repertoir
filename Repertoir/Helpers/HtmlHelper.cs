@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Linq.Expressions;
@@ -61,7 +62,7 @@ namespace Repertoir.Helpers
             return html;
         }
 
-        public static MvcHtmlString ActionCrud(this HtmlHelper helper)
+        public static MvcHtmlString ActionCrud(this HtmlHelper helper, object linkValues = null)
         {
             var current_controller = helper.ViewContext.RouteData.Values["controller"].ToString().ToLower();
             var current_action = helper.ViewContext.RouteData.Values["action"].ToString().ToLower();
@@ -114,6 +115,14 @@ namespace Repertoir.Helpers
                     { "edit", "Modifier" },
                     { "delete", "Supprimer" }
                 };
+                if (linkValues != null)
+                {
+                    var linkProperties = TypeDescriptor.GetProperties(linkValues);
+                    foreach (PropertyDescriptor property in linkProperties)
+                    {
+                        crud.Add(property.Name.ToLowerInvariant(), property.GetValue(linkValues).ToString());
+                    }
+                }
                 // (mais pas de fiche détail pour les tags)
                 if (current_controller == "tags") crud.Remove("details");
 
