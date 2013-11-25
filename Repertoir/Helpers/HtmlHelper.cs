@@ -74,7 +74,8 @@ namespace Repertoir.Helpers
             if (current_action != "index")
             {
                 // Alors, il faut un lien vers la page Index
-                html += helper.ActionLink(index_title, "Index", "Contacts").ToString();
+                var index_controller = current_controller == "tags" ? "Tags" : "Contacts";
+                html += helper.ActionLink(index_title, "Index", index_controller).ToString();
             }
             else
             {
