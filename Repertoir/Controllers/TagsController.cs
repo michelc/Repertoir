@@ -44,6 +44,12 @@ namespace Repertoir.Controllers
         {
             if (ModelState.IsValid)
             {
+                model.Caption = model.Caption.Unaccentize().SimplifySpaces().Replace(" ", "-");
+                if (db.Tags.Any(t => t.Caption.ToLower() == model.Caption.ToLower())) ModelState.AddModelError("Caption", "Ce tag existe déjà");
+            }
+
+            if (ModelState.IsValid)
+            {
                 var tag = new Tag();
                 tag.Caption = model.Caption;
                 db.Tags.Add(tag);
@@ -73,6 +79,12 @@ namespace Repertoir.Controllers
         [HttpPost, ValidateAntiForgeryToken]
         public ActionResult Edit(ViewTag model)
         {
+            if (ModelState.IsValid)
+            {
+                model.Caption = model.Caption.Unaccentize().SimplifySpaces().Replace(" ", "-");
+                if (db.Tags.Any(t => t.Caption.ToLower() == model.Caption.ToLower())) ModelState.AddModelError("Caption", "Ce tag existe déjà");
+            }
+
             if (ModelState.IsValid)
             {
                 var tag = db.Tags.Find(model.Tag_ID);

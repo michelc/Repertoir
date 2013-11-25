@@ -47,5 +47,14 @@ namespace Repertoir.Helpers
             return result;
         }
 
+        // Transforme les espaces multiples en un seul espace
+        // (y compris tabulations, sauts de lignes...)
+        public static string SimplifySpaces(this string text)
+        {
+            if (string.IsNullOrWhiteSpace(text)) return null;
+            string result = Regex.Replace(text, @"\s+", " ").Trim();
+
+            return result;
+        }
     }
 }
