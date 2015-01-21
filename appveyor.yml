@@ -1,0 +1,11 @@
+version: 1.0.{build}
+
+configuration: release
+
+before_build:
+- nuget restore
+
+build:
+  parallel: true
+  publish_wap_xcopy: true
+  verbosity: minimal

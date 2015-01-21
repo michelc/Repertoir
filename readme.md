@@ -1,5 +1,7 @@
 # Répertoir
 
+[![Build status](https://ci.appveyor.com/api/projects/status/3w71kfbk0g9yq5i0)](https://ci.appveyor.com/project/michelc/repertoir)
+
 Gestion d'un petit répertoire de contacts pour servir de banc d'essai
 à la création d'une application avec ASP.NET MVC 4.
 
