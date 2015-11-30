@@ -11,8 +11,6 @@ namespace Repertoir
     {
         protected void Application_Start()
         {
-            AreaRegistration.RegisterAllAreas();
-
             ModelBinders.Binders.Add(typeof(string), new StringModelBinder());
 
             ViewEngines.Engines.Clear();

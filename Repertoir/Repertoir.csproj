@@ -28,6 +28,7 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <OldToolsVersion>4.0</OldToolsVersion>
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -119,7 +120,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\AboutController.cs" />
-    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CompaniesController.cs" />
     <Compile Include="Controllers\ContactsController.cs" />
     <Compile Include="Controllers\PeopleController.cs" />
@@ -131,7 +131,6 @@
     <Compile Include="Helpers\FlashHelper.cs" />
     <Compile Include="Helpers\HtmlHelper.cs" />
     <Compile Include="Helpers\StringHelper.cs" />
-    <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\AutoMapperConfiguration.cs" />
     <Compile Include="Models\FlatContact.cs" />
     <Compile Include="Models\RepertoirModels.cs" />
@@ -200,10 +199,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\About\Index.cshtml" />
-    <Content Include="Views\Account\ChangePassword.cshtml" />
-    <Content Include="Views\Account\ChangePasswordSuccess.cshtml" />
-    <Content Include="Views\Account\LogOn.cshtml" />
-    <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Companies\Create.cshtml" />
     <Content Include="Views\Companies\Delete.cshtml" />
     <Content Include="Views\Companies\Details.cshtml" />
