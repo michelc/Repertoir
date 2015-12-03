@@ -82,7 +82,6 @@ namespace Repertoir.Controllers
             if (ModelState.IsValid)
             {
                 model.Caption = model.Caption.Unaccentize().SimplifySpaces().Replace(" ", "-");
-                if (db.Tags.Any(t => t.Caption.ToLower() == model.Caption.ToLower())) ModelState.AddModelError("Caption", "Ce tag existe déjà");
                 if (db.Tags.Any(t => (t.Caption.ToLower() == model.Caption.ToLower())
                                   && (t.Tag_ID != model.Tag_ID))) ModelState.AddModelError("Caption", "Ce tag existe déjà");
             }
