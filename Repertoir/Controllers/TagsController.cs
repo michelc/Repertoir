@@ -55,7 +55,7 @@ namespace Repertoir.Controllers
                 db.Tags.Add(tag);
                 db.SaveChanges();
 
-                this.Flash(string.Format("Le tag [{0}] a été inséré", tag.Caption));
+                this.Flash("Le tag [{0}] a été inséré", tag.Caption);
                 return RedirectToAction("Index");
             }
 
@@ -83,6 +83,8 @@ namespace Repertoir.Controllers
             {
                 model.Caption = model.Caption.Unaccentize().SimplifySpaces().Replace(" ", "-");
                 if (db.Tags.Any(t => t.Caption.ToLower() == model.Caption.ToLower())) ModelState.AddModelError("Caption", "Ce tag existe déjà");
+                if (db.Tags.Any(t => (t.Caption.ToLower() == model.Caption.ToLower())
+                                  && (t.Tag_ID != model.Tag_ID))) ModelState.AddModelError("Caption", "Ce tag existe déjà");
             }
 
             if (ModelState.IsValid)
@@ -92,7 +94,7 @@ namespace Repertoir.Controllers
                 db.Entry(tag).State = EntityState.Modified;
                 db.SaveChanges();
 
-                this.Flash(string.Format("Le tag [{0}] a été mis à jour", tag.Caption));
+                this.Flash("Le tag [{0}] a été mis à jour", tag.Caption);
                 return RedirectToAction("Index");
             }
 
@@ -120,7 +122,7 @@ namespace Repertoir.Controllers
             db.Tags.Remove(tag);
             db.SaveChanges();
 
-            this.Flash(string.Format("Le tag [{0}] a été supprimé", tag.Caption));
+            this.Flash("Le tag [{0}] a été supprimé", tag.Caption);
             return RedirectToAction("Index");
         }
 
@@ -159,7 +161,7 @@ namespace Repertoir.Controllers
 
                 db.SaveChanges();
 
-                this.Flash(string.Format("Le tag [{0}] a été remplacé par [{1}]", source.Caption, destination.Caption));
+                this.Flash("Le tag [{0}] a été remplacé par [{1}]", source.Caption, destination.Caption);
                 return RedirectToAction("Index");
             }
 
