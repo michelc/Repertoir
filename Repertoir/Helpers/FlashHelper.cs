@@ -4,9 +4,9 @@ namespace Repertoir.Helpers
 {
     public static class FlashHelper
     {
-        public static void Flash(this Controller controler, object text, params object[] args)
+        public static void Flash(this Controller controller, object text, params object[] args)
         {
-            controler.TempData["FlashKey"] = string.Format(text.ToString(), args);
+            controller.TempData["FlashKey"] = string.Format(text.ToString(), args);
         }
 
         public static MvcHtmlString Flash(this HtmlHelper helper)
