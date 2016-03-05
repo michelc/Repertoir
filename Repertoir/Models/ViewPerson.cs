@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
-using AutoMapper;
 using Repertoir.Helpers;
 
 namespace Repertoir.Models
@@ -42,7 +41,7 @@ namespace Repertoir.Models
         {
             // Conservé temporairement pour les tests unitaires
             // (en attendant de référencer AutoMapper dans le projet Repertoir.Tests)
-            var view_model = Mapper.Map<ViewPerson>(model);
+            var view_model = AutoMap.Map<ViewPerson>(model);
 
             return view_model;
         }

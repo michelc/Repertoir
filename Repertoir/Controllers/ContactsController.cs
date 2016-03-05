@@ -2,12 +2,11 @@
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
-using AutoMapper;
 using Repertoir.Helpers;
 using Repertoir.Models;
 
 namespace Repertoir.Controllers
-{ 
+{
     public class ContactsController : Controller
     {
         private RepertoirContext db;
@@ -115,7 +114,7 @@ namespace Repertoir.Controllers
         public JsonResult Export()
         {
             var contacts = db.Contacts.OrderByDescending(c => c.IsCompany).ThenBy(c => c.DisplayName);
-            var model = Mapper.Map<IList<FlatContact>>(contacts);
+            var model = AutoMap.Map<IList<FlatContact>>(contacts);
 
             return Json(model, "application/json", JsonRequestBehavior.AllowGet);
         }

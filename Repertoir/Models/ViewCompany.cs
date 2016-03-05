@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using AutoMapper;
 using Repertoir.Helpers;
 
 namespace Repertoir.Models
@@ -22,7 +21,7 @@ namespace Repertoir.Models
         {
             // Conservé temporairement pour les tests unitaires
             // (en attendant de référencer AutoMapper dans le projet Repertoir.Tests)
-            var view_model = Mapper.Map<ViewCompany>(model);
+            var view_model = AutoMap.Map<ViewCompany>(model);
 
             return view_model;
         }
@@ -81,11 +80,11 @@ namespace Repertoir.Models
                         }).ToList();
 
             // Transforme la liste anonyme en liste de contacts
-            var contacts = list.Select(a => Mapper.DynamicMap<Contact>(a)).ToList();
+            var contacts = list.Select(a => AutoMap.DynamicMap<Contact>(a)).ToList();
             // abrégeable en list.Select(Mapper.DynamicMap<Contact>).ToList();
 
             // Renvoie une liste d'objets ViewModel
-            return Mapper.Map<IList<ContactList>>(contacts);
+            return AutoMap.Map<IList<ContactList>>(contacts);
         }
     }
 }

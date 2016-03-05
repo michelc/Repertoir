@@ -2,9 +2,8 @@
 using System.Data;
 using System.Linq;
 using System.Web.Mvc;
-using AutoMapper;
 using Repertoir.Helpers;
-using Repertoir.Models; 
+using Repertoir.Models;
 
 namespace Repertoir.Controllers
 {
@@ -21,7 +20,7 @@ namespace Repertoir.Controllers
         public ViewResult Details(int id)
         {
             var contact = db.Contacts.Find(id);
-            var person = Mapper.Map<ViewPerson>(contact);
+            var person = AutoMap.Map<ViewPerson>(contact);
 
             return View(person);
         }
@@ -32,7 +31,7 @@ namespace Repertoir.Controllers
         public ViewResult Display(int id)
         {
             var contact = db.Contacts.Find(id);
-            var person = Mapper.Map<ViewPerson>(contact);
+            var person = AutoMap.Map<ViewPerson>(contact);
 
             return View(person);
         }
@@ -48,7 +47,7 @@ namespace Repertoir.Controllers
                 contact.Company_ID = ParentID;
                 contact.Company = db.Contacts.Find(ParentID);
             }
-            var person = Mapper.Map<ViewPerson>(contact);
+            var person = AutoMap.Map<ViewPerson>(contact);
 
             person.AvailableTags = ListTags(person.Tags_IDs);
             person.Companies = ListCompanies(person.Company_ID);
@@ -89,7 +88,7 @@ namespace Repertoir.Controllers
         public ViewResult Edit(int id)
         {
             var contact = db.Contacts.Find(id);
-            var person = Mapper.Map<ViewPerson>(contact);
+            var person = AutoMap.Map<ViewPerson>(contact);
 
             person.AvailableTags = ListTags(person.Tags_IDs);
             person.Companies = ListCompanies(person.Company_ID);
@@ -131,7 +130,7 @@ namespace Repertoir.Controllers
         public ViewResult Delete(int id)
         {
             var contact = db.Contacts.Find(id);
-            var person = Mapper.Map<ViewPerson>(contact);
+            var person = AutoMap.Map<ViewPerson>(contact);
 
             return View(person);
         }

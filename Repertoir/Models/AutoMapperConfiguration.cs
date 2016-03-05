@@ -4,16 +4,46 @@ using AutoMapper;
 
 namespace Repertoir.Models
 {
-    public class AutoMapperConfiguration
+    public static class AutoMap
     {
+        private static MapperConfiguration Config { get; set; }
+        private static IMapper Mapper { get; set; }
+        private static IMapper DynamicMapper { get; set; }
+
         public static void Configure()
+        {
+            Config = new MapperConfiguration(cfg => {
+                ConfigureEntitiesToViewModels(cfg);
+            });
+
+            Mapper = Config.CreateMapper();
+
+            var DynamicConfig = new MapperConfiguration(cfg => cfg.CreateMissingTypeMaps = true);
+            DynamicMapper = DynamicConfig.CreateMapper();
+        }
+
+        public static T Map<T>(object model)
+        {
+            var view_model = AutoMap.Mapper.Map<T>(model);
+
+            return view_model;
+        }
+
+        public static T DynamicMap<T>(object model)
+        {
+            var view_model = AutoMap.DynamicMapper.Map<T>(model);
+
+            return view_model;
+        }
+
+        private static void ConfigureEntitiesToViewModels(IMapperConfiguration config)
         {
             // Entités vers ViewModels
 
-            Mapper.CreateMap<Tag, ViewTag>();
-            Mapper.CreateMap<Tag, ReplaceTag>();
+            config.CreateMap<Tag, ViewTag>();
+            config.CreateMap<Tag, ReplaceTag>();
 
-            Mapper.CreateMap<Contact, ViewPerson>()
+            config.CreateMap<Contact, ViewPerson>()
                   .ForMember(
                              person => person.Tags_IDs,
                              opt => opt.MapFrom(contact => contact.Tags)
@@ -25,9 +55,9 @@ namespace Repertoir.Models
                                                            : null)
                             );
 
-            Mapper.CreateMap<Tag, int>().ConvertUsing(tag => tag.Tag_ID);
+            config.CreateMap<Tag, int>().ConvertUsing(tag => tag.Tag_ID);
 
-            Mapper.CreateMap<Contact, ViewCompany>()
+            config.CreateMap<Contact, ViewCompany>()
                   .ForMember(
                              company => company.Tags_IDs,
                              opt => opt.MapFrom(contact => contact.Tags)
@@ -37,7 +67,7 @@ namespace Repertoir.Models
                              opt => opt.UseValue(new List<ContactList>())
                             );
 
-            Mapper.CreateMap<Contact, ContactList>()
+            config.CreateMap<Contact, ContactList>()
                   .ForMember(
                              line => line.ControllerName,
                              opt => opt.MapFrom(contact => contact.IsCompany ? "Companies" : "People")
@@ -49,7 +79,7 @@ namespace Repertoir.Models
                                                            : "// " + contact.PostalCode + " " + contact.Municipality)
                             );
 
-            Mapper.CreateMap<Contact, FlatContact>()
+            config.CreateMap<Contact, FlatContact>()
                   .ForMember(
                              flat => flat.Tags,
                              opt => opt.MapFrom(contact => string.Join(",", contact.Tags.Select(t => t.Caption)))
