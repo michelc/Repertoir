@@ -36,7 +36,7 @@ namespace Repertoir.Models
             return view_model;
         }
 
-        private static void ConfigureEntitiesToViewModels(IMapperConfiguration config)
+        private static void ConfigureEntitiesToViewModels(IMapperConfigurationExpression config)
         {
             // Entités vers ViewModels
 
