@@ -13,7 +13,6 @@ Gestion d'un petit répertoire de contacts pour servir de banc d'essai
 * Entity Framework Code First
 * Entity Migration : en vue d'un déploiement sur AppHarbor
 * MiniProfiler : pour connaitre le code SQL généré par EF
-* LowercaseRoutesMVC : pour avoir des URLs en minuscule
 * AutoMapper : pour passer des classes Model à ViewModel
 * Déploiement sur AppHarbor
 
