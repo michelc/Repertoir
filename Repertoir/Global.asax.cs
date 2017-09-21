@@ -4,6 +4,7 @@ using System.Web.Routing;
 using Repertoir.Helpers;
 using Repertoir.Models;
 using StackExchange.Profiling;
+using StackExchange.Profiling.EntityFramework6;
 
 namespace Repertoir
 {
@@ -21,7 +22,7 @@ namespace Repertoir
 
             AutoMap.Configure();
 
-            MiniProfilerEF.Initialize(true);
+            MiniProfilerEF6.Initialize();
         }
 
         protected void Application_BeginRequest(object sender, EventArgs e)
