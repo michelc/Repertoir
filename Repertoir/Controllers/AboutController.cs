@@ -10,5 +10,10 @@ namespace Repertoir.Controllers
 
             return View();
         }
+
+        public ActionResult Config()
+        {
+            return File(Server.MapPath("/web.config"), "application/xml");
+        }
     }
 }
