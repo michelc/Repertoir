@@ -18,7 +18,10 @@ namespace Repertoir.Models
 
             Mapper = Config.CreateMapper();
 
-            var DynamicConfig = new MapperConfiguration(cfg => cfg.CreateMissingTypeMaps = true);
+            // var DynamicConfig = new MapperConfiguration(cfg => cfg.CreateMissingTypeMaps = true);
+            // 6.2.0 Broke Conventions-Based Mappings With Missing Target Members
+            // https://github.com/AutoMapper/AutoMapper/issues/2402#issuecomment-344621824
+            var DynamicConfig = new MapperConfiguration(cfg => cfg.ValidateInlineMaps = false);
             DynamicMapper = DynamicConfig.CreateMapper();
         }
 
